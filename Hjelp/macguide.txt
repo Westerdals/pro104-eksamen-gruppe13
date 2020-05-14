@@ -1,0 +1,23 @@
+Guide:
+
+Lag ny branch:
+
+Git checkout -b branchname
+
+
+Legg til filer:
+
+Git add .
+Git commit -m "melding"
+Git push origin branchname
+
+
+Merge med master:
+Git checkout master
+Git pull
+Git merge branchname
+
+"Pop-up-screen"
+
+i -> <esc> -> :wq <enter>
+Git pushgit 
