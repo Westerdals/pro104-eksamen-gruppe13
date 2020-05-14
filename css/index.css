@@ -7,6 +7,7 @@ body {
     background-color: #D3E8C2;
 }
 
+/* Header  */
 header {
     padding-top: 1.5rem;
     padding-left: 2.85rem;
@@ -17,6 +18,7 @@ header {
     padding-bottom: 1.5rem;
 }
 
+/* Navigation */
 .main-nav {
     margin: 0;
     padding: 0;
@@ -41,6 +43,7 @@ header {
     background-color:#A9D97D;
 }
 
+/* Grid for to do boards */
 .main-boards .main-container {
     margin-left: 2em;;
     max-width 70em;
@@ -67,6 +70,23 @@ header {
     font-size: 20px;
     text-align: center;
     
+}
+
+/* Add task in textbox  */
+.main-boards-add-task {
+    width: 90%;
+    margin: auto;
+    align: center;
+    width: 1fr;
+    height: 3.6rem;
+    background-color: blue;
+}
+
+.main-boards-input-txt {
+    height: 50%;
+    width: 90%;
+    margin-top: 1.25em;
+    margin-left: 1.1em;
 }
 
 
