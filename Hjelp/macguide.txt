@@ -20,4 +20,4 @@ Git merge branchname
 "Pop-up-screen"
 
 i -> <esc> -> :wq <enter>
-Git pushgit 
+Git push 
