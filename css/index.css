@@ -4,6 +4,7 @@
 
 body {
     margin: 0;
+    background-color: #D3E8C2;
 }
 
 .main-title {
@@ -41,6 +42,9 @@ body {
 }
 
 .box {
-    background-color: #191E1A;
+    background-color: #A9D97D;
     margin: 5px;
+    border-radius: 10px;
+    
+
 }
