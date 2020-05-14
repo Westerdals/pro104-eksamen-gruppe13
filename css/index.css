@@ -6,7 +6,41 @@ body {
     margin: 0;
 }
 
-.boards-title {
+.main-title {
     margin: auto;
+    padding: 1rem;
+
 }
 
+.main-nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.main-nav li {
+    display: inline-block;
+    margin: 1em;
+}
+
+
+.main-boards .main-container {
+    margin: 0 auto;
+    max-width: 70em;
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+    height: 80vh;
+    border-radius: 2.5%;
+}
+
+.main-grids .main-container div{
+    height: 15rem;
+    margin: 1em;
+    margin-top: 1.5rem;
+}
+
+.box {
+    background-color: #191E1A;
+    margin: 5px;
+}
