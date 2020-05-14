@@ -60,13 +60,10 @@ body {
     border-radius: 10px;
     
 }
-b {
+p {
     color: #557440;
+    text-align: center;
     
 }
 
-#textbox1, #textbox2, #textbox3, #textbox4 {
-    text-align: center;
-
-}
 
