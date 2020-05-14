@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Boards</title>
   <link href="css/index.css" type="text/css" rel="stylesheet">
+  <link href="css/new-board.css" type="text/css" rel="stylesheet">
   <script type="text/javascript" src="js/global.js"></script>
 </head>
 
-<body onload="printUserId()">
+<body>
 
 <header>
 
@@ -21,6 +22,19 @@
 <div class="container">
 
   <h2>Select board</h2>
+
+  <input type="button" value="Create a board" onclick="showNewBoardDiv();" />
+
+  <!-- [hidden] New board window  -->
+  <div id="new-board-overlay" class="transparent cover hidden" onclick="hideNewBoardDiv();"></div>
+  <div id="new-board-container" class="hidden">
+    <div id="new-board-upper-part" class="rounded">
+      <input name="board-title-in" placeholder="Add board title">
+    </div>
+    <div id="new-board-lower-part">
+      <input type="button" class="rounded" value="Create Board" onclick="createNewBoard()" />
+    </div>
+  </div>
 
 </div>
 
