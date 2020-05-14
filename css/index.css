@@ -76,17 +76,64 @@ header {
 .main-boards-add-task {
     width: 90%;
     margin: auto;
-    align: center;
+    margin-top: 10px;
     width: 1fr;
     height: 3.6rem;
-    background-color: blue;
+    background-color: lightgrey;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: -1px 7px 10px 2px rgba(0,0,0,0.56);
 }
 
 .main-boards-input-txt {
     height: 50%;
     width: 90%;
-    margin-top: 1.25em;
+    margin-top: 1.45em;
     margin-left: 1.1em;
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid #000000;
+    background: transparent;
+    color: #000000;
+    font-family: sans-serif;
+    font-size: .77em;
+    transition: border-color .2s;
+
 }
 
 
+
+
+
+.main-boards-label {
+    position: absolute;
+    left: 14px;
+    top: 25px;
+    display: block;
+    font-size: .77em;
+    font-family: sans-serif;
+    color: #000000;
+    transition: .2s;
+}
+
+
+.main-boards-input-txt:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 2px;
+    border-color: grey;
+}
+
+.main-boards-input-txt:focus ~ .main-boards-label {
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    display: block;
+    font-size: .7em;
+    color: grey;
+    font-weight: 700;
+}
+
+.main-boards-input-txt:focus::placeholder {
+        color: transparent;
+}
