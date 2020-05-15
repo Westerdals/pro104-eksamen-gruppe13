@@ -96,26 +96,30 @@ header {
 }
 
 /* Arrow to send to the next block */
+.main-boards-tasks-arrow {
+    position: relative;
+    bottom: 3.3em;;
+    left: 14.3rem;
+    width: 22px;
+    height: 20px;
+}
+
 .arrow {
     border: solid #000000;
     border-width: 0 2px 2px 0;
     display: inline-block;
     padding: 3px;
-    position: relative;
-    top: -35px;
-    left: 13rem; 
+    margin: 5px;
+    text-align: center;
 }
 
 .right {
     transform: rotate(-45deg);
 }
 
-.right:hover {
+.main-boards-tasks-arrow:hover .arrow {
     border: solid #FFF;
     border-width: 0 2px 2px 0;
     display: inline-block;
     padding: 3px;
-    position: relative;
-    top: -35px;
-    left: 13rem; 
 }
