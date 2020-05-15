@@ -8,8 +8,8 @@ function loginUser(event) {
   const password = document.querySelector("[name='password-in']").value;
 
   if (name.length < 1) {
-      console.log("Invalid username, must be at least 1 characters.");
-      return;
+    console.log("Invalid username, must be at least 1 characters.");
+    return;
   }
   if (password.length < 1) {
     console.log("Invalid password, must be at least 1 characters.");
@@ -74,9 +74,9 @@ function loginUser(event) {
   }
 }
 
-function printUserId() {
-  var s = window.location.search;
-  //alert(s.substring(1, s.length));
+function getUserId() {
+  const s = window.location.search;
+  return s.substring(1, s.length);
 }
 
 function getUniqueListId(listName) {
