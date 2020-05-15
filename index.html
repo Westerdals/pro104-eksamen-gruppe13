@@ -16,9 +16,10 @@
     	<script type="text/javascript" src="js/index.js"></script>
     	<script type="text/javascript" src="js/index2.js"></script>
 
+
 </head>
 
-<body onload="drawBoard()">
+<body onload="createTemplateGrid()">
   
   <header>
     <h1 class="main-title">To do list</h1>
@@ -36,80 +37,9 @@
 
 
   <section class="main-boards">
-    <div class="main-container">
 
-        <!-- Box 1 -->
-        <div class="box" id="box1">
-            <p class="textbox"><strong>To Do</strong></p>
-
-            <div class="main-boards-tasks">
-                
-                <p>Create tables</p>
-                <input type="checkbox" class="main-boards-tasks-check">
-                
-                <!-- Arrow to the right -->
-                <div class="main-boards-tasks-arrow">
-                    <i class="arrow right"></i>
-                </div>
-
-            </div>
-            
-        </div>
-
-        <!-- Box 2 -->
-        <div class="box" id="box2">
-            <p class="textbox"><strong>Doing</strong></p>
-
-            <div class="main-boards-tasks">
-                
-                <p>Create tables</p>
-                <input type="checkbox" class="main-boards-tasks-check">
-                
-                <!-- Arrow to the right -->
-                <div class="main-boards-tasks-arrow">
-                    <i class="arrow right"></i>
-                </div>
-
-            </div>
-
-
-        </div>
-        
-        <!-- Box 3 -->
-        <div class="box" id="box3">
-            <p class="textbox"><strong>Done</strong></p>
-
-            <div class="main-boards-tasks">
-                
-                <p>Create tables</p>
-                <input type="checkbox" class="main-boards-tasks-check">
-                
-                <!-- Arrow to the right -->
-                <div class="main-boards-tasks-arrow">
-                    <i class="arrow right"></i>
-                </div>
-            </div>
-
-        </div>
-        
-        <!-- Box 4 -->
-        <div class="box" id="box4">
-            <p class="textbox"><strong>+ To add new list</strong>
-
-            <div class="main-boards-tasks">
-                
-                <p>Create tables</p>
-                <input type="checkbox" class="main-boards-tasks-check">
-                
-                <!-- Arrow to the right -->
-                <div class="main-boards-tasks-arrow">
-                    <i class="arrow right"></i>
-                </div>
-            </div>
+    <div id="main-container"> </div>
     
-        </div>
-
-    </div>
   </section>
 
 	
@@ -130,7 +60,7 @@
 
 	
 
-	
+	    	<script type="text/javascript" src="js/index.js"></script>
 
 </body>
 
