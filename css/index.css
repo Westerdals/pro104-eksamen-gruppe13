@@ -133,8 +133,36 @@ header {
     background-color: blue;
 }
 
+/* Container for both the textarea to input the tasks and the button */
 .main-boards-tasks-txt {
     display:none;
+    width:100%;
+    height:5.1em;
+    margin:.91em;
+    width:90%;
+    top: -66px;
+    background-color: lightgrey;
+    position:relative;
+}
+
+.main-boards-tasks-txt textarea {
+    position:relative;
+    height: 5rem;
+    width:100%;
+    font-size: 14px;
+    background-color: skyblue;
+    resize:none;
+    outline: none;
+    border-radius: 5px;
+    border:0;
+    padding: 10px;
+}
+
+.main-boards-tasks-txt input {
+    width:7rem;
+    height: 2rem;
+    font-size: 14px;
+    font-weight:700
 }
 
 .main-boards-add-task-btn:active ~ .main-boards-tasks-txt{

@@ -41,7 +41,8 @@ function createTemplateGrid(){
             </div>
 
             <div class="main-boards-tasks-txt">
-                <input type="textbox" value="Add new task..">
+                <textarea type="textbox" placeholder="Add new task.."></textarea>
+                <input type="button" value="Add task">
             </div>
             
         </div>
