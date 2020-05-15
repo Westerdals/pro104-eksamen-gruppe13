@@ -1,6 +1,6 @@
 var mainBoardContainer = document.getElementById("main-container");
 
-const columns = [
+var columns = [
     {
       title: "To do",
       taskIds: [0] // refers to its index value
@@ -15,17 +15,15 @@ const columns = [
     }
   ];
   
-  console.log(columns[0].title);
 
 function createTemplateGrid(){ 
      var htmlTxt = "";
 
     for (let i = 0; i < columns.length; i++){
-        var title = columns[i].title;
         
         htmlTxt += `
         <div class="box">
-            <p class="textbox"><strong>${title}</strong></p>
+            <p class="textbox"><strong>${columns[i].title}</strong></p>
 
             <div class="main-boards-tasks">
                 
