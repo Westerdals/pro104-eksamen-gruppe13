@@ -80,6 +80,7 @@ header {
     background-color: skyblue;
 }
 
+/* The title of the tasks */
 .main-boards-tasks p {
     padding-top: .99em;
     padding-left: 2em;
@@ -87,8 +88,34 @@ header {
     position: relative;
 }
 
+/* Check box */
 .main-boards-tasks-check {
     position: relative;
     top: -36px;
     margin-left: .75em;
+}
+
+/* Arrow to send to the next block */
+.arrow {
+    border: solid #000000;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    position: relative;
+    top: -35px;
+    left: 13rem; 
+}
+
+.right {
+    transform: rotate(-45deg);
+}
+
+.right:hover {
+    border: solid #FFF;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    position: relative;
+    top: -35px;
+    left: 13rem; 
 }
