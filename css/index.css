@@ -44,7 +44,7 @@ header {
 }
 
 /* Grid for to do boards */
-.main-boards .main-container {
+.main-boards #main-container {
     margin-left: 2em;;
     max-width 70em;
     width: 90%;
@@ -54,7 +54,7 @@ header {
     float: left;
 }
 
-.main-grids .main-container div{
+.main-grids #main-container div{
     height: 15rem;
     margin-top: 1.5rem;
 }
@@ -78,6 +78,7 @@ header {
     height: 3em;
     margin: auto;
     background-color: skyblue;
+    margin-bottom: 10px;
 }
 
 /* The title of the tasks */
@@ -122,4 +123,9 @@ header {
     border-width: 0 2px 2px 0;
     display: inline-block;
     padding: 3px;
+}
+
+/* Adding new tasks */
+.main-boards-add-task-btn {
+    
 }
