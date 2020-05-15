@@ -30,10 +30,10 @@
   <div id="new-board-overlay" class="transparent cover hidden" onclick="hideNewBoardDiv();"></div>
   <div id="new-board-container" class="hidden">
     <div id="new-board-upper-part" class="rounded">
-      <input name="board-title-in" placeholder="Add board title">
+      <input id="board-title-in" placeholder="Add board title">
     </div>
     <div id="new-board-lower-part">
-      <input type="button" class="rounded" value="Create Board" onclick="createNewBoard()" />
+      <input type="button" class="rounded" value="Create Board" onclick="createNewBoard('board-title-in')" />
     </div>
   </div>
 
