@@ -77,8 +77,11 @@ header {
     width: 90%;
     height: 3em;
     margin: auto;
-    background-color: skyblue;
     margin-bottom: 10px;
+}
+
+.color {
+     background-color: skyblue;
 }
 
 /* The title of the tasks */
@@ -118,7 +121,7 @@ header {
     transform: rotate(-45deg);
 }
 
-.main-boards-tasks-arrow:hover .arrow {
+.main-boards-tasks-arrow:hover .arrow, .main-boards-tasks-arrow:target .arrow {
     border: solid #FFF;
     border-width: 0 2px 2px 0;
     display: inline-block;
@@ -127,5 +130,13 @@ header {
 
 /* Adding new tasks */
 .main-boards-add-task-btn {
-    
+    background-color: blue;
+}
+
+.main-boards-tasks-txt {
+    display:none;
+}
+
+.main-boards-add-task-btn:active ~ .main-boards-tasks-txt{
+    display: block;
 }

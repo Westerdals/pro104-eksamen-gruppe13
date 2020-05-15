@@ -25,7 +25,7 @@ function createTemplateGrid(){
         <div class="box">
             <p class="textbox"><strong>${columns[i].title}</strong></p>
 
-            <div class="main-boards-tasks">
+            <div class="main-boards-tasks color">
                 
                 <p>Create tables</p>
                 <input type="checkbox" class="main-boards-tasks-check">
@@ -38,6 +38,10 @@ function createTemplateGrid(){
 
             <div class="main-boards-tasks main-boards-add-task-btn">
                 <p>+Add new task..</p>
+            </div>
+
+            <div class="main-boards-tasks-txt">
+                <input type="textbox" value="Add new task..">
             </div>
             
         </div>
