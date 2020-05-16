@@ -1,17 +1,15 @@
 
 ### Ny branch ###
 -----------------
-
 Command line:
-git checkout master            Setter master branch som aktiv
-git pull                       Oppdaterer master branch med evt endringer fra GitHub
-git checkout -b <branch-name>  Lager ny branch og setter som aktiv
-git push origin <branch-name>  Pusher branchen opp til GitHub
+git checkout master            Setter master branch som aktiv.
+git pull                       Oppdaterer master branch med evt endringer fra GitHub.
+git checkout -b branchname     Lager ny branch og setter som aktiv.
+git push origin branchname     Pusher branchen opp til GitHub.
 
 
 ### Merge branch ###
 --------------------
-
 GitHub:
 velg 'Pull requests'
 finn branchen din og velg 'Compare & pull request'
@@ -20,18 +18,19 @@ velg 'Merge pull request' om det ikke er noen konflikter
 velg 'Confirm merge' evt legg til en merge message
 
 Command line:
-git push origin branch-name
+git push origin branchname     Pusher branchen opp til GitHub.
+git checkout master            Bytter til master.
+git pull                       Henter ned evt endringer fra GitHub.
+git push                       Sender dine endringer opp.
+git merge branchname           Utfører selve mergen.
+
+
+### Slette branch ###
+---------------------
 git checkout master
 git pull
-git push
-git merge branchname
-
-(alternativ metode)
-git fetch origin
-git checkout master
-git merge --no-ff <branch-name>
-git push origin master
-
+git branch -d branchname       Sletter branchen lokalt.
+git push origin --delete branchname Sletter branchen på GitHub.
 
 ### Feilsøking ###
 ------------------
