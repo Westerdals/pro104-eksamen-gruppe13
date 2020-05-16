@@ -8,14 +8,26 @@ function isAlphaNumeric(str) {
   return str.match(pattern);
 }
 
-function hasValidForm(str, name, minLength, isAlphaNum) {
+function invFormAl(str, minLength, isAlphaNum, name) {
   if (minLength > 0 && str.length < minLength) {
     alert(name + " length must be at least " + minLength);
-    return false;
+    return true;
   } else if (isAlphaNum && !isAlphaNumeric(str)) {
-    alert(name + " can only contain letters and numbers.");
+    alert(name + " can only contain letters and numbers");
+    return true;
   }
-  return true;
+  return false;
+}
+
+function invFormFb(str, minLength, isAlphaNum, name, fbDiv) {
+  if (minLength > 0 && str.length < minLength) {
+    fbDiv.innerHTML = name + " length must be at least " + minLength;
+    return true;
+  } else if (isAlphaNum && !isAlphaNumeric(str)) {
+    fbDiv.innerHTML = name + " can only contain letters and numbers";
+    return true;
+  }
+  return false;
 }
 
 function getUniqueListId(listName) {
