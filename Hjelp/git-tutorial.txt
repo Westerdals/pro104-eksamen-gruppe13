@@ -1,39 +1,34 @@
 
-### Ny branch ###
------------------
-Command line:
-git checkout master            Setter master branch som aktiv.
-git pull                       Oppdaterer master branch med evt endringer fra GitHub.
-git checkout -b branchname     Lager ny branch og setter som aktiv.
-git push origin branchname     Pusher branchen opp til GitHub.
+- Ny branch
+git checkout master            # Setter master branch som aktiv.
+git pull                       # Oppdaterer master branch med evt endringer fra GitHub.
+git checkout -b branchname     # Lager ny branch og setter som aktiv.
+git push origin branchname     # Pusher branchen opp til GitHub.
 
+- Rebase branch (flytter roten til branchen du er på til master)
+git fetch origin               # Updates origin/master
+git rebase origin/master       # Rebases current branch onto origin/master
 
-### Merge branch ###
---------------------
-GitHub:
-velg 'Pull requests'
+- Merge branch
+på GitHub, velg 'Pull requests'
 finn branchen din og velg 'Compare & pull request'
 velg 'Create pull request'
 velg 'Merge pull request' om det ikke er noen konflikter
 velg 'Confirm merge' evt legg til en merge message
 
-Command line:
-git push origin branchname     Pusher branchen opp til GitHub.
-git checkout master            Bytter til master.
-git pull                       Henter ned evt endringer fra GitHub.
-git push                       Sender dine endringer opp.
-git merge branchname           Utfører selve mergen.
+- Merge branch (command line)
+git push origin branchname     # Pusher branchen opp til GitHub.
+git checkout master            # Bytter til master.
+git pull                       # Henter ned evt endringer fra GitHub.
+git push                       # Sender dine endringer opp.
+git merge branchname           # Utfører selve mergen.
 
-
-### Slette branch ###
----------------------
+- Slette branch
 git checkout master
 git pull
-git branch -d branchname       Sletter branchen lokalt.
-git push origin --delete branchname Sletter branchen på GitHub.
+git branch -d branchname       # Sletter branchen lokalt.
+git push origin --delete branchname # Sletter branchen på GitHub.
 
-### Feilsøking ###
-------------------
-
-Stuck i editor                 Trykk i <escape> :wq for å avslutte.
+- Feilsøking
+Stuck i editor                 # Trykk i <escape> :wq for å avslutte.
 
