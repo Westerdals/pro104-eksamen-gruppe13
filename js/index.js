@@ -3,17 +3,34 @@ var mainBoardContainer = document.getElementById("main-container");
 var columns = [
     {
       title: "To do",
-      taskIds: [0] // refers to its index value
+      taskIds: [0], // refers to its index value
+      textBoxId: "",
+      textAreaId: "",
     },
     {
       title: "Doing",
-      taskIds: []
+      taskIds: [],
+      textBoxId: "",
+      textAreaId: "",
     },
     {
       title: "Done",
-      taskIds: [1, 2]
+      taskIds: [1, 2],
+      textBoxId: "",
+      textAreaId: "",
     }
   ];
+
+
+// Adds ID to the textboxes
+function setIds(){
+    for (let i = 0; i < columns.length; i++){
+      columns[i].textBoxId = `textBoxId${i}`;
+      columns[i].textAreaId = `textAreaId${i}`;
+    }
+}
+
+setIds();
   
 
 function createTemplateGrid(){ 
@@ -36,12 +53,12 @@ function createTemplateGrid(){
 
             </div>
 
-            <div class="main-boards-tasks main-boards-add-task-btn">
+            <div class="main-boards-tasks main-boards-add-task-btn" id="${columns[i].textBoxId}" onclick="showTextbox(this.id)">
                 <p>+Add new task..</p>
             </div>
 
             <div class="main-boards-tasks-txt">
-                <textarea type="textbox" placeholder="Add new task.."></textarea>
+                <textarea id="${columns[i].textAreaId}" onfocusout="hideTextBox(this.id)" autofocus type="textbox" placeholder="Add new task.."></textarea>
                 <input type="button" value="Add task">
             </div>
             
@@ -52,4 +69,35 @@ function createTemplateGrid(){
     }
  
   mainBoardContainer.innerHTML = htmlTxt;  
+}
+
+// Function to show textfield and hide button
+function showTextbox(clickedId) {
+
+  let hideButton = document.getElementById(clickedId);
+  hideButton.style.display = "none";
+
+
+  let showText = hideButton.nextElementSibling;
+  showText.style.display = "block";
+
+  // Focusing on the textarea shown
+  let focus = showText.getElementsByTagName("textarea");
+  focus[0].focus();
+  
+}
+
+// Function to show button and hide textfields
+function hideTextBox(object){
+  let hideText = document.getElementById(object);
+  let parentOfTextarea = hideText.parentElement;
+  let showButton = parentOfTextarea.previousElementSibling;
+
+  if (hideText.value.length == 0){
+
+  parentOfTextarea.style.display = "none";
+
+  showButton.style.display = "block";
+
+  }
 }
