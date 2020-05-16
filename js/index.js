@@ -5,28 +5,32 @@ var columns = [
       title: "To do",
       taskIds: [0], // refers to its index value
       textBoxId: "",
+      textAreaId: "",
     },
     {
       title: "Doing",
       taskIds: [],
       textBoxId: "",
+      textAreaId: "",
     },
     {
       title: "Done",
       taskIds: [1, 2],
       textBoxId: "",
+      textAreaId: "",
     }
   ];
 
 
 // Adds ID to the textboxes
-function createTextBoxId(){
+function setIds(){
     for (let i = 0; i < columns.length; i++){
       columns[i].textBoxId = `textBoxId${i}`;
+      columns[i].textAreaId = `textAreaId${i}`;
     }
 }
 
-createTextBoxId();
+setIds();
   
 
 function createTemplateGrid(){ 
@@ -54,7 +58,7 @@ function createTemplateGrid(){
             </div>
 
             <div class="main-boards-tasks-txt">
-                <textarea type="textbox" placeholder="Add new task.."></textarea>
+                <textarea id="${columns[i].textAreaId}" onfocusout="hideTextBox(this.id)" autofocus type="textbox" placeholder="Add new task.."></textarea>
                 <input type="button" value="Add task">
             </div>
             
@@ -67,7 +71,7 @@ function createTemplateGrid(){
   mainBoardContainer.innerHTML = htmlTxt;  
 }
 
-// Function to Show and hide button
+// Function to show textfield and hide button
 function showTextbox(clickedId) {
 
   let hideButton = document.getElementById(clickedId);
@@ -76,5 +80,21 @@ function showTextbox(clickedId) {
 
   let showText = hideButton.nextElementSibling;
   showText.style.display = "block";
+
+  // Focusing on the textarea shown
+  let focus = showText.getElementsByTagName("textarea");
+  focus[0].focus();
   
+}
+
+// Function to show button and hide textfields
+function hideTextBox(object){
+  let hideText = document.getElementById(object);
+  let parentOfTextarea = hideText.parentElement;
+  let showButton = parentOfTextarea.previousElementSibling;
+
+
+  parentOfTextarea.style.display = "none";
+
+  showButton.style.display = "block";
 }
