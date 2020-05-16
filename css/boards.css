@@ -18,8 +18,8 @@
 /* Board list elements */
 ul > li {
   display: inline-block;
-  width: 100px;
-  height: 100px;
+  width: 185px;
+  height: 85px;
   margin: 5px;
   padding: 7px 5px;
   cursor: pointer;
@@ -27,6 +27,10 @@ ul > li {
 }
 ul > li:hover {
   background-color: green;
+}
+#create-li {
+  text-align: center;
+  line-height: 77px;
 }
 
 #new-board-container {

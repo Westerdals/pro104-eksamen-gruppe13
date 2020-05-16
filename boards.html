@@ -26,12 +26,14 @@
   <h2>Select board</h2>
 
   <!-- List that is populated with previously created boards -->
-  <ul id="board-ul"></ul>
+  <ul id="board-ul">
+    <li id="create-li" class="rounded" onclick="showNewBoardDiv();">
+      Create new board
+    </li>
+  </ul>
 
   <!-- Div used to write feedback to the user -->
   <div id="board-feedback-div"></div>
-
-  <input id="create-btn" type="button" value="Create a board" onclick="showNewBoardDiv();" />
 
   <a id="login-a" href="login.html">Log Out</a>
 

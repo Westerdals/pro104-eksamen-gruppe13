@@ -1,1 +1,6 @@
 /* Styles that are used across multiple html files */
+
+/* Rounded corners. */
+.rounded {
+  border-radius: 5px;
+}

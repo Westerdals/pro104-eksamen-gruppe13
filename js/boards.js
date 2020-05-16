@@ -6,7 +6,7 @@ window.onload = function() {
   const userId = getUserId();
 
   const feedbackDiv = document.getElementById("board-feedback-div");
-  const createBtn   = document.getElementById("create-btn");
+  const createLi    = document.getElementById("create-li");
   const loginA      = document.getElementById("login-a");
   const boardsUl    = document.getElementById("board-ul");
   
@@ -18,7 +18,7 @@ window.onload = function() {
   if (userList.length == 0 || typeof(userList[userId]) === undefined || userId == '') {
 
     feedbackDiv.innerHTML = "You must be logged in to access and create boards.";
-    createBtn.disabled = true;
+    //createBtn.disabled = true;
     loginA.innerHTML = "Log In";
 
     /*alert("You must be logged in as a user in order to create a board.");
@@ -34,9 +34,11 @@ window.onload = function() {
 
       // Creates and appends a new clickable list element.
       let li = document.createElement("li");
+      li.className = "rounded";
       li.innerHTML = board.title;
       li.onclick = function(){ selectBoard(i, userId); }
-      boardsUl.appendChild(li);
+      boardsUl.insertBefore(li, createLi);
+      //boardsUl.appendChild(li);
     }
   }
   console.log(count + " board elements created");
@@ -67,6 +69,16 @@ function hideNewBoardDiv() {
   overlayDiv.style.display = "none";
   containerDiv.style.display = "none";
 }
+
+/**
+ * Close the Create new board window if 'escape' is pressed.
+ */
+document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    if (evt.keyCode == 27) {
+        hideNewBoardDiv();
+    }
+};
 
 function createNewBoard(inputIdTag) {
   const userId = getUserId();
