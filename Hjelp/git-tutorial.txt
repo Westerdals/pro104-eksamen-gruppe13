@@ -10,11 +10,14 @@ git fetch origin               # Updates origin/master
 git rebase origin/master       # Rebases current branch onto origin/master
 
 - Merge branch
-på GitHub, velg 'Pull requests'
+på Command line: git push origin branchname  # Pusher branchen opp til GitHub.
+på GitHub: velg 'Pull requests'
 finn branchen din og velg 'Compare & pull request'
 velg 'Create pull request'
 velg 'Merge pull request' om det ikke er noen konflikter
 velg 'Confirm merge' evt legg til en merge message
+velg 'Delete branch' for å slette branchen (om den ble lagt til uten problemer)
+husk at branchen på maskinen din er der enda
 
 - Merge branch (command line)
 git push origin branchname     # Pusher branchen opp til GitHub.
@@ -22,10 +25,6 @@ git checkout master            # Bytter til master.
 git pull                       # Henter ned evt endringer fra GitHub.
 git push                       # Sender dine endringer opp.
 git merge branchname           # Utfører selve mergen.
-
-- Slette branch
-git checkout master
-git pull
 git branch -d branchname       # Sletter branchen lokalt.
 git push origin --delete branchname # Sletter branchen på GitHub.
 
