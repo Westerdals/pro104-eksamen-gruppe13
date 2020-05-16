@@ -2,23 +2,17 @@ function loginUser(event) {
   event.preventDefault();
 
   const loginType = document.activeElement.name;
-  //console.log(loginType + " button pressed");
 
-  const name = document.querySelector("[name='username-in']").value.toLowerCase();
+  const usernameFeedbackDiv = document.getElementById("username-feedback-div");
+  const passwordFeedbackDiv = document.getElementById("password-feedback-div");
+  const submitFeedbackDiv   = document.getElementById("submit-feedback-div");
+
+  const name     = document.querySelector("[name='username-in']").value.toLowerCase();
   const password = document.querySelector("[name='password-in']").value;
 
-  if (name.length < 1) {
-    console.log("Invalid username, must be at least 1 characters.");
-    return;
-  }
-  if (password.length < 1) {
-    console.log("Invalid password, must be at least 1 characters.");
-    return;
-  }
-
-  //let passMasked = '';
-  //for (let i = 0; i < password.length; i++) {passMasked += "*";}
-  //console.log("username: " + name + ", password: " + passMasked);
+  // Validate name and password.
+  if (!hasValidForm(name, "Username", 1, true))      {return;}
+  if (!hasValidForm(password, "Password", 1, false)) {return;}
 
   const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
 
@@ -41,13 +35,13 @@ function loginUser(event) {
           }
         } else {
           console.log("User authentication failed: invalid password");
-          // TODO: output error message in feedback div
+          passwordFeedbackDiv.innerHTML = "Invalid password.";
         }
         return;
       }
     }
     console.log("Couldn't find user " + name + " in storage");
-    // TODO: output error message in feedback div
+    submitFeedbackDiv.innerHTML = "User not found.";
 
   } else {
 
@@ -57,7 +51,7 @@ function loginUser(event) {
     for (let i = 0; i < userList.length; i++) {
       if (userList[i].name == name) {
           console.log("User " + name + " already in storage");
-          // TODO: output feedback message
+          submitFeedbackDiv.innerHTML = "Username already exists.";
           return;
       }
     }
@@ -69,6 +63,6 @@ function loginUser(event) {
     window.localStorage.setItem("userList", JSON.stringify(userList));
 
     console.log("User " + name + " added to storage with id " + id);
-    // TODO: output feedback message
+    submitFeedbackDiv.innerHTML = "User created successfully.";
   }
 }

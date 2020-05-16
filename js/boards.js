@@ -15,12 +15,9 @@ function hideNewBoardDiv() {
 function createNewBoard(inputIdTag) {
   const userId = getUserId();
   const title = document.getElementById(inputIdTag).value;
-
-  if (title.length < 1) {
-    alert("Title must contain at least one character.");
-  } else if (!isAlphaNumeric(title)) {
-    alert("Title can only contain letters and numbers.");
-  }
+  
+  // Check length and characters of the input string.
+  if (!hasValidForm(title, "Title", 1, true)) {return;}
 
   // Get board and user list from local storage
   const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
