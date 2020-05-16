@@ -140,9 +140,8 @@ header {
     height:5.1em;
     margin:.91em;
     width:90%;
-    top: -66px;
     background-color: lightgrey;
-    position:relative;
+
 }
 
 .main-boards-tasks-txt textarea {
@@ -164,7 +163,3 @@ header {
     font-size: 14px;
     font-weight:700
 }
-/*
-.main-boards-add-task-btn:active ~ .main-boards-tasks-txt{
-    display: block;
-}*/

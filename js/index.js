@@ -67,10 +67,14 @@ function createTemplateGrid(){
   mainBoardContainer.innerHTML = htmlTxt;  
 }
 
+// Function to Show and hide button
 function showTextbox(clickedId) {
 
   let hideButton = document.getElementById(clickedId);
   hideButton.style.display = "none";
 
+
+  let showText = hideButton.nextElementSibling;
+  showText.style.display = "block";
   
 }
