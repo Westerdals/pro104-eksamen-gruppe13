@@ -18,7 +18,7 @@ window.onload = function() {
   if (userList.length == 0 || typeof(userList[userId]) === undefined || userId == '') {
 
     feedbackDiv.innerHTML = "You must be logged in to access and create boards.";
-    //createBtn.disabled = true;
+    createLi.style.display = "none";
     loginA.innerHTML = "Log In";
 
     /*alert("You must be logged in as a user in order to create a board.");

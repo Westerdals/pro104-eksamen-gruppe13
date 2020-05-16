@@ -17,7 +17,9 @@
 
 /* Board list elements */
 ul > li {
-  display: inline-block;
+  display: block;
+  position: relative;
+  float: left;
   width: 185px;
   height: 85px;
   margin: 5px;
@@ -25,12 +27,9 @@ ul > li {
   cursor: pointer;
   background-color: grey;
 }
+
 ul > li:hover {
   background-color: green;
-}
-#create-li {
-  text-align: center;
-  line-height: 77px;
 }
 
 #new-board-container {

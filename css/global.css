@@ -1,6 +1,21 @@
 /* Styles that are used across multiple html files */
 
-/* Rounded corners. */
+/* Rounded corners */
 .rounded {
   border-radius: 5px;
+}
+
+/* Center align text */
+.centered {
+  text-align: center; /* horizontal */
+  display: table-cell;
+  width: 185px;
+  height: 85px;
+  vertical-align: middle;
+}
+
+/* Used to stop floating */
+.clear {
+  float: none;
+  clear: both;
 }
