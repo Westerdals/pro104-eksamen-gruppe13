@@ -1,6 +1,14 @@
+/**
+ * 
+ */
 window.onload = function() {
+
   const userId = getUserId();
-  let ul = document.getElementById("board-ul");
+
+  const feedbackDiv = document.getElementById("board-feedback-div");
+  const createBtn   = document.getElementById("create-btn");
+  const loginA      = document.getElementById("login-a");
+  const boardsUl    = document.getElementById("board-ul");
   
   // Get board and user list from local storage.
   const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
@@ -8,26 +16,30 @@ window.onload = function() {
 
   // Verify that the user is logged in properly.
   if (userList.length == 0 || typeof(userList[userId]) === undefined || userId == '') {
-    alert("You must be logged in as a user in order to create a board.");
-    window.location.href = "login.html"; //redirect to login page
-    return;
+
+    feedbackDiv.innerHTML = "You must be logged in to access and create boards.";
+    createBtn.disabled = true;
+    loginA.innerHTML = "Log In";
+
+    /*alert("You must be logged in as a user in order to create a board.");
+    window.location.href = "login.html"; //redirect to login page*/
   }
   
   // Loops through all boards that belong to the current user.
-  let sum = 0;
+  let count = 0;
   for (let i = 0; i < boardList.length; i++) {
     let board = boardList[i];
     if (board.userIds[0] == userId) {
-      sum++;
+      count++;
 
-      // Creates and appends a new board element.
+      // Creates and appends a new clickable list element.
       let li = document.createElement("li");
-      li.innerHTML = i;
+      li.innerHTML = board.title;
       li.onclick = function(){ selectBoard(i, userId); }
-      ul.appendChild(li);
+      boardsUl.appendChild(li);
     }
   }
-  console.log(sum + " boards elements created");
+  console.log(count + " board elements created");
 };
 
 function selectBoard(boardId, userId) {

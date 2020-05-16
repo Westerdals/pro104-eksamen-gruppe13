@@ -21,6 +21,7 @@ ul > li {
   width: 100px;
   height: 100px;
   margin: 5px;
+  padding: 7px 5px;
   cursor: pointer;
   background-color: grey;
 }
