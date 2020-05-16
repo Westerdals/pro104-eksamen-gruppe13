@@ -34,11 +34,11 @@ function loginUser(event) {
           console.log("user authentication successful");
           
           // Check if user has a valid lastBoardId value set.
-          if (userList[i].lastBoardId > -1) {
+          /*if (userList[i].lastBoardId > -1) {
             window.location.href = "index.html?" + i;
-          } else {
+          } else {*/
             window.location.href = "boards.html?" + i;
-          }
+          //}
         } else {
           console.log("User authentication failed: invalid password");
           passFbDiv.innerHTML = "Invalid password";
