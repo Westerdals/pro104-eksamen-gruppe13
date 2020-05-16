@@ -93,8 +93,11 @@ function hideTextBox(object){
   let parentOfTextarea = hideText.parentElement;
   let showButton = parentOfTextarea.previousElementSibling;
 
+  if (hideText.value.length == 0){
 
   parentOfTextarea.style.display = "none";
 
   showButton.style.display = "block";
+
+  }
 }
