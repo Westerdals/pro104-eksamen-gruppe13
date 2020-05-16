@@ -25,6 +25,7 @@ function createNewBoard(inputIdTag) {
   
   if (userList.length == 0 || userList.length < userId) {
     alert("You must be logged in as a user in order to create a board.");
+    window.location.href = "login.html"; //redirect to login page
     return;
   }
 
