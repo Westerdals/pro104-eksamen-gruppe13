@@ -3,16 +3,23 @@ function loginUser(event) {
 
   const loginType = document.activeElement.name;
 
-  const usernameFeedbackDiv = document.getElementById("username-feedback-div");
-  const passwordFeedbackDiv = document.getElementById("password-feedback-div");
-  const submitFeedbackDiv   = document.getElementById("submit-feedback-div");
+  const nameFbDiv = document.getElementById("username-feedback-div");
+  const passFbDiv = document.getElementById("password-feedback-div");
+  const subFbDiv  = document.getElementById("submit-feedback-div");
 
   const name     = document.querySelector("[name='username-in']").value.toLowerCase();
   const password = document.querySelector("[name='password-in']").value;
-
+  
+  // Clear feedback div's in case they have existing content.
+  nameFbDiv.innerHTML = "";
+  passFbDiv.innerHTML = "";
+  subFbDiv.innerHTML  = "";
+  
   // Validate name and password.
-  if (!hasValidForm(name, "Username", 1, true))      {return;}
-  if (!hasValidForm(password, "Password", 1, false)) {return;}
+  if (invFormFb(name, 1, true, "Username", nameFbDiv)
+   || invFormFb(password, 1, false, "Password", passFbDiv)) {
+    return;
+  }
 
   const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
 
@@ -27,21 +34,20 @@ function loginUser(event) {
           console.log("user authentication successful");
           
           // Check if user has a valid lastBoardId value set.
-          const urlParam = "?" + encodeURIComponent(userList[i].id);
           if (userList[i].lastBoardId > -1) {
-            window.location.href = "index.html" + urlParam;
+            window.location.href = "index.html?" + i;
           } else {
-            window.location.href = "boards.html" + urlParam;
+            window.location.href = "boards.html?" + i;
           }
         } else {
           console.log("User authentication failed: invalid password");
-          passwordFeedbackDiv.innerHTML = "Invalid password.";
+          passFbDiv.innerHTML = "Invalid password";
         }
         return;
       }
     }
     console.log("Couldn't find user " + name + " in storage");
-    submitFeedbackDiv.innerHTML = "User not found.";
+    subFbDiv.innerHTML = "User not found";
 
   } else {
 
@@ -51,18 +57,17 @@ function loginUser(event) {
     for (let i = 0; i < userList.length; i++) {
       if (userList[i].name == name) {
           console.log("User " + name + " already in storage");
-          submitFeedbackDiv.innerHTML = "Username already exists.";
+          subFbDiv.innerHTML = "Username already exists";
           return;
       }
     }
 
-    const id = getUniqueListId(userList);
     const lastBoardId = -1;
-    const user = {id, name, password, lastBoardId};
+    const user = {name, password, lastBoardId};
     userList.push(user);
     window.localStorage.setItem("userList", JSON.stringify(userList));
 
-    console.log("User " + name + " added to storage with id " + id);
-    submitFeedbackDiv.innerHTML = "User created successfully.";
+    console.log("User " + name + " added to storage with id " + userList.length);
+    subFbDiv.innerHTML = "User created successfully";
   }
 }

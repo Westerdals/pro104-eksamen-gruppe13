@@ -1,3 +1,14 @@
+function setLinkParams() {
+  let boardA   = document.getElementById("board-a");
+  let ideasA   = document.getElementById("ideas-a");
+  let membersA = document.getElementById("members-a");
+  const userId = getUserId();
+  
+  boardA.href   = boardA.href   + "?"  + userId;
+  ideasA.href   = ideasA.href   + "?"  + userId;
+  membersA.href = membersA.href + "?"  + userId;
+}
+
 function drawBoard() {
 
   const userId = 0; //getUserId();
