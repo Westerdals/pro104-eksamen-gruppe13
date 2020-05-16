@@ -3,17 +3,30 @@ var mainBoardContainer = document.getElementById("main-container");
 var columns = [
     {
       title: "To do",
-      taskIds: [0] // refers to its index value
+      taskIds: [0], // refers to its index value
+      textBoxId: "",
     },
     {
       title: "Doing",
-      taskIds: []
+      taskIds: [],
+      textBoxId: "",
     },
     {
       title: "Done",
-      taskIds: [1, 2]
+      taskIds: [1, 2],
+      textBoxId: "",
     }
   ];
+
+
+// Adds ID to the textboxes
+function createTextBoxId(){
+    for (let i = 0; i < columns.length; i++){
+      columns[i].textBoxId = `textBoxId${i}`;
+    }
+}
+
+createTextBoxId();
   
 
 function createTemplateGrid(){ 
@@ -36,7 +49,7 @@ function createTemplateGrid(){
 
             </div>
 
-            <div class="main-boards-tasks main-boards-add-task-btn">
+            <div class="main-boards-tasks main-boards-add-task-btn" id="${columns[i].textBoxId}" onclick="showTextbox(this.id)">
                 <p>+Add new task..</p>
             </div>
 
@@ -52,4 +65,12 @@ function createTemplateGrid(){
     }
  
   mainBoardContainer.innerHTML = htmlTxt;  
+}
+
+function showTextbox(clickedId) {
+
+  let hideButton = document.getElementById(clickedId);
+  hideButton.style.display = "none";
+
+  
 }
