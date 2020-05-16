@@ -15,6 +15,19 @@
   display: none;
 }
 
+/* Board list elements */
+ul > li {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  cursor: pointer;
+  background-color: grey;
+}
+ul > li:hover {
+  background-color: green;
+}
+
 #new-board-container {
   position: absolute;
   top: 37px;
