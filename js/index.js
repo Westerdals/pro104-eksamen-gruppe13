@@ -37,6 +37,12 @@ function createTemplateGrid(){
 
   for (let i = 0; i < columns.length; i++) {
         
+        /* Har startet å flette sammen koden her. La til en id på p tagen
+         * rett under slik at jeg får lagt til task elementer på riktig sted.
+         * Selve task elementene genereres i index2.js linje 75.
+         * Har også lagt til en id dag på 'Add task' knappen for å legge til
+         * en onclick event. */
+
         htmlTxt += `
         <div class="box">
             <p id="p${i}" class="textbox"><strong>${columns[i].title}</strong></p>
