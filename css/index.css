@@ -163,3 +163,7 @@ header {
     font-size: 14px;
     font-weight:700
 }
+
+.task:hover * {
+  background-color: lightgray;
+}

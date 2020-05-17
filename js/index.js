@@ -58,7 +58,7 @@ function createTemplateGrid(){
 
             <div class="main-boards-tasks-txt">
                 <textarea id="${columns[i].textAreaId}" onfocusout="hideTextBox(this.id)" autofocus type="textbox" placeholder="Add new task.."></textarea>
-                <input type="button" value="Add task">
+                <input id="col${i}-btn" type="button" value="Add task">
             </div>
             
         </div>

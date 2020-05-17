@@ -11,21 +11,22 @@ function setLinkParams() {
 
 function loadBoardData() {
 
-  const userId = getUserId();
+  let userId = getUserId();
 
   const loginA = document.getElementById("login-a");
 
   // Get board and user list from local storage.
-  const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
-  const boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  let userList = JSON.parse(window.localStorage.getItem("userList")) || [];
+  let boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
 
   // Verify that the user is logged in properly.
   if (userList.length == 0 || typeof(userList[userId]) === undefined || userId == '') {
 
-    // Creating a test user and logs in.
+    // Creating a test user if none exists.
     if (userList.length == 0) {
+      userId = 0;
       const name = "test";
-      const password = "test;"
+      const password = "test";
       const lastBoardId = -1;
       const user = {name, password, lastBoardId};
       userList.push(user);
@@ -45,6 +46,13 @@ function loadBoardData() {
     return;
   }
 
+  // Creating a default board if none exists.
+  if (userList[userId].lastBoardId == -1) {
+    createBoard(userId, "testBoard", getDefaultColumns(), getDefaultTasks());
+    userList = JSON.parse(window.localStorage.getItem("userList")) || [];
+    boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  }
+
   const boardId = userList[userId].lastBoardId;
   const board = boardList[boardId];
 
@@ -59,7 +67,7 @@ function loadBoardData() {
 
     // Column title.
     const columnTitle = column.title;
-    console.log("column #" + i + " title: " + columnTitle);
+    //console.log("column #" + i + " title: " + columnTitle);
 
     let anchorP = document.getElementById("p" + i);
 
@@ -70,28 +78,39 @@ function loadBoardData() {
       const taskTitle = task.title;
       const taskDescription = task.description;
       const taskDeadline = task.deadline;
-      console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescription + ", deadline: " + taskDeadline);
+      //console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescription + ", deadline: " + taskDeadline);
 
       let taskDiv  = document.createElement("div");
       let titleDiv = document.createElement("div");
       let propDiv  = document.createElement("div");
+      let arrowDiv = document.createElement("div");
       let leftDiv  = document.createElement("div");
       let rightDiv = document.createElement("div");
       let dateDiv  = document.createElement("div");
       let descDiv  = document.createElement("div");
 
-      taskDiv.className = "rounded"
+      taskDiv.className = "rounded color task"
       taskDiv.style.position = "relative";
-      taskDiv.style.background = "#87ceeb";
+      taskDiv.style.margin = "5px";
+      taskDiv.style.zIndex = "99";
+      //taskDiv.style.background = "#87ceeb";
+      titleDiv.style.padding = "5px";
+      titleDiv.style.textAlign = "left";
       titleDiv.innerHTML = task.title;
       titleDiv.style.background = "";
       propDiv.style.position = "absolute";
-      propDiv.style.top = "0";
-      propDiv.style.right = "0";
+      propDiv.style.top = "3px";
+      propDiv.style.right = "3px";
       propDiv.style.width = "16px";
       propDiv.style.height = "16px";
-      propDiv.src = "properties.png";
-      //propDiv.style.background = "grey";
+      propDiv.style.backgroundImage = "url(properties.png)";
+      propDiv.style.backgroundColor = "grey";
+      arrowDiv.className = "main-boards-tasks-arrow arrow right";
+      arrowDiv.style.position = "absolute";
+      arrowDiv.style.top = "3px";
+      arrowDiv.style.right = "16px";
+      arrowDiv.style.width = "16px";
+      arrowDiv.style.height = "16px";
       leftDiv.style.background = "";
       rightDiv.style.background = "";
       dateDiv.style.background = "";
@@ -99,10 +118,11 @@ function loadBoardData() {
 
       taskDiv.appendChild(titleDiv);
       taskDiv.appendChild(propDiv);
-      /*taskDiv.appendChild(leftDiv);
+      taskDiv.appendChild(arrowDiv);
+      taskDiv.appendChild(leftDiv);
       taskDiv.appendChild(rightDiv);
       leftDiv.appendChild(dateDiv);
-      leftDiv.appendChild(descDiv);*/
+      leftDiv.appendChild(descDiv);
 
       anchorP.appendChild(taskDiv);
 
@@ -111,8 +131,20 @@ function loadBoardData() {
         // Assigned user id and name.
         const assignedUserId = task.userIds[k];
         const assignedUserName = userList[assignedUserId].name;
-        console.log("assigned user #" + k + ": " + assignedUserName);
+        //console.log("assigned user #" + k + ": " + assignedUserName);
       }
     }
+  
+    const addBtn = document.getElementById("col" + i + "-btn");
+    const inputTag = document.getElementById("textAreaId" + i);
+    addBtn.onclick = function(){createTask(userId, i, inputTag)};
   }
+}
+
+function createTask(userId, colId, inputTag) {
+  console.log(userId+", "+colId+", "+inputTag.value);
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  // Create task element
+  // Save in boardList
+  // Draw element on page
 }
