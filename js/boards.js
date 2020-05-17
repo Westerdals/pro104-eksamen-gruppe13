@@ -106,8 +106,9 @@ function createNewBoard(inputIdTag) {
   }*/
   
   // Creating the new board and adds it to the list.
-  const boardId = boardList.length;
+  createBoard(userId, title, getDefaultColumns(), getDefaultTasks());
 
+  /*const boardId = boardList.length;
   const userIds = [userId]; // current members (user ids) of the board
   const columns = getDefaultColumns(); // column list
   const tasks   = getDefaultTasks(); // task list
@@ -120,54 +121,8 @@ function createNewBoard(inputIdTag) {
   // Storing board and user data in local storage.
   window.localStorage.setItem("boardList", JSON.stringify(boardList));
   window.localStorage.setItem("userList", JSON.stringify(userList));
-  console.log("Storing board with title " + title + " (id=" + boardId + ") for user " + userName + " (id=" + userId + ").");
+  console.log("Storing board with title " + title + " (id=" + boardId + ") for user " + userName + " (id=" + userId + ").");*/
   
   // Redirect to the main page.
   window.location.href = "index.html?" + userId;
-}
-
-/**
- * Default columns in a new board.
- */
-function getDefaultColumns() {
-  return [
-    {
-      title: "Todo",
-      taskIds: [0] // refers to its index value
-    },
-    {
-      title: "Doing",
-      taskIds: []
-    },
-    {
-      title: "Done",
-      taskIds: [1, 2]
-    }
-  ];
-}
-
-/**
- * Default tasks in a new board.
- */
-function getDefaultTasks() {
-  return [
-    {
-      title: "Task #1",
-      description: "",
-      deadline: "",
-      memberIds: [] // assigned members
-    },
-    {
-      title: "Task #2",
-      description: "",
-      deadline: "",
-      memberIds: []
-    },
-    {
-      title: "Task #3",
-      description: "",
-      deadline: "",
-      memberIds: []
-    },
-  ];
 }
