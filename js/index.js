@@ -1,26 +1,25 @@
 var mainBoardContainer = document.getElementById("main-container");
 
 var columns = [
-    {
-      title: "To do",
-      taskIds: [0], // refers to its index value
-      textBoxId: "",
-      textAreaId: "",
-    },
-    {
-      title: "Doing",
-      taskIds: [],
-      textBoxId: "",
-      textAreaId: "",
-    },
-    {
-      title: "Done",
-      taskIds: [1, 2],
-      textBoxId: "",
-      textAreaId: "",
-    }
-  ];
-
+  {
+    title: "To do",
+    taskIds: [0], // refers to its index value
+    textBoxId: "",
+    textAreaId: "",
+  },
+  {
+    title: "Doing",
+    taskIds: [],
+    textBoxId: "",
+    textAreaId: "",
+  },
+  {
+    title: "Done",
+    taskIds: [1, 2],
+    textBoxId: "",
+    textAreaId: "",
+  }
+];
 
 // Adds ID to the textboxes
 function setIds(){
@@ -34,13 +33,13 @@ setIds();
   
 
 function createTemplateGrid(){ 
-     var htmlTxt = "";
+  var htmlTxt = "";
 
-    for (let i = 0; i < columns.length; i++){
+  for (let i = 0; i < columns.length; i++) {
         
         htmlTxt += `
         <div class="box">
-            <p class="textbox"><strong>${columns[i].title}</strong></p>
+            <p id="p${i}" class="textbox"><strong>${columns[i].title}</strong></p>
 
             <div class="main-boards-tasks color">
                 

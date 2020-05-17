@@ -13,6 +13,8 @@ function loadBoardData() {
 
   const userId = getUserId();
 
+  const loginA = document.getElementById("login-a");
+
   // Get board and user list from local storage.
   const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
   const boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
@@ -20,13 +22,26 @@ function loadBoardData() {
   // Verify that the user is logged in properly.
   if (userList.length == 0 || typeof(userList[userId]) === undefined || userId == '') {
 
+    // Creating a test user and logs in.
+    if (userList.length == 0) {
+      const name = "test";
+      const password = "test;"
+      const lastBoardId = -1;
+      const user = {name, password, lastBoardId};
+      userList.push(user);
+      window.localStorage.setItem("userList", JSON.stringify(userList));
+      console.log("User " + name + " added to storage with id " + userList.length);
+    }
+    console.log("Injecting log in session of user " + userList[0].name);
+    window.location.href = "index.html?0";
+
     /*feedbackDiv.innerHTML = "You must be logged in to access and create boards.";
     createLi.style.display = "none";
     loginA.innerHTML = "Log In";*/
 
     /*alert("You must be logged in to access this page.");
-    window.location.href = "login.html"; //redirect to login page*/
-    console.log("invalid login state");
+    window.location.href = "login.html"; //redirect to login page
+    console.log("invalid login state");*/
     return;
   }
 
@@ -46,6 +61,8 @@ function loadBoardData() {
     const columnTitle = column.title;
     console.log("column #" + i + " title: " + columnTitle);
 
+    let anchorP = document.getElementById("p" + i);
+
     for (let j = 0; j < column.taskIds.length; j++) {
       const task = tasks[column.taskIds[j]];
 
@@ -54,6 +71,40 @@ function loadBoardData() {
       const taskDescription = task.description;
       const taskDeadline = task.deadline;
       console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescription + ", deadline: " + taskDeadline);
+
+      let taskDiv  = document.createElement("div");
+      let titleDiv = document.createElement("div");
+      let propDiv  = document.createElement("div");
+      let leftDiv  = document.createElement("div");
+      let rightDiv = document.createElement("div");
+      let dateDiv  = document.createElement("div");
+      let descDiv  = document.createElement("div");
+
+      taskDiv.className = "rounded"
+      taskDiv.style.position = "relative";
+      taskDiv.style.background = "#87ceeb";
+      titleDiv.innerHTML = task.title;
+      titleDiv.style.background = "";
+      propDiv.style.position = "absolute";
+      propDiv.style.top = "0";
+      propDiv.style.right = "0";
+      propDiv.style.width = "16px";
+      propDiv.style.height = "16px";
+      propDiv.src = "properties.png";
+      //propDiv.style.background = "grey";
+      leftDiv.style.background = "";
+      rightDiv.style.background = "";
+      dateDiv.style.background = "";
+      descDiv.style.background = "";
+
+      taskDiv.appendChild(titleDiv);
+      taskDiv.appendChild(propDiv);
+      /*taskDiv.appendChild(leftDiv);
+      taskDiv.appendChild(rightDiv);
+      leftDiv.appendChild(dateDiv);
+      leftDiv.appendChild(descDiv);*/
+
+      anchorP.appendChild(taskDiv);
 
       for (let k = 0; j < task.userIds; k++) {
 
