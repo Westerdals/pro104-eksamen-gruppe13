@@ -81,12 +81,14 @@ function loadBoardData() {
       const taskDeadline = task.deadline;
       const memberIds    = task.memberIds;
       //console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescription + ", deadline: " + taskDeadline);
-      
-      let taskDiv = createElementWithRightCSS(taskTitle);
-      taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)}
+
 
       let outputTasks = document.getElementById("newTaskId" + i);
       outputTasks.innerHTML += createElementWithRightCSS(taskTitle);
+
+            
+      const taskDiv = createElementWithRightCSS(taskTitle);
+      taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)}
 /*
       const taskDiv = createTaskElem(taskTitle, taskDescr, taskDeadline, memberIds);
       taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
