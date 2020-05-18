@@ -50,7 +50,6 @@ function createTemplateGrid(){
             <div class="main-boards-tasks color">
                 
                 <p>Create tables</p>
-                <input type="checkbox" class="main-boards-tasks-check">
                 
                 <div class="main-boards-tasks-arrow">
                     <i class="arrow right"></i>

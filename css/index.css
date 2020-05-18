@@ -92,17 +92,11 @@ header {
     position: relative;
 }
 
-/* Check box */
-.main-boards-tasks-check {
-    position: relative;
-    top: -36px;
-    margin-left: .75em;
-}
 
 /* Arrow to send to the next block */
 .main-boards-tasks-arrow {
     position: relative;
-    bottom: 3.3em;;
+    bottom: 2.2em;;
     left: 14.3rem;
     width: 22px;
     height: 20px;
