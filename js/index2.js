@@ -80,15 +80,14 @@ function loadBoardData() {
       const taskDescr    = task.description;
       const taskDeadline = task.deadline;
       const memberIds    = task.memberIds;
-      //console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescription + ", deadline: " + taskDeadline);
+      console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescr + ", deadline: " + taskDeadline);
 
 
       let outputTasks = document.getElementById("newTaskId" + i);
       outputTasks.innerHTML += createElementWithRightCSS(taskTitle);
 
             
-      const taskDiv = createElementWithRightCSS(taskTitle);
-      taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)}
+      outputTasks.onclick = function(){showTaskPropDiv(boardId, taskId)};
 /*
       const taskDiv = createTaskElem(taskTitle, taskDescr, taskDeadline, memberIds);
       taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
@@ -162,7 +161,7 @@ function createElementWithRightCSS(title){
                 <div class="main-boards-tasks-arrow">
                     <i class="arrow right"></i>
                 </div>
-      </div>`;
+     </div>`;
 
   return outputDiv;
 }
