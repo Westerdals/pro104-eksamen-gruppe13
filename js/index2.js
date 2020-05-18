@@ -82,11 +82,17 @@ function loadBoardData() {
       const memberIds    = task.memberIds;
       //console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescription + ", deadline: " + taskDeadline);
       
+      let taskDiv = createElementWithRightCSS(taskTitle);
+      taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)}
+
+      let outputTasks = document.getElementById("newTaskId" + i);
+      outputTasks.innerHTML += createElementWithRightCSS(taskTitle);
+/*
       const taskDiv = createTaskElem(taskTitle, taskDescr, taskDeadline, memberIds);
       taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
 
       anchorP.appendChild(taskDiv);
-
+*/
       for (let k = 0; j < task.userIds; k++) {
 
         // Assigned user id and name.
@@ -131,6 +137,7 @@ function createTaskHandler(userId, colId, inputTag) {
   tasks.push(task);
   window.localStorage.setItem("boardList", JSON.stringify(boardList));
 
+/*
   // Create the task element.
   const taskDiv = createTaskElem(title, description, deadline, memberIds);
   taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
@@ -138,11 +145,28 @@ function createTaskHandler(userId, colId, inputTag) {
   // Get anchor tag and add task element to page. 
   let anchorP = document.getElementById("p" + colId);
   anchorP.appendChild(taskDiv);
+*/
+
+  let outputTasks = document.getElementById("newTaskId" + colId);
+  outputTasks.innerHTML += createElementWithRightCSS(title);
+  outputTasks.onclick = function(){showTaskPropDiv(boardId, taskId)}
 }
 
-/**
- * Creates and returns a new task element.
- */
+function createElementWithRightCSS(title){
+  let outputDiv = `
+     <div class="main-boards-tasks color selectable">
+            <p>${title}</p>
+                
+                <div class="main-boards-tasks-arrow">
+                    <i class="arrow right"></i>
+                </div>
+      </div>`;
+
+  return outputDiv;
+}
+
+// Creates and returns a new task element.
+ 
 function createTaskElem(title, descr, deadline, memberIds) {
   
   let taskDiv  = document.createElement("div");

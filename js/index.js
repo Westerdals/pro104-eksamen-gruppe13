@@ -6,18 +6,21 @@ var columns = [
     taskIds: [0], // refers to its index value
     textBoxId: "",
     textAreaId: "",
+    newTaskId: "",
   },
   {
     title: "Doing",
     taskIds: [],
     textBoxId: "",
     textAreaId: "",
+    newTaskId: "",
   },
   {
     title: "Done",
     taskIds: [1, 2],
     textBoxId: "",
     textAreaId: "",
+    newTaskId: "",
   }
 ];
 
@@ -26,6 +29,7 @@ function setIds(){
     for (let i = 0; i < columns.length; i++){
       columns[i].textBoxId = `textBoxId${i}`;
       columns[i].textAreaId = `textAreaId${i}`;
+      columns[i].newTaskId = `newTaskId${i}`;
     }
 }
 
@@ -47,13 +51,7 @@ function createTemplateGrid(){
         <div class="box">
             <p id="p${i}" class="textbox"><strong>${columns[i].title}</strong></p>
 
-            <div class="main-boards-tasks color">
-                
-                <p>Create tables</p>
-                
-                <div class="main-boards-tasks-arrow">
-                    <i class="arrow right"></i>
-                </div>
+            <div id="${columns[i].newTaskId}">
 
             </div>
 
