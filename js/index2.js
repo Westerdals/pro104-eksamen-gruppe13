@@ -82,12 +82,15 @@ function loadBoardData() {
       const memberIds    = task.memberIds;
       console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescr + ", deadline: " + taskDeadline);
 
-
-      let outputTasks = document.getElementById("newTaskId" + i);
-      outputTasks.innerHTML += createElementWithRightCSS(taskTitle);
-
+      //let outputTasks = document.getElementById("newTaskId" + i);
+      //outputTasks.innerHTML += createElementWithRightCSS(taskTitle);
+      let htmlTxtForOneElement = createElementWithRightCSS(taskTitle);
+      let taskDiv = document.createElement("div");
+      taskDiv.innerHTML = htmlTxtForOneElement;
+      taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
+      anchorP.appendChild(taskDiv);
             
-      outputTasks.onclick = function(){showTaskPropDiv(boardId, taskId)};
+      //outputTasks.onclick = function(){showTaskPropDiv(boardId, taskId)};
 /*
       const taskDiv = createTaskElem(taskTitle, taskDescr, taskDeadline, memberIds);
       taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
@@ -142,20 +145,26 @@ function createTaskHandler(userId, colId, inputTag) {
   // Create the task element.
   const taskDiv = createTaskElem(title, description, deadline, memberIds);
   taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
+*/
 
   // Get anchor tag and add task element to page. 
   let anchorP = document.getElementById("p" + colId);
-  anchorP.appendChild(taskDiv);
-*/
+  //anchorP.appendChild(taskDiv);
 
-  let outputTasks = document.getElementById("newTaskId" + colId);
-  outputTasks.innerHTML += createElementWithRightCSS(title);
-  outputTasks.onclick = function(){showTaskPropDiv(boardId, taskId)}
+  //let outputTasks = document.getElementById("newTaskId" + colId);
+  //outputTasks.innerHTML += createElementWithRightCSS(title);
+  //outputTasks.onclick = function(){showTaskPropDiv(boardId, taskId)}
+
+  let htmlTxtForOneElement = createElementWithRightCSS(taskTitle);
+  let taskDiv = document.createElement("div");
+  taskDiv.innerHTML = htmlTxtForOneElement;
+  taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
+  anchorP.appendChild(taskDiv);
 }
 
 function createElementWithRightCSS(title){
   let outputDiv = `
-     <div class="main-boards-tasks color selectable">
+     <div class="main-boards-tasks color selectable rounded">
             <p>${title}</p>
                 
                 <div class="main-boards-tasks-arrow">
@@ -217,26 +226,24 @@ function createTaskElem(title, descr, deadline, memberIds) {
 function showTaskPropDiv(boardId, taskId) {
   console.log("showTaskPropDiv(taskId="+taskId+")");
   let overlayDiv    = document.getElementById("tp-overlay");
-  let containerDiv  = document.getElementById("tp-container");
+  let frameDiv      = document.getElementById("tp-frame");
   const titleDiv    = document.getElementById("tp-title");
   const titleSubDiv = document.getElementById("tp-title-sub");
 
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
   const task = boardList[boardId].tasks[taskId];
 
-  titleDiv.innerHTML = task.title;
-  titleSubDiv.innerHTML = "in column " + boardList[boardId].title;
+  //titleDiv.innerHTML = task.title;
+  //titleSubDiv.innerHTML = "in column " + boardList[boardId].title;
 
   overlayDiv.style.display = "block";
-  containerDiv.style.display = "block";
+  frameDiv.style.display   = "block";
 }
 
 function hideTaskPropDiv() {
-  let overlayDiv   = document.getElementById("tp-overlay");
-  let containerDiv = document.getElementById("tp-container");
-  overlayDiv.style.display = "none";
-  containerDiv.style.display = "none";
-}
+  document.getElementById("tp-overlay").style.display = "none";
+  document.getElementById("tp-frame").style.display   = "none";
+  }
 
 /**
  * Close the task properties window if 'escape' is pressed.

@@ -42,41 +42,16 @@
   <div id="main-container"></div>
     
   <!-- [hidden] Task properties window -->
-  <div id="tp-overlay" class="transparent cover hidden" onclick="hideTaskPropDiv();"></div>
-  <div id="tp-container" class="rounded hidden">
+  <div id="tp-overlay" class="overlay transparent hidden"></div>
+  <div id="tp-frame" class="overlay hidden">
+    <div id="tp-container">
     
-    <div id="tp-top-wrapper">
-      <div id="tp-title"></div>
-      <div id="tp-title-sub"></div>
-      <div id="tp-close" class="selectable" onclick="hideTaskPropDiv();"></div>
-    </div>
-
-    <div id="tp-left-wrapper">
-      <div id="tp-status-wrapper">
-        <div id="tps-members-wrapper">
-          <div id="tps-members-title">Members</div>
-          <div id="tps-members-value"></div>
-        </div>
-        <div id ="tps-deadline-wrapper">
-          <div id="tps-deadline-title">Deadline</div>
-          <div id="tps-deadline-value"></div>
-        </div>
+      <div id="tp-win" class="rounded">
       </div>
-      <div id="tp-description-wrapper">
-        <div id="tpd-title">Description</div>
-        <textarea id="tpd-input-text"></textarea>
-      </div>
-    </div>
 
-    <div id="tp-right-wrapper">
-      <div id="tp-add-title">Add:</div>
-      <div id="tp-add-members" class="selectable">Members</div>
-      <div id="tp-add-deadline" class="selectable">Deadline</div>
     </div>
-
   </div>
-  <!-- end of Task properties window -->
-
+  
 </section>
 
 	
