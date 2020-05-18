@@ -1,3 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #D3E8C2;
+}
+
+header {
+    padding-top: 1.5rem;
+    padding-left: 2.85rem;
+}
+
 /* Board list elements */
 ul > li {
   display: block;
@@ -6,13 +20,12 @@ ul > li {
   width: 185px;
   height: 85px;
   margin: 5px;
-  padding: 7px 5px;
   cursor: pointer;
-  background-color: grey;
+  background-color: #88b360;
 }
 
 ul > li:hover {
-  background-color: green;
+  background-color: #A9D97D;
 }
 
 #new-board-container {
