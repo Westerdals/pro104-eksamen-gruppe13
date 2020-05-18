@@ -167,3 +167,41 @@ header {
 .task:hover * {
   background-color: lightgray;
 }
+
+#task-prop-container {
+  position: absolute;
+  top: 37px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 450px;
+  height: 600px;
+  padding-right: 3px;
+  background-color: #f4f5f7;
+}
+
+#task-prop-upper {
+  position: relative;
+  height: 40px;
+  padding-left: 13px;
+  padding-top: 13px;
+  /*background-color: #dfdfdf;*/
+}
+
+#task-prop-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  background-image: url("../cross_12x12.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: inherit;
+  /*background-color: grey;*/
+}
+
+#task-prop-close:hover {
+  cursor: pointer;
+  background-color: #e2e4e9;
+  border-radius: 25px;
+}

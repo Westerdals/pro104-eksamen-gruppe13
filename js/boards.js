@@ -41,7 +41,7 @@ window.onload = function() {
       //boardsUl.appendChild(li);
     }
   }
-  console.log(count + " board elements created");
+  console.log(count + " board elements found");
 };
 
 function selectBoard(boardId, userId) {

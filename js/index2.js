@@ -60,7 +60,7 @@ function loadBoardData() {
   const boardTitle = board.title;
   const columns    = board.columns;
   const tasks      = board.tasks;
-  
+
   // Demonstration on how to extract everything.
   for (let i = 0; i < columns.length; i++) {
     const column = columns[i];
@@ -72,7 +72,8 @@ function loadBoardData() {
     let anchorP = document.getElementById("p" + i);
 
     for (let j = 0; j < column.taskIds.length; j++) {
-      const task = tasks[column.taskIds[j]];
+      const taskId = column.taskIds[j];
+      const task = tasks[taskId];
 
       // Task title, description and deadline.
       const taskTitle    = task.title;
@@ -82,6 +83,7 @@ function loadBoardData() {
       //console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescription + ", deadline: " + taskDeadline);
       
       const taskDiv = createTaskElem(taskTitle, taskDescr, taskDeadline, memberIds);
+      taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
 
       anchorP.appendChild(taskDiv);
 
@@ -131,6 +133,7 @@ function createTaskHandler(userId, colId, inputTag) {
 
   // Create the task element.
   const taskDiv = createTaskElem(title, description, deadline, memberIds);
+  taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
 
   // Get anchor tag and add task element to page. 
   let anchorP = document.getElementById("p" + colId);
@@ -154,7 +157,8 @@ function createTaskElem(title, descr, deadline, memberIds) {
   taskDiv.className = "rounded color task"
   taskDiv.style.position = "relative";
   taskDiv.style.margin = "5px";
-  taskDiv.style.zIndex = "99";
+  //taskDiv.style.zIndex = "1";
+  taskDiv.style.cursor = "pointer";
   //taskDiv.style.background = "#87ceeb";
   titleDiv.style.padding = "5px";
   titleDiv.style.textAlign = "left";
@@ -165,8 +169,8 @@ function createTaskElem(title, descr, deadline, memberIds) {
   propDiv.style.right = "3px";
   propDiv.style.width = "16px";
   propDiv.style.height = "16px";
-  propDiv.style.backgroundImage = "url(properties.png)";
-  propDiv.style.backgroundColor = "grey";
+  //propDiv.style.backgroundImage = "url(properties.png)";
+  //propDiv.style.backgroundColor = "grey";
   arrowDiv.className = "main-boards-tasks-arrow arrow right";
   arrowDiv.style.position = "absolute";
   arrowDiv.style.top = "3px";
@@ -188,3 +192,35 @@ function createTaskElem(title, descr, deadline, memberIds) {
 
   return taskDiv;
 }
+
+function showTaskPropDiv(boardId, taskId) {
+  console.log("showTaskPropDiv(taskId="+taskId+")");
+  let overlayDiv   = document.getElementById("task-prop-overlay");
+  let containerDiv = document.getElementById("task-prop-container");
+  const titleDiv = document.getElementById("task-prop-title");
+
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  const task = boardList[boardId].tasks[taskId];
+
+  titleDiv.innerHTML = task.title;
+
+  overlayDiv.style.display = "block";
+  containerDiv.style.display = "block";
+}
+
+function hideTaskPropDiv() {
+  let overlayDiv   = document.getElementById("task-prop-overlay");
+  let containerDiv = document.getElementById("task-prop-container");
+  overlayDiv.style.display = "none";
+  containerDiv.style.display = "none";
+}
+
+/**
+ * Close the task properties window if 'escape' is pressed.
+ */
+document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    if (evt.keyCode == 27) {
+        hideTaskPropDiv();
+    }
+};

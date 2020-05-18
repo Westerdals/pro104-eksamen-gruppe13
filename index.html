@@ -39,10 +39,17 @@
 
 <section class="main-boards">
 
-  <div id="main-container">
-
-  </div>
+  <div id="main-container"></div>
     
+  <!-- [hidden] Task properties window -->
+  <div id="task-prop-overlay" class="transparent cover hidden" onclick="hideTaskPropDiv();"></div>
+  <div id="task-prop-container" class="rounded hidden">
+    <div id="task-prop-upper">
+      <div id="task-prop-title"></div>
+      <div id="task-prop-close" onclick="hideTaskPropDiv();"></div>
+    </div>
+  </div>    
+
 </section>
 
 	
