@@ -46,3 +46,18 @@ ul > li:hover {
 #new-board-lower-part {
   padding: 6px 0; /* top&bottom, left/right */
 }
+
+#login-a {
+  margin: 3em;
+  padding: 5px 10px;
+  position: relative;
+  top: 1.2em;
+  text-decoration: none;
+  color: #000;
+  border: 2px solid #FFF;
+  border-radius:5px;
+}
+
+#login-a:hover {
+  border: 1px solid #e03736;
+}
