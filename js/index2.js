@@ -154,16 +154,12 @@ function createTaskElem(title, descr, deadline, memberIds) {
   let dateDiv  = document.createElement("div");
   let descDiv  = document.createElement("div");
 
-  taskDiv.className = "rounded color task"
+  taskDiv.className = "rounded color task selectable"
   taskDiv.style.position = "relative";
   taskDiv.style.margin = "5px";
-  //taskDiv.style.zIndex = "1";
-  taskDiv.style.cursor = "pointer";
-  //taskDiv.style.background = "#87ceeb";
   titleDiv.style.padding = "5px";
   titleDiv.style.textAlign = "left";
   titleDiv.innerHTML = title;
-  titleDiv.style.background = "";
   propDiv.style.position = "absolute";
   propDiv.style.top = "3px";
   propDiv.style.right = "3px";
@@ -195,22 +191,24 @@ function createTaskElem(title, descr, deadline, memberIds) {
 
 function showTaskPropDiv(boardId, taskId) {
   console.log("showTaskPropDiv(taskId="+taskId+")");
-  let overlayDiv   = document.getElementById("task-prop-overlay");
-  let containerDiv = document.getElementById("task-prop-container");
-  const titleDiv = document.getElementById("task-prop-title");
+  let overlayDiv    = document.getElementById("tp-overlay");
+  let containerDiv  = document.getElementById("tp-container");
+  const titleDiv    = document.getElementById("tp-title");
+  const titleSubDiv = document.getElementById("tp-title-sub");
 
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
   const task = boardList[boardId].tasks[taskId];
 
   titleDiv.innerHTML = task.title;
+  titleSubDiv.innerHTML = "in column " + boardList[boardId].title;
 
   overlayDiv.style.display = "block";
   containerDiv.style.display = "block";
 }
 
 function hideTaskPropDiv() {
-  let overlayDiv   = document.getElementById("task-prop-overlay");
-  let containerDiv = document.getElementById("task-prop-container");
+  let overlayDiv   = document.getElementById("tp-overlay");
+  let containerDiv = document.getElementById("tp-container");
   overlayDiv.style.display = "none";
   containerDiv.style.display = "none";
 }

@@ -22,6 +22,11 @@
   display: none;
 }
 
+.selectable:hover {
+  cursor: pointer;
+  background-color: #d3e8c2; /* #e2e4e9; */
+}
+
 /* Center align text */
 .centered {
   text-align: center; /* horizontal */

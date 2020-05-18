@@ -164,35 +164,39 @@ header {
     font-weight:700
 }
 
-.task:hover * {
-  background-color: lightgray;
-}
-
-#task-prop-container {
+/*
+ * === Task properties ===
+ */
+#tp-overlay {}
+#tp-container {
   position: absolute;
   top: 37px;
   left: 50%;
   transform: translate(-50%, 0);
   width: 450px;
-  height: 600px;
-  padding-right: 3px;
+  height: 400px;
+  padding: 15px;
   background-color: #f4f5f7;
 }
 
-#task-prop-upper {
+/* --- Top wrapper --- 
+ */
+#tp-top-wrapper {
   position: relative;
-  height: 40px;
-  padding-left: 13px;
-  padding-top: 13px;
-  /*background-color: #dfdfdf;*/
 }
 
-#task-prop-close {
+#tp-title {
+  font-weight: bold;
+}
+
+#tp-title-sub {}
+
+#tp-close {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 32px;
-  height: 32px;
+  top: -12px;
+  right: -12px;
+  width: 36px;
+  height: 36px;
   background-image: url("../cross_12x12.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -200,8 +204,46 @@ header {
   /*background-color: grey;*/
 }
 
-#task-prop-close:hover {
-  cursor: pointer;
-  background-color: #e2e4e9;
+#tp-close:hover {
   border-radius: 25px;
+}
+
+/* --- Left wrapper ---
+ */
+#tp-left-wrapper {
+  float: left;
+  width: 300px;
+}
+
+#tps-members-title {
+  margin-right: 10px;
+}
+#tps-members-value {}
+#tps-deadline-title {}
+#tps-deadline-value {}
+
+/* Align horizontally */
+#tps-members-wrapper,
+#tps-deadline-wrapper {
+   display: inline-block;
+}
+
+#tp-status-wrapper,
+#tp-description-wrapper {
+  margin: 15px 0;
+}
+
+#tpd-title {
+  font-weight: bold;
+}
+#tpd-input-text {}
+
+/* --- Right wrapper ---
+ */
+#tp-right-wrapper {
+  float: left;
+  min-width: 120px;
+}
+
+#tp-add-members {
 }
