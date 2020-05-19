@@ -40,33 +40,41 @@
 <section class="main-boards">
 
   <div id="main-container"></div>
-    
-  <!-- [hidden] Task properties window -->
+  
+  <!-- 
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  * This is the code for the window that opens when you click a task. *
+  * It's hidden by default.                                           *
+  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
   <div id="tp-overlay" class="overlay transparent hidden"></div>
   <div id="tp-frame" class="overlay hidden">
 
     <div id="tp-container">
 
+      <!-- Invisible divs that capture click events for closing the window -->
       <div id="tp-air-top" onclick="hideTaskPropDiv()"></div>
       <div id="tp-air-left" onclick="hideTaskPropDiv()"></div>
 
+      <!-- This is the visible window -->
       <div id="tp-win" class="rounded">
 
-        <div id="tp-title-icon">ico</div>
-        <div id="tp-title"></div>
-        <div id="tp-title-sub"></div>
+        <div id="tp-title-icon">ico</div> <!-- Title icon -->
+        <div id="tp-title"></div>         <!-- Title text -->
+        <div id="tp-title-sub"></div>     <!-- Text below title -->
 
         <div id="tp-mem-title">Members & Deadline</div>
-        <div id="tp-menu">Menu</div>
+        
+        <div id="tp-menu">Menu</div> <!-- Menu on the right side -->
 
         <div id="tp-mem-list">assigned members & deadline date</div>
 
-        <div id="tp-desc-icon">ico</div>
-        <div id="tp-desc-title">Description</div>
-        <div id="tp-desc-input">input field</div>
+        <div id="tp-desc-icon">ico</div>          <!-- Description icon -->
+        <div id="tp-desc-title">Description</div> <!-- Description title -->
+        <div id="tp-desc-input">input field</div> <!-- Description input -->
 
       </div>
 
+      <!-- Invisible divs that capture click events for closing the window -->
       <div id="tp-air-right" onclick="hideTaskPropDiv()"></div>
       <div id="tp-air-bot" onclick="hideTaskPropDiv()"></div>
 
