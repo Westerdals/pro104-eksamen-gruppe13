@@ -71,12 +71,12 @@ function createTemplateGrid(){
     }
 
     var newBoard = `
-        <div class="box">
+        <div id="add-new-board" onclick="animationForAddBoard()" onfocusout="outAnimationForAddBoard)()">
             <p class="textbox"><strong>Add new board</strong></p>
-
-                <textarea id="add-new-board" type="textbox" placeholder="Add new task.."></textarea>
-                <input type="button" value="Add task">
-            
+            <div id="new-board-container">
+                <input type="text" id="add-board-field">
+                <input type="button" value="Add board" id="add-board-btn">
+            </div>
         </div>
     `;
  
@@ -87,6 +87,20 @@ function createTemplateGrid(){
 function addNewBoard(){
   
 }
+
+function animationForAddBoard(){
+  let animateBoard = document.getElementById("add-new-board");
+  animateBoard.className = "add-new-board-animation";
+
+  let createNewBoardContainer = document.getElementById("new-board-container");
+  createNewBoardContainer.style.display = 'block';
+}
+
+/*
+function outAnimationForAddBoard() {
+  let animateBoard = document.getElementById("add-new-board");
+  animateBoard.className = "add-new-board-animation-reversed";
+}*/
 
 // Function to show textfield and hide button
 function showTextbox(clickedId) {
