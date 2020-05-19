@@ -50,7 +50,7 @@ function getDefaultTasks() {
 }
 
 function isAlphaNumeric(str) { 
-  var pattern = /^[0-9a-zA-Z]+$/;
+  var pattern = /^[0-9a-zA-Z]+$/; // TODO: make space, bindestrek eligible 2nd character
   return str.match(pattern);
 }
 

@@ -34,11 +34,10 @@ function setIds(){
 }
 
 setIds();
-  
 
 function createTemplateGrid(){ 
   var htmlTxt = "";
-
+  
   for (let i = 0; i < columns.length; i++) {
         
         /* Har startet å flette sammen koden her. La til en id på p tagen
