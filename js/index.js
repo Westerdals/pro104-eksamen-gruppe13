@@ -75,7 +75,7 @@ function createTemplateGrid(){
             <p class="textbox"><strong>Add new board</strong></p>
             <div id="new-board-container">
                 <input type="text" id="add-board-field">
-                <input type="button" value="Add board" id="add-board-btn">
+                <input type="button" value="Add board" id="add-board-btn" onclick="addNewBoard()">
             </div>
         </div>
     `;
@@ -84,8 +84,12 @@ function createTemplateGrid(){
   mainBoardContainer.innerHTML += newBoard;
 }
 
+//Function to add new board into the template
 function addNewBoard(){
-  
+  let str = document.getElementById("add-board-field").value;
+  console.log(str);
+
+  if (invFormAl(str, 1, true, "Title")) {return;}
 }
 
 function animationForAddBoard(){
