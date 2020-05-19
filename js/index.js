@@ -43,11 +43,11 @@ function createTemplateGrid(){
         /* Har startet å flette sammen koden her. La til en id på p tagen
          * rett under slik at jeg får lagt til task elementer på riktig sted.
          * Selve task elementene genereres i index2.js linje 75.
-         * Har også lagt til en id dag på 'Add task' knappen for å legge til
+         * Har også lagt til en id tag på 'Add task' knappen for å legge til
          * en onclick event. */
 
         htmlTxt += `
-        <div class="box">
+        <div id="col${i}" class="box" ondrop="drop(event)" ondragover="allowDrop(event)">
             <p id="p${i}" class="textbox"><strong>${columns[i].title}</strong></p>
 
             <div id="${columns[i].newTaskId}">
@@ -64,12 +64,51 @@ function createTemplateGrid(){
             </div>
             
         </div>
-
-
-            `;
+        `;
     }
  
   mainBoardContainer.innerHTML = htmlTxt;  
+}
+
+// Prevent interaction when dragging an element.
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+// Handles dropping a dragged task over a column.
+function drop(ev) {
+  ev.preventDefault();
+  
+  // Get the dragged task and 'Add new task' elements.
+  var data = ev.dataTransfer.getData("text");
+  const taskDiv = document.getElementById(data);
+  const colId = Number(ev.currentTarget.id.substring(3));
+  const originColId = Number(taskDiv.parentNode.id.substring(3));
+  const anchorTag = document.getElementById("newTaskId" + colId);
+
+  // Insert the task before the button element.
+  anchorTag.parentNode.insertBefore(taskDiv, anchorTag);
+
+  // Update local storage.
+  let userList = JSON.parse(window.localStorage.getItem("userList")) || [];
+  let boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  const userId = getUserId();
+  const boardId = userList[userId].lastBoardId;
+  const taskId = Number(taskDiv.id.substring(4));
+  
+  // Remove task reference id from the previous column.
+  let taskIds = boardList[boardId].columns[originColId].taskIds;
+  for (let i = 0; i < taskIds.length; i++) {
+    if (taskIds[i] == taskId) {
+      taskIds.splice(i, 1);
+      boardList[boardId].columns[originColId].taskIds = taskIds;
+      break;
+    }
+  }
+  // Add task referene id to the new parent column.
+  boardList[boardId].columns[colId].taskIds.push(taskId);
+
+  window.localStorage.setItem("boardList", JSON.stringify(boardList));
 }
 
 // Function to show textfield and hide button
