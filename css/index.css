@@ -159,25 +159,103 @@ header {
 }
 
 /*
- * === Task properties ===
+ * === Task properties window ===
  */
+#tp-overlay {
+}
 #tp-frame {
   margin: 0 5px;
 }
 
+/* Main grid container. */
 #tp-container {
   display: grid;
-  grid-template-columns: 1fr minmax(200px, 960px) 1fr;
-  grid-template-rows: 30px 600px auto;
+  grid-template-columns: 1fr minmax(200px, 760px) 1fr;
+  grid-template-rows: 30px 600px 100%;
   grid-template-areas: 
-    ". .   ."
-    ". win ."
-    ". .   .";
+    "air-top  air-top air-top"
+    "air-left win     air-right"
+    "air-bot  air-bot air-bot";
 }
 
+/* Defined in order to capture onclick (to hide task properties) */
+#tp-air-top   {grid-area: air-top;  }
+#tp-air-left  {grid-area: air-left; }
+#tp-air-right {grid-area: air-right;}
+#tp-air-bot   {grid-area: air-bot;  }
+
+/* Sub grid container (desktop view) */
 #tp-win {
   grid-area: win;
+  display: grid;
+  padding: calc(1vw);
+  grid-template-columns: 24px minmax(200px, auto) 210px;
+  grid-template-rows: 20px 18px 18px 40px 20px 70px 60px;
+  grid-template-areas:
+    "title-icon title     title"
+    ".          title-sub ."
+    ".          mem-title menu"
+    ".          mem-list  menu"
+    "desc-icon desc-title menu"
+    "        . desc-input menu"
+    "        .          . menu";
+  column-gap: calc(1vw * 1.5);
+  row-gap: calc(1vw * 1.5);
   background-color: #f4f5f7;
 }
 
-/* 960 x 1040, 30px from top*/
+/* Sub grid container (mobile view) */
+@media screen and (max-width: 550px) {
+  #tp-win {
+    padding: 2px;
+    grid-template-columns: 24px 1fr 1fr;
+    grid-template-rows: 20px 18px 18px 40px 20px 70px;
+    grid-template-areas:
+      "title-icon title      title"
+      "title-sub  title-sub  title-sub"
+      "mem-title  mem-title  mem-title"
+      "mem-list   mem-list   mem-list"
+      "desc-icon  desc-title desc-title"
+      "desc-input desc-input desc-input"
+      "menu       menu       menu";
+    column-gap: 2px;
+    row-gap: 7px;
+  }
+}
+
+#tp-title-icon {
+  grid-area: title-icon;
+  background-color: lightgrey;
+}
+#tp-title {
+  grid-area: title;
+  background-color: lightgrey;
+}
+#tp-title-sub {
+  grid-area: title-sub;
+  background-color: lightgrey;
+}
+#tp-mem-title {
+  grid-area: mem-title;
+  background-color: lightgrey;
+}
+#tp-mem-list {
+  grid-area: mem-list;
+  background-color: lightgrey;
+}
+#tp-menu {
+  grid-area: menu;
+  background-color: lightgrey;
+}
+#tp-desc-icon {
+  grid-area: desc-icon;
+  background-color: lightgrey;
+}
+#tp-desc-title {
+  grid-area: desc-title;
+  background-color:  lightgrey;
+}
+#tp-desc-input {
+  grid-area: desc-input;
+  background-color: lightgrey;
+}

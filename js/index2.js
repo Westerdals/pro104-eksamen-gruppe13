@@ -132,8 +132,8 @@ function createTaskHandler(userId, colId, inputTag) {
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
   userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
   const boardId = userList[userId].lastBoardId;
-  let columns = boardList[boardId].columns;
-  let tasks  = boardList[boardId].tasks;
+  let columns   = boardList[boardId].columns;
+  let tasks     = boardList[boardId].tasks;
   const taskId  = tasks.length;
 
   // Add and save data.
@@ -155,7 +155,7 @@ function createTaskHandler(userId, colId, inputTag) {
   //outputTasks.innerHTML += createElementWithRightCSS(title);
   //outputTasks.onclick = function(){showTaskPropDiv(boardId, taskId)}
 
-  let htmlTxtForOneElement = createElementWithRightCSS(taskTitle);
+  let htmlTxtForOneElement = createElementWithRightCSS(title);
   let taskDiv = document.createElement("div");
   taskDiv.innerHTML = htmlTxtForOneElement;
   taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
@@ -233,17 +233,17 @@ function showTaskPropDiv(boardId, taskId) {
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
   const task = boardList[boardId].tasks[taskId];
 
-  //titleDiv.innerHTML = task.title;
-  //titleSubDiv.innerHTML = "in column " + boardList[boardId].title;
+  titleDiv.innerHTML = task.title;
+  titleSubDiv.innerHTML = "in column " + boardList[boardId].title;
 
   overlayDiv.style.display = "block";
   frameDiv.style.display   = "block";
 }
 
-function hideTaskPropDiv() {
+function hideTaskPropDiv(e) {
   document.getElementById("tp-overlay").style.display = "none";
   document.getElementById("tp-frame").style.display   = "none";
-  }
+}
 
 /**
  * Close the task properties window if 'escape' is pressed.
