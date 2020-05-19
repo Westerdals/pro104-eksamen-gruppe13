@@ -132,8 +132,8 @@ function createTaskHandler(userId, colId, inputTag) {
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
   userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
   const boardId = userList[userId].lastBoardId;
-  let columns = boardList[boardId].columns;
-  let tasks  = boardList[boardId].tasks;
+  let columns   = boardList[boardId].columns;
+  let tasks     = boardList[boardId].tasks;
   const taskId  = tasks.length;
 
   // Add and save data.
@@ -233,8 +233,8 @@ function showTaskPropDiv(boardId, taskId) {
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
   const task = boardList[boardId].tasks[taskId];
 
-  //titleDiv.innerHTML = task.title;
-  //titleSubDiv.innerHTML = "in column " + boardList[boardId].title;
+  titleDiv.innerHTML = task.title;
+  titleSubDiv.innerHTML = "in column " + boardList[boardId].title;
 
   overlayDiv.style.display = "block";
   frameDiv.style.display   = "block";
