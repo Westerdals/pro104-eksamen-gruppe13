@@ -225,30 +225,37 @@ header {
 
 #tp-title-icon {
   grid-area: title-icon;
-  background-color: lightgrey;}
+  background-color: lightgrey;
+}
 #tp-title {
   grid-area: title;
-  background-color: lightgrey;}
+  background-color: lightgrey;
+}
 #tp-title-sub {
   grid-area: title-sub;
-  background-color: lightgrey;}
+  background-color: lightgrey;
+}
 #tp-mem-title {
   grid-area: mem-title;
-  background-color: lightgrey;}
+  background-color: lightgrey;
+}
 #tp-mem-list {
   grid-area: mem-list;
-  background-color: lightgrey;}
-/*#tp-due-title {background-color: burlywood;}
-#tp-due-date {background-color: brown;}*/
+  background-color: lightgrey;
+}
 #tp-menu {
   grid-area: menu;
-  background-color: lightgrey;}
+  background-color: lightgrey;
+}
 #tp-desc-icon {
   grid-area: desc-icon;
-  background-color: lightgrey;}
+  background-color: lightgrey;
+}
 #tp-desc-title {
   grid-area: desc-title;
-  background-color:  lightgrey;}
+  background-color:  lightgrey;
+}
 #tp-desc-input {
   grid-area: desc-input;
-  background-color: lightgrey;}
+  background-color: lightgrey;
+}

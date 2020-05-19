@@ -155,7 +155,7 @@ function createTaskHandler(userId, colId, inputTag) {
   //outputTasks.innerHTML += createElementWithRightCSS(title);
   //outputTasks.onclick = function(){showTaskPropDiv(boardId, taskId)}
 
-  let htmlTxtForOneElement = createElementWithRightCSS(taskTitle);
+  let htmlTxtForOneElement = createElementWithRightCSS(title);
   let taskDiv = document.createElement("div");
   taskDiv.innerHTML = htmlTxtForOneElement;
   taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
