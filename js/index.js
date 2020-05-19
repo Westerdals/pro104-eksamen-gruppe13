@@ -24,6 +24,9 @@ var columns = [
   }
 ];
 
+/*
+ Trenger denne å stå utenfor løkken i createTemplateGrid() ?
+*/
 // Adds ID to the textboxes
 function setIds(){
     for (let i = 0; i < columns.length; i++){
@@ -34,8 +37,15 @@ function setIds(){
 }
 
 setIds();
-  
 
+/*
+ Forslag er at denne funksjonen kalles fra loadBoardData() i index2.js
+ Da kan den motta 'columns' variabelen som er lest inn fra local storage.
+ 
+ Situasjonen vi er i nå er at loadBoardData() er avhengig av at createTemplateGrid()
+ har kjørt før den får lagt til tasks etc. og createTemplateGrid() er avhengig
+ av at loadBoardData() har kjørt for å få tegnet kolonnene fra storage.
+ */
 function createTemplateGrid(){ 
   var htmlTxt = "";
 
@@ -71,7 +81,7 @@ function createTemplateGrid(){
     }
 
     var newBoard = `
-        <div id="add-new-board" onclick="animationForAddBoard()" onfocusout="outAnimationForAddBoard)()">
+        <div id="add-new-board" onclick="animationForAddBoard()" onfocusout="outAnimationForAddBoard()">
             <p class="textbox"><strong>Add new board</strong></p>
             <div id="new-board-container">
                 <input type="text" id="add-board-field">
