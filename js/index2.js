@@ -69,7 +69,8 @@ function loadBoardData() {
     const columnTitle = column.title;
     //console.log("column #" + i + " title: " + columnTitle);
 
-    let anchorP = document.getElementById("p" + i);
+    // Used for inserting tasks.
+    let anchorTag = document.getElementById("p" + i);
 
     for (let j = 0; j < column.taskIds.length; j++) {
       const taskId = column.taskIds[j];
@@ -80,20 +81,15 @@ function loadBoardData() {
       const taskDescr    = task.description;
       const taskDeadline = task.deadline;
       const memberIds    = task.memberIds;
-      console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescr + ", deadline: " + taskDeadline);
+      //console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescr + ", deadline: " + taskDeadline);
 
       let htmlTxtForOneElement = createElementWithRightCSS(taskTitle);
       let taskDiv = document.createElement("div");
+      taskDiv.id = "task" + taskId;
       taskDiv.innerHTML = htmlTxtForOneElement;
       taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
-
-      taskDiv.setAttribute("draggable", true);
-      taskDiv.ondragstart = function(event) {
-        console.log("drag start");
-        event.dataTransfer.setData("text", event.target.id);
-      };
-
-      anchorP.appendChild(taskDiv);
+      anchorTag.parentNode.insertBefore(taskDiv, anchorTag.nextSibling); //insert after anchor tagg
+      anchorTag = taskDiv; // Set anchor tag to last inserted div.
 
       for (let k = 0; j < task.userIds; k++) {
 
@@ -115,7 +111,7 @@ function loadBoardData() {
  * from where the button was pressed and saves task data in local storage.
  */
 function createTaskHandler(userId, colId, inputTag) {
-  console.log("createTaskHandler(userId="+userId+", colId="+colId+", value="+inputTag.value+") running");
+  //console.log("createTaskHandler(userId="+userId+", colId="+colId+", value="+inputTag.value+") running");
   
   // Create the task data variable.
   const title = inputTag.value;
@@ -139,14 +135,16 @@ function createTaskHandler(userId, colId, inputTag) {
   tasks.push(task);
   window.localStorage.setItem("boardList", JSON.stringify(boardList));
 
-  // Get anchor tag and add task element to page. 
-  let anchorP = document.getElementById("p" + colId);
+  // Get anchor tag.
+  let anchorTag = document.getElementById("newTaskId" + colId);
 
   let htmlTxtForOneElement = createElementWithRightCSS(title);
   let taskDiv = document.createElement("div");
+  taskDiv.id = "task" + taskId;
   taskDiv.innerHTML = htmlTxtForOneElement;
   taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
-  anchorP.appendChild(taskDiv);
+  anchorTag.parentNode.insertBefore(taskDiv, anchorTag); //insert before
+  //anchorTag.parentNode.insertBefore(taskDiv, anchorTag.nextSibling);
 
   // Setting textArea to empty when added task
   // and setting focus to write another task
@@ -156,7 +154,7 @@ function createTaskHandler(userId, colId, inputTag) {
 
 function createElementWithRightCSS(title){
   let outputDiv = `
-     <div class="main-boards-tasks color selectable rounded">
+     <div class="main-boards-tasks color selectable rounded" draggable="true" ondragstart="drag(event)">
             <p>${title}</p>
                 
                 <div class="main-boards-tasks-arrow">
@@ -167,8 +165,12 @@ function createElementWithRightCSS(title){
   return outputDiv;
 }
 
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.parentNode.id);
+}
+
 function showTaskPropDiv(boardId, taskId) {
-  console.log("showTaskPropDiv(taskId="+taskId+")");
+  //console.log("showTaskPropDiv(taskId="+taskId+")");
   let overlayDiv    = document.getElementById("tp-overlay");
   let frameDiv      = document.getElementById("tp-frame");
   const titleDiv    = document.getElementById("tp-title");
