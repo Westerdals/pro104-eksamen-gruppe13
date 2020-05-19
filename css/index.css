@@ -87,7 +87,6 @@ header {
 /* The title of the tasks */
 .main-boards-tasks p {
     padding-top: .99em;
-    padding-left: 2em;
     font-weight: 800;
     position: relative;
 }
@@ -96,7 +95,7 @@ header {
 /* Arrow to send to the next block */
 .main-boards-tasks-arrow {
     position: relative;
-    bottom: 2.2em;;
+    bottom: 2em;;
     left: 14.3rem;
     width: 22px;
     height: 20px;
