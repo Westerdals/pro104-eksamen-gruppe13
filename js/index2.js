@@ -82,21 +82,19 @@ function loadBoardData() {
       const memberIds    = task.memberIds;
       console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescr + ", deadline: " + taskDeadline);
 
-      //let outputTasks = document.getElementById("newTaskId" + i);
-      //outputTasks.innerHTML += createElementWithRightCSS(taskTitle);
       let htmlTxtForOneElement = createElementWithRightCSS(taskTitle);
       let taskDiv = document.createElement("div");
       taskDiv.innerHTML = htmlTxtForOneElement;
       taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
-      anchorP.appendChild(taskDiv);
-            
-      //outputTasks.onclick = function(){showTaskPropDiv(boardId, taskId)};
-/*
-      const taskDiv = createTaskElem(taskTitle, taskDescr, taskDeadline, memberIds);
-      taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
+
+      taskDiv.setAttribute("draggable", true);
+      taskDiv.ondragstart = function(event) {
+        console.log("drag start");
+        event.dataTransfer.setData("text", event.target.id);
+      };
 
       anchorP.appendChild(taskDiv);
-*/
+
       for (let k = 0; j < task.userIds; k++) {
 
         // Assigned user id and name.
@@ -105,7 +103,7 @@ function loadBoardData() {
         //console.log("assigned user #" + k + ": " + assignedUserName);
       }
     }
-    
+   
     const addBtn = document.getElementById("col" + i + "-btn");
     const inputTag = document.getElementById("textAreaId" + i);
     addBtn.onclick = function(){createTaskHandler(userId, i, inputTag)};
@@ -141,19 +139,8 @@ function createTaskHandler(userId, colId, inputTag) {
   tasks.push(task);
   window.localStorage.setItem("boardList", JSON.stringify(boardList));
 
-/*
-  // Create the task element.
-  const taskDiv = createTaskElem(title, description, deadline, memberIds);
-  taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
-*/
-
   // Get anchor tag and add task element to page. 
   let anchorP = document.getElementById("p" + colId);
-  //anchorP.appendChild(taskDiv);
-
-  //let outputTasks = document.getElementById("newTaskId" + colId);
-  //outputTasks.innerHTML += createElementWithRightCSS(title);
-  //outputTasks.onclick = function(){showTaskPropDiv(boardId, taskId)}
 
   let htmlTxtForOneElement = createElementWithRightCSS(title);
   let taskDiv = document.createElement("div");
@@ -178,54 +165,6 @@ function createElementWithRightCSS(title){
      </div>`;
 
   return outputDiv;
-}
-
-// Creates and returns a new task element.
- 
-function createTaskElem(title, descr, deadline, memberIds) {
-  
-  let taskDiv  = document.createElement("div");
-  let titleDiv = document.createElement("div");
-  let propDiv  = document.createElement("div");
-  let arrowDiv = document.createElement("div");
-  let leftDiv  = document.createElement("div");
-  let rightDiv = document.createElement("div");
-  let dateDiv  = document.createElement("div");
-  let descDiv  = document.createElement("div");
-
-  taskDiv.className = "rounded color task selectable"
-  taskDiv.style.position = "relative";
-  taskDiv.style.margin = "5px";
-  titleDiv.style.padding = "5px";
-  titleDiv.style.textAlign = "left";
-  titleDiv.innerHTML = title;
-  propDiv.style.position = "absolute";
-  propDiv.style.top = "3px";
-  propDiv.style.right = "3px";
-  propDiv.style.width = "16px";
-  propDiv.style.height = "16px";
-  //propDiv.style.backgroundImage = "url(properties.png)";
-  //propDiv.style.backgroundColor = "grey";
-  arrowDiv.className = "main-boards-tasks-arrow arrow right";
-  arrowDiv.style.position = "absolute";
-  arrowDiv.style.top = "3px";
-  arrowDiv.style.right = "16px";
-  arrowDiv.style.width = "16px";
-  arrowDiv.style.height = "16px";
-  leftDiv.style.background = "";
-  rightDiv.style.background = "";
-  dateDiv.style.background = "";
-  descDiv.style.background = "";
-
-  taskDiv.appendChild(titleDiv);
-  taskDiv.appendChild(propDiv);
-  taskDiv.appendChild(arrowDiv);
-  taskDiv.appendChild(leftDiv);
-  taskDiv.appendChild(rightDiv);
-  leftDiv.appendChild(dateDiv);
-  leftDiv.appendChild(descDiv);
-
-  return taskDiv;
 }
 
 function showTaskPropDiv(boardId, taskId) {
