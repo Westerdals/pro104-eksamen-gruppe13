@@ -160,6 +160,9 @@ function createTaskHandler(userId, colId, inputTag) {
   taskDiv.innerHTML = htmlTxtForOneElement;
   taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
   anchorP.appendChild(taskDiv);
+
+  // Setting textArea to empty when added task
+  inputTag.value = "";
 }
 
 function createElementWithRightCSS(title){

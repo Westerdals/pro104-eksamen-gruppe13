@@ -95,7 +95,7 @@ header {
 /* Arrow to send to the next block */
 .main-boards-tasks-arrow {
     position: relative;
-    bottom: 2em;;
+    bottom: 2em;
     left: 14.3rem;
     width: 22px;
     height: 20px;
@@ -124,7 +124,10 @@ header {
 /* Adding new tasks */
 .main-boards-add-task-btn {
     background-color: blue;
+    padding-left: 2em;
+    cursor: pointer;
 }
+
 
 /* Container for both the textarea to input the tasks and the button */
 .main-boards-tasks-txt {
@@ -154,7 +157,8 @@ header {
     width:7rem;
     height: 2rem;
     font-size: 14px;
-    font-weight:700
+    font-weight:700;
+    cursor: pointer;
 }
 
 /*
