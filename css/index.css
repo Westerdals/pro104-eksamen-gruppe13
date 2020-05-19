@@ -13,6 +13,13 @@ header {
     padding-left: 2.85rem;
 }
 
+img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+}
+
 .main-title {
     margin: 0;
     padding-bottom: 1.5rem;
@@ -33,7 +40,7 @@ header {
 
 .main-nav li a {
     text-decoration: none;
-    color: black;
+    color: #767875;
     border: 1px solid #A9D97D;
     border-radius: 5px;
     padding: .5em 2.25rem;
@@ -60,13 +67,13 @@ header {
 }
 
 .box {
-    background-color: #A9D97D;
+    background-color: #98BB81;
     margin: .9em;
     border-radius: 10px;
     
 }
 .textbox {
-    color: #557440;
+    color: #C0C5BB;
     font-size: 20px;
     text-align: center;
 }
@@ -83,7 +90,7 @@ header {
 }
 
 .color {
-     background-color: skyblue;
+     background-color: #D9D8D8;
 }
 
 
@@ -129,8 +136,9 @@ header {
 
 /* Adding new tasks */
 .main-boards-add-task-btn {
-    background-color: blue;
-    padding-left: 2em;
+    background-color: #D9D8D8;
+    border-radius: 10px; 
+    text-align: center;
     cursor: pointer;
 }
 
@@ -151,7 +159,7 @@ header {
     height: 5rem;
     width:100%;
     font-size: 14px;
-    background-color: skyblue;
+    background-color: #BDCCAD;
     resize:none;
     outline: none;
     border-radius: 5px;
