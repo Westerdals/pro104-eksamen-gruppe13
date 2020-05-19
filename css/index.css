@@ -20,16 +20,14 @@ img{
   width: 40%;
 }
 
-.main-title {
-    margin: 0;
-    padding-bottom: 1.5rem;
-}
 
 /* Navigation */
 .main-nav {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    
 }
 
 
@@ -73,7 +71,7 @@ img{
     
 }
 .textbox {
-    color: #C0C5BB;
+    color: #334622;
     font-size: 20px;
     text-align: center;
 }
@@ -90,7 +88,7 @@ img{
 }
 
 .color {
-     background-color: #D9D8D8;
+     background-color: #63824F;
 }
 
 
