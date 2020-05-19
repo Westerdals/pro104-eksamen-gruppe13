@@ -162,7 +162,9 @@ function createTaskHandler(userId, colId, inputTag) {
   anchorP.appendChild(taskDiv);
 
   // Setting textArea to empty when added task
+  // and setting focus to write another task
   inputTag.value = "";
+  inputTag.focus();
 }
 
 function createElementWithRightCSS(title){
