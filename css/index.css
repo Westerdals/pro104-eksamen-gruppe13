@@ -159,23 +159,32 @@ header {
 }
 
 /*
- * === Task properties ===
+ * === Task properties window ===
  */
+#tp-overlay {
+}
 #tp-frame {
   margin: 0 5px;
 }
 
+/* Main grid container. */
 #tp-container {
   display: grid;
-  grid-template-columns: 1fr minmax(200px, 960px) 1fr;
-  grid-template-rows: 30px 600px auto;
+  grid-template-columns: 1fr minmax(200px, 760px) 1fr;
+  grid-template-rows: 30px 600px 100%;
   grid-template-areas: 
-    ". .   ."
-    ". win ."
-    ". .   .";
+    "air-top  air-top air-top"
+    "air-left win     air-right"
+    "air-bot  air-bot air-bot";
 }
 
-/* desktop view */
+/* Defined in order to capture onclick (to hide task properties) */
+#tp-air-top   {grid-area: air-top;  }
+#tp-air-left  {grid-area: air-left; }
+#tp-air-right {grid-area: air-right;}
+#tp-air-bot   {grid-area: air-bot;  }
+
+/* Sub grid container (desktop view) */
 #tp-win {
   grid-area: win;
   display: grid;
@@ -195,11 +204,9 @@ header {
   background-color: #f4f5f7;
 }
 
-/* mobile view */
+/* Sub grid container (mobile view) */
 @media screen and (max-width: 550px) {
   #tp-win {
-    grid-area: win;
-    display: grid;
     padding: 2px;
     grid-template-columns: 24px 1fr 1fr;
     grid-template-rows: 20px 18px 18px 40px 20px 70px;
@@ -213,7 +220,6 @@ header {
       "menu       menu       menu";
     column-gap: 2px;
     row-gap: 7px;
-    background-color: #f4f5f7;
   }
 }
 

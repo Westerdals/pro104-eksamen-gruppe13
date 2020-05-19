@@ -240,10 +240,10 @@ function showTaskPropDiv(boardId, taskId) {
   frameDiv.style.display   = "block";
 }
 
-function hideTaskPropDiv() {
+function hideTaskPropDiv(e) {
   document.getElementById("tp-overlay").style.display = "none";
   document.getElementById("tp-frame").style.display   = "none";
-  }
+}
 
 /**
  * Close the task properties window if 'escape' is pressed.
