@@ -69,8 +69,23 @@ function createTemplateGrid(){
 
             `;
     }
+
+    var newBoard = `
+        <div class="box">
+            <p class="textbox"><strong>Add new board</strong></p>
+
+                <textarea id="add-new-board" type="textbox" placeholder="Add new task.."></textarea>
+                <input type="button" value="Add task">
+            
+        </div>
+    `;
  
-  mainBoardContainer.innerHTML = htmlTxt;  
+  mainBoardContainer.innerHTML = htmlTxt;
+  mainBoardContainer.innerHTML += newBoard;
+}
+
+function addNewBoard(){
+  
 }
 
 // Function to show textfield and hide button
