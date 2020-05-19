@@ -86,12 +86,24 @@ function createTemplateGrid(){
 
 //Function to add new board into the template
 function addNewBoard(){
-  let str = document.getElementById("add-board-field").value;
-  console.log(str);
 
+  const str = document.getElementById("add-board-field").value;
+  
   if (invFormAl(str, 1, true, "Title")) {return;}
-}
 
+  const userId = getUserId();
+  let userList = JSON.parse(window.localStorage.getItem("userList")) || [];
+  let boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  const boardId = userList[userId].lastBoardId;
+  
+  const colElement = { title: str, taskIds: [] };
+
+  const columns = boardList[boardId].columns;
+  columns.push(colElement);
+
+  window.localStorage.setItem("boardList", JSON.stringify(boardList));
+
+}
 function animationForAddBoard(){
   let animateBoard = document.getElementById("add-new-board");
   animateBoard.className = "add-new-board-animation";
