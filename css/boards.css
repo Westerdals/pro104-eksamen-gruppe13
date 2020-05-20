@@ -14,6 +14,13 @@ header {
     padding-left: 2.85rem;
 }
 
+@media only screen and (max-width: 600px) {
+  header {
+    padding-left: 6.5rem;
+    padding-top: 3rem;
+  }
+}
+
 img{
   width: 10rem;
 }
@@ -30,6 +37,13 @@ ul > li {
   background-color: #88b360;
   text-align: center;
   padding-top: 33px;
+}
+
+@media only screen and (max-width: 600px) {
+  ul {
+    padding-left: 5.7rem;
+    padding-top: 2rem;
+  }
 }
 
 ul > li:hover {
