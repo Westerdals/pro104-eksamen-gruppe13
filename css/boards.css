@@ -12,6 +12,11 @@ header {
     padding-left: 2.85rem;
 }
 
+img{
+  height: 4srem;
+  width: 10rem;
+}
+
 /* Board list elements */
 ul > li {
   display: inline;

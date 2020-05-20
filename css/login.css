@@ -12,7 +12,7 @@
 
 #logotext{
  width: 17rem;
- height: 4rem;
+ height: 3.3rem;
 }
 
 .name{
@@ -20,15 +20,20 @@
  margin-top: .6rem;
 }
 
-.input placeholder{
+.input{
    color: #8C9989;
    margin-top: .2rem; 
-   border: 2px solid black;
-   border-radius: 2px;
+
+}
+
+.button input:hover{
+    background-color: beige;
 }
 
 .button input{
     color: #8C9989;
+    border: 2px solid #8C9989;
+    border-radius: 10px;
 }
 
 .button{
