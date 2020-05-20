@@ -62,3 +62,11 @@
   position: relative;
   width:30px;
 }
+
+/*Setting position to 30px from top in case
+user is using phones that cover top part of app (ex Iphone 8 ->)*/
+@media only screen and (max-width: 600px) {
+  .logout-container {
+      top:30px;
+    }
+  }

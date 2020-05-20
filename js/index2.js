@@ -5,7 +5,6 @@ function setLinkParams() {
   const userId = getUserId();
   
   boardA.href   = boardA.href   + "?"  + userId;
-  ideasA.href   = ideasA.href   + "?"  + userId;
   membersA.href = membersA.href + "?"  + userId;
 }
 
