@@ -162,7 +162,6 @@ function showTextbox(clickedId) {
   let hideButton = document.getElementById(clickedId);
   hideButton.style.display = "none";
 
-
   let showText = hideButton.nextElementSibling;
   showText.style.display = "block";
 

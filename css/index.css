@@ -253,10 +253,6 @@ header {
   animation: addBoard .2s both, changeDisplay .3s both;
 }
 
-/*
-.add-new-board-animation-reversed {
-  animation: addBoard .2s both reversed, changeDisplay .3s both reversed;
-}*/
 
 #new-board-container {
     margin: auto;
