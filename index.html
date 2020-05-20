@@ -19,7 +19,7 @@
 
 </head>
 
-<body onload="createTemplateGrid(); loadBoardData(); setLinkParams()">
+<body onload="loadBoardData(); setLinkParams()">
   
 <header>
 
@@ -27,14 +27,36 @@
   
 <img src="JADEBOARDTEXT.png" alt="jadetext" style="width: 23rem; height: 4rem;">
    
-  <ul class="main-nav">
+  <ul id="main-nav" class="main-nav">
     <li><a id="board-a" href="boards.html">Boards</a></li>
     <li><a id="ideas-a" href="ideas.html">Ideas</a></li>
     <li><a id="members-a" href="members.html">Members</a></li>
  
     <li><a href="#">View my tasks</a></li>
     <li><a href="#">View all tasks</a></li>
+
+    <li id="inv-li"></li>
+    <li><div id="inv-btn" class="color" onclick="showInviteMenu()">Invite</div></li>
   </ul>
+
+  <!-- [hidden] List of users that can be invited to the board. -->
+  <div id="inv-overlay" class="overlay transparent hidden"></div>
+  <div id="inv-frame" class="overlay hidden">
+    <div id="inv-container">
+      
+      <div id="inv-air-top" onclick="hideInviteMenu()"></div>
+      <div id="inv-air-left" onclick="hideInviteMenu()"></div>
+
+      <div id="inv-win" class="rounded">
+        <div>Invite to Board</div>
+        <div id="inv-list"></div>
+      </div>
+
+      <div id="inv-air-right" onclick="hideInviteMenu()"></div>
+      <div id="inv-air-bot" onclick="hideInviteMenu()"></div>
+
+    </div>
+  </div>
 
   <a id="login-a" href="login.html">Log Out</a>
 </header>
@@ -59,22 +81,32 @@
       <div id="tp-air-left" onclick="hideTaskPropDiv()"></div>
 
       <!-- This is the visible window -->
-      <div id="tp-win" class="rounded">
+      <div id="tp-win" class="rounded" onclick="closeDescInput(event)">
 
-        <div id="tp-title-icon">ico</div> <!-- Title icon -->
+        <div id="tp-title-icon">icon</div> <!-- Title icon -->
         <div id="tp-title"></div>         <!-- Title text -->
         <div id="tp-title-sub"></div>     <!-- Text below title -->
 
         <div id="tp-mem-title">Members & Deadline</div>
         
-        <div id="tp-menu">Menu</div> <!-- Menu on the right side -->
+         <!-- Menu on the right side -->
+        <div id="tp-menu-wrap">
+          <div>Menu</div>
+          <div id="m-join" class="opt" onclick="joinTask()">Join</div>
+          <div id="m-add" class="opt">Add</div>
+          <div id="m-deadline" class="opt">Deadline</div>
+          <div id="m-move" class="opt">Move</div>
+          <div id="m-delete" class="opt">Delete</div>
+        </div>
 
-        <div id="tp-mem-list">assigned members & deadline date</div>
+        <div id="tp-mem-list"></div>
 
-        <div id="tp-desc-icon">ico</div>          <!-- Description icon -->
-        <div id="tp-desc-title">Description</div> <!-- Description title -->
-        <div id="tp-desc-input">input field</div> <!-- Description input -->
-
+        <div id="tp-desc-icon">icon</div>            <!-- Description icon -->
+        <div id="tp-desc-title">Description</div>    <!-- Description title -->
+        <div id="tp-desc-in-wrap">
+          <input id="tp-desc-input" class="color rounded" type="text" placeholder="Add a more detailed text..." onclick="triggerDescInput()"> <!-- Description input -->
+          <div id="tp-desc-btn" class="color rounded hidden">Save</div>
+        </div>
       </div>
 
       <!-- Invisible divs that capture click events for closing the window -->

@@ -14,7 +14,7 @@ header {
 
 /* Board list elements */
 ul > li {
-  display: block;
+  display: inline;
   position: relative;
   float: left;
   width: 185px;
@@ -22,6 +22,8 @@ ul > li {
   margin: 5px;
   cursor: pointer;
   background-color: #88b360;
+  text-align: center;
+  padding-top: 33px;
 }
 
 ul > li:hover {
@@ -34,7 +36,6 @@ ul > li:hover {
   left: 50%;
   transform: translate(-50%, 0);
   width: 300px;
-  /*background-color: #fff;*/
 }
 
 #new-board-upper-part {

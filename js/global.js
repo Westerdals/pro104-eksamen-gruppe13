@@ -50,7 +50,7 @@ function getDefaultTasks() {
 }
 
 function isAlphaNumeric(str) { 
-  var pattern = /^[0-9a-zA-Z]+$/;
+  var pattern = /^[0-9a-zA-Z]+$/; // TODO: make space, bindestrek eligible 2nd character
   return str.match(pattern);
 }
 
@@ -100,7 +100,7 @@ function getUniqueListId(listName) {
 function createBoard(userId, title, columns, tasks) {
   const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
   const boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
-  const userIds = [userId];
+  const userIds = [Number(userId)];
   const boardId = boardList.length;
   board = {userIds, title, columns, tasks};
   boardList.push(board);
