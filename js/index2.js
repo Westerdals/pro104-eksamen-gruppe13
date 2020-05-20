@@ -60,6 +60,7 @@ function loadBoardData() {
   const boardTitle = board.title;
   const columns    = board.columns;
   const tasks      = board.tasks;
+  const userIds    = board.userIds; //invited members
 
   // Demonstration on how to extract everything.
   for (let i = 0; i < columns.length; i++) {
@@ -104,6 +105,101 @@ function loadBoardData() {
     const inputTag = document.getElementById("textAreaId" + i);
     addBtn.onclick = function(){createTaskHandler(userId, i, inputTag)};
   }
+
+  refreshMembersInNav(userId, boardId);
+}
+
+// Add members to nav-bar
+function refreshMembersInNav(userId, boardId) {
+  const anchorTag = document.getElementById("inv-li");
+
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  userList = JSON.parse(window.localStorage.getItem("userList")) || [];
+
+  const userIds = boardList[boardId].userIds;
+
+  anchorTag.textContent = "";
+  for (let i = 0; i < userIds.length; i++) {
+    const memberId   = userIds[i];
+    const memberName = userList[memberId].name; 
+    let memberDiv = document.createElement("div");
+    memberDiv.className = "member";
+    memberDiv.innerHTML = memberName;
+    console.log(i + ", " + memberName);
+    anchorTag.appendChild(memberDiv);
+  }
+}
+
+function showInviteMenu() {
+  let overlayDiv = document.getElementById("inv-overlay");
+  let frameDiv = document.getElementById("inv-frame");
+  let inviteDiv = document.getElementById("inv-container");
+  const inviteLi = document.getElementById("inv-li");
+  let membersDiv = document.getElementById("inv-list");
+  
+  // Make list visible.
+  overlayDiv.style.display = "block";
+  frameDiv.style.display = "block";
+
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
+  const userId = getUserId();
+  const boardId = userList[userId].lastBoardId;
+  const memberIds = boardList[boardId].userIds; //users already invited
+  membersDiv.textContent = "";
+
+  for (let i = 0; i < userList.length; i++) {
+    
+    // Check if user is already a member.
+    let isMember = false;
+    for (let j = 0; j < memberIds.length; j++) {
+      const mId = Number(memberIds[j]);
+      if (mId == i) {
+        isMember = true;
+        break;
+      }
+    }
+    if (isMember) continue;
+
+    let memberDiv = document.createElement("div");
+    memberDiv.className = "memberListName";
+    memberDiv.innerHTML = userList[i].name;
+    memberDiv.onclick = function() {addMemberToBoard(userId, i, boardId, memberDiv)};
+
+    membersDiv.appendChild(memberDiv);
+  }
+
+  document.addEventListener('keydown', handleKeyPressFromInv);
+}
+
+function addMemberToBoard(userId, memberId, boardId, memberDiv) {
+  console.log("Adding user " + memberId + " to the board of user " + userId);
+
+  // Remove member from the invite list. 
+  memberDiv.parentNode.removeChild(memberDiv);
+
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  boardList[userId].userIds.push(memberId);
+  window.localStorage.setItem("boardList", JSON.stringify(boardList));
+
+  refreshMembersInNav(userId, boardId);
+}
+
+function handleKeyPressFromInv(ev) {
+  ev = ev || window.event;
+  if (ev.keyCode == 27) {
+      console.log("escape key from Invite menu");
+      hideInviteMenu();
+      document.removeEventListener('keydown', handleKeyPressFromInv);
+  }
+}
+
+function hideInviteMenu() {
+  let overlayDiv = document.getElementById("inv-overlay");
+  let frameDiv = document.getElementById("inv-frame");
+  overlayDiv.style.display = "none";
+  frameDiv.style.display = "none";
+  document.removeEventListener('keydown', handleKeyPressFromInv);
 }
 
 /**
@@ -176,34 +272,47 @@ function showTaskPropDiv(boardId, taskId) {
   const titleDiv    = document.getElementById("tp-title");
   const titleSubDiv = document.getElementById("tp-title-sub");
   const descInput   = document.getElementById("tp-desc-input");
+  let joinDiv       = document.getElementById("m-join");
 
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
   const task = boardList[boardId].tasks[taskId];
+  const userId = getUserId();
 
   frameDiv.setAttribute("taskId", taskId); //store for later use
   titleDiv.innerHTML    = task.title;
   titleSubDiv.innerHTML = "in column " + boardList[boardId].title;
   descInput.value       = task.description;
 
+  refreshTaskMembers(boardId, taskId);
+
+  // Hide the "Join" menu option if user is already assigned to the task.
+  if (task.memberIds.includes(userId)) {
+    joinDiv.style.display = "none";
+  } else {
+    joinDiv.style.display = "block";
+  }
+
   overlayDiv.style.display = "block";
   frameDiv.style.display   = "block";
+
+  document.addEventListener('keydown', handleKeyPressFromProp);
+}
+
+function handleKeyPressFromProp(ev) {
+  ev = ev || window.event;
+  if (ev.keyCode == 27) {
+      console.log("escape key from Properties window");
+      hideTaskPropDiv();
+      document.removeEventListener('keydown', handleKeyPressFromProp);
+  }
 }
 
 function hideTaskPropDiv(ev) {
   closeDescInput(); //close description input
   document.getElementById("tp-overlay").style.display = "none";
   document.getElementById("tp-frame").style.display   = "none";
+  document.removeEventListener('keydown', handleKeyPressFromProp);
 }
-
-/**
- * Close the task properties window if 'escape' is pressed.
- */
-document.onkeydown = function(evt) {
-    evt = evt || window.event;
-    if (evt.keyCode == 27) {
-        hideTaskPropDiv();
-    }
-};
 
 function triggerDescInput() {
   const inputDiv = document.getElementById("tp-desc-input");
@@ -231,5 +340,40 @@ function closeDescInput(ev) {
     let task         = boardList[boardId].tasks[taskId];
     task.description = inputDiv.value;
     window.localStorage.setItem("boardList", JSON.stringify(boardList));
+  }
+}
+
+function joinTask() {
+  document.getElementById("m-join").style.display = "none";
+
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
+  const userId     = getUserId();
+  const boardId    = userList[userId].lastBoardId;
+  const frameDiv   = document.getElementById("tp-frame");
+  const taskId     = frameDiv.getAttribute("taskId");
+  let task         = boardList[boardId].tasks[taskId];
+  task.memberIds.push(userId);
+  window.localStorage.setItem("boardList", JSON.stringify(boardList));
+
+  refreshTaskMembers(boardId, taskId);
+}
+
+function refreshTaskMembers(boardId, taskId) {
+  let membersDiv = document.getElementById("tp-mem-list");
+
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
+  const memberIds = boardList[boardId].tasks[taskId].memberIds;
+  membersDiv.textContent = "";
+  for (let i = 0; i < memberIds.length; i++) {
+    const memberId = memberIds[i];
+    const memberName = userList[memberId].name;
+
+    let memberDiv = document.createElement("div");
+    memberDiv.className = "member";
+    memberDiv.innerHTML = memberName;
+
+    membersDiv.appendChild(memberDiv);
   }
 }

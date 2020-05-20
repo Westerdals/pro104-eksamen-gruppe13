@@ -50,7 +50,7 @@ img{
 
 /* Grid for to do boards */
 .main-boards #main-container {
-    margin-left: 2em;;
+    margin-left: 2em;
     max-width 70em;
     width: 90%;
     display: grid;
@@ -173,6 +173,17 @@ img{
     cursor: pointer;
 }
 
+/* Member names in nav-bar */
+.member {
+  display: inline-block;
+  margin: 0px 3px;
+}
+
+/* Member names in invite window */
+.memberListName {
+  cursor: pointer;
+}
+
 /*
  * === Task properties window ===
  */
@@ -258,7 +269,7 @@ img{
   grid-area: mem-list;
   background-color: lightgrey;
 }
-#tp-menu {
+#tp-menu-wrap {
   grid-area: menu;
   color: #334622
 }
@@ -295,3 +306,40 @@ img{
   color: white;
   vertical-align: middle;
 }
+
+/* Menu options */
+.opt:hover {
+  cursor: pointer;
+  background-color: #a9d97d;
+}
+
+/* Invite option in nav-bar */
+#inv-btn {
+  width: 50px;
+  height: 35px;
+}
+#inv-btn:hover {
+  cursor: pointer;
+  background-color: #a9d97d;
+}
+
+#inv-container {
+  display: grid;
+  grid-template-columns: 1fr 130px 1fr;
+  grid-template-rows: 30px 200px 20000px; /* last value should be 100%, but it doesn't stretch down like with #tp-container for some reason. */
+  grid-template-areas: 
+    "inv-air-top  inv-air-top inv-air-top"
+    "inv-air-left inv-win     inv-air-right"
+    "inv-air-bot  inv-air-bot inv-air-bot";
+}
+
+#inv-win {
+  grid-area: inv-win;
+  background-color: lightgrey;
+}
+
+/* Defined in order to capture onclick (to hide invite window) */
+#inv-air-top   {grid-area: inv-air-top;  }
+#inv-air-left  {grid-area: inv-air-left; }
+#inv-air-right {grid-area: inv-air-right;}
+#inv-air-bot   {grid-area: inv-air-bot;  }

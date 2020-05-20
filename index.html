@@ -27,14 +27,36 @@
   
 <img src="JADEBOARDTEXT.png" alt="jadetext" style="width: 23rem; height: 4rem;">
    
-  <ul class="main-nav">
+  <ul id="main-nav" class="main-nav">
     <li><a id="board-a" href="boards.html">Boards</a></li>
     <li><a id="ideas-a" href="ideas.html">Ideas</a></li>
     <li><a id="members-a" href="members.html">Members</a></li>
  
     <li><a href="#">View my tasks</a></li>
     <li><a href="#">View all tasks</a></li>
+
+    <li id="inv-li"></li>
+    <li><div id="inv-btn" class="color rounded" onclick="showInviteMenu()">Invite</div></li>
   </ul>
+
+  <!-- [hidden] List of users that can be invited to the board. -->
+  <div id="inv-overlay" class="overlay transparent hidden"></div>
+  <div id="inv-frame" class="overlay hidden">
+    <div id="inv-container">
+      
+      <div id="inv-air-top" onclick="hideInviteMenu()"></div>
+      <div id="inv-air-left" onclick="hideInviteMenu()"></div>
+
+      <div id="inv-win">
+        <div>Invite to Board</div>
+        <div id="inv-list"></div>
+      </div>
+
+      <div id="inv-air-right" onclick="hideInviteMenu()"></div>
+      <div id="inv-air-bot" onclick="hideInviteMenu()"></div>
+
+    </div>
+  </div>
 
   <a id="login-a" href="login.html">Log Out</a>
 </header>
@@ -67,9 +89,17 @@
 
         <div id="tp-mem-title">Members & Deadline</div>
         
-        <div id="tp-menu">Menu</div> <!-- Menu on the right side -->
+         <!-- Menu on the right side -->
+        <div id="tp-menu-wrap">
+          <div>Menu</div>
+          <div id="m-join" class="opt" onclick="joinTask()">Join</div>
+          <div id="m-add" class="opt">Add</div>
+          <div id="m-deadline" class="opt">Deadline</div>
+          <div id="m-move" class="opt">Move</div>
+          <div id="m-delete" class="opt">Delete</div>
+        </div>
 
-        <div id="tp-mem-list">assigned members & deadline date</div>
+        <div id="tp-mem-list"></div>
 
         <div id="tp-desc-icon">icon</div>            <!-- Description icon -->
         <div id="tp-desc-title">Description</div>    <!-- Description title -->
