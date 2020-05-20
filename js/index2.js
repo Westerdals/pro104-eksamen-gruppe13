@@ -175,18 +175,22 @@ function showTaskPropDiv(boardId, taskId) {
   let frameDiv      = document.getElementById("tp-frame");
   const titleDiv    = document.getElementById("tp-title");
   const titleSubDiv = document.getElementById("tp-title-sub");
+  const descInput   = document.getElementById("tp-desc-input");
 
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
   const task = boardList[boardId].tasks[taskId];
 
-  titleDiv.innerHTML = task.title;
+  frameDiv.setAttribute("taskId", taskId); //store for later use
+  titleDiv.innerHTML    = task.title;
   titleSubDiv.innerHTML = "in column " + boardList[boardId].title;
+  descInput.value       = task.description;
 
   overlayDiv.style.display = "block";
   frameDiv.style.display   = "block";
 }
 
-function hideTaskPropDiv(e) {
+function hideTaskPropDiv(ev) {
+  closeDescInput(); //close description input
   document.getElementById("tp-overlay").style.display = "none";
   document.getElementById("tp-frame").style.display   = "none";
 }
@@ -200,3 +204,32 @@ document.onkeydown = function(evt) {
         hideTaskPropDiv();
     }
 };
+
+function triggerDescInput() {
+  const inputDiv = document.getElementById("tp-desc-input");
+  const saveDiv = document.getElementById("tp-desc-btn");
+  inputDiv.style.backgroundColor = "#a9d97d";
+  saveDiv.style.display = "table-cell";
+}
+
+function closeDescInput(ev) {
+  if (typeof ev === "undefined" || ev.target.id != "tp-desc-input") {
+    
+    // Revert elements.
+    const inputDiv = document.getElementById("tp-desc-input");
+    const saveDiv = document.getElementById("tp-desc-btn");
+    inputDiv.style.backgroundColor = "#63824f"; //same as .color
+    saveDiv.style.display = "none";
+
+    // Save input data in storage.
+    boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+    userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
+    const userId     = getUserId();
+    const boardId    = userList[userId].lastBoardId;
+    const frameDiv   = document.getElementById("tp-frame");
+    const taskId     = frameDiv.getAttribute("taskId");
+    let task         = boardList[boardId].tasks[taskId];
+    task.description = inputDiv.value;
+    window.localStorage.setItem("boardList", JSON.stringify(boardList));
+  }
+}

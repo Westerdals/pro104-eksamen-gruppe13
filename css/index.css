@@ -205,18 +205,18 @@ img{
   display: grid;
   padding: calc(1vw);
   grid-template-columns: 24px minmax(200px, auto) 210px;
-  grid-template-rows: 20px 18px 18px 40px 20px 70px 60px;
+  grid-template-rows: 20px 18px 18px 40px 20px minmax(70px, auto) 60px;
   grid-template-areas:
-    "title-icon title     title"
-    ".          title-sub ."
-    ".          mem-title menu"
-    ".          mem-list  menu"
-    "desc-icon desc-title menu"
-    "        . desc-input menu"
-    "        .          . menu";
+    "title-icon title        title"
+    ".          title-sub    ."
+    ".          mem-title    menu"
+    ".          mem-list     menu"
+    "desc-icon  desc-title   menu"
+    "        .  desc-in-wrap menu"
+    "        .  .            menu";
   column-gap: calc(1vw * 1.5);
   row-gap: calc(1vw * 1.5);
-  background-color: #f4f5f7;
+  background-color: #98bb81;
 }
 
 /* Sub grid container (mobile view) */
@@ -231,7 +231,7 @@ img{
       "mem-title  mem-title  mem-title"
       "mem-list   mem-list   mem-list"
       "desc-icon  desc-title desc-title"
-      "desc-input desc-input desc-input"
+      "desc-in-wrap desc-in-wrap desc-in-wrap"
       "menu       menu       menu";
     column-gap: 2px;
     row-gap: 7px;
@@ -244,15 +244,15 @@ img{
 }
 #tp-title {
   grid-area: title;
-  background-color: lightgrey;
+  color: #334622;
 }
 #tp-title-sub {
   grid-area: title-sub;
-  background-color: lightgrey;
+  color: #334622
 }
 #tp-mem-title {
   grid-area: mem-title;
-  background-color: lightgrey;
+  color: #334622
 }
 #tp-mem-list {
   grid-area: mem-list;
@@ -260,7 +260,7 @@ img{
 }
 #tp-menu {
   grid-area: menu;
-  background-color: lightgrey;
+  color: #334622
 }
 #tp-desc-icon {
   grid-area: desc-icon;
@@ -268,9 +268,30 @@ img{
 }
 #tp-desc-title {
   grid-area: desc-title;
-  background-color:  lightgrey;
+  color: #334622;
 }
+#tp-desc-in-wrap {
+  grid-area: desc-in-wrap;
+}
+
 #tp-desc-input {
-  grid-area: desc-input;
-  background-color: lightgrey;
+  width: 100%;
+  height: 50px;
+  border: 0;
+  cursor: pointer;
+  margin-bottom: 7px;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
+#tp-desc-input:hover {
+  background-color: #a9d97d;
+}
+#tp-desc-btn {
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+  color: white;
+  vertical-align: middle;
 }
