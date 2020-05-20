@@ -100,7 +100,7 @@ function getUniqueListId(listName) {
 function createBoard(userId, title, columns, tasks) {
   const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
   const boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
-  const userIds = [userId];
+  const userIds = [Number(userId)];
   const boardId = boardList.length;
   board = {userIds, title, columns, tasks};
   boardList.push(board);

@@ -50,7 +50,7 @@ img{
 
 /* Grid for to do boards */
 .main-boards #main-container {
-    margin-left: 2em;;
+    margin-left: 2em;
     max-width 70em;
     width: 90%;
     display: grid;
@@ -173,6 +173,28 @@ img{
     cursor: pointer;
 }
 
+/* Member names in nav-bar */
+.member {
+  display: inline-block;
+  margin: 0px 3px;
+}
+
+.greycircle {
+  background-color: lightgray;
+  width: 30px;
+  height: 30px;
+  padding-top: 4px;
+  border-radius: 25px;
+  text-align: center;
+}
+
+/* Member names in invite window */
+.memberListName:hover {
+  cursor: pointer;
+  background-color: #a9d97d;
+}
+
+
 /*
  * === Task properties window ===
  */
@@ -205,18 +227,18 @@ img{
   display: grid;
   padding: calc(1vw);
   grid-template-columns: 24px minmax(200px, auto) 210px;
-  grid-template-rows: 20px 18px 18px 40px 20px 70px 60px;
+  grid-template-rows: 20px 18px 18px 40px 20px minmax(70px, auto) 60px;
   grid-template-areas:
-    "title-icon title     title"
-    ".          title-sub ."
-    ".          mem-title menu"
-    ".          mem-list  menu"
-    "desc-icon desc-title menu"
-    "        . desc-input menu"
-    "        .          . menu";
+    "title-icon title        title"
+    ".          title-sub    ."
+    ".          mem-title    menu"
+    ".          mem-list     menu"
+    "desc-icon  desc-title   menu"
+    "        .  desc-in-wrap menu"
+    "        .  .            menu";
   column-gap: calc(1vw * 1.5);
   row-gap: calc(1vw * 1.5);
-  background-color: #f4f5f7;
+  background-color: #98bb81;
 }
 
 /* Sub grid container (mobile view) */
@@ -231,7 +253,7 @@ img{
       "mem-title  mem-title  mem-title"
       "mem-list   mem-list   mem-list"
       "desc-icon  desc-title desc-title"
-      "desc-input desc-input desc-input"
+      "desc-in-wrap desc-in-wrap desc-in-wrap"
       "menu       menu       menu";
     column-gap: 2px;
     row-gap: 7px;
@@ -244,23 +266,22 @@ img{
 }
 #tp-title {
   grid-area: title;
-  background-color: lightgrey;
+  color: #334622;
 }
 #tp-title-sub {
   grid-area: title-sub;
-  background-color: lightgrey;
+  color: #334622
 }
 #tp-mem-title {
   grid-area: mem-title;
-  background-color: lightgrey;
+  color: #334622
 }
 #tp-mem-list {
   grid-area: mem-list;
-  background-color: lightgrey;
 }
-#tp-menu {
+#tp-menu-wrap {
   grid-area: menu;
-  background-color: lightgrey;
+  color: #334622
 }
 #tp-desc-icon {
   grid-area: desc-icon;
@@ -268,9 +289,71 @@ img{
 }
 #tp-desc-title {
   grid-area: desc-title;
-  background-color:  lightgrey;
+  color: #334622;
 }
+#tp-desc-in-wrap {
+  grid-area: desc-in-wrap;
+}
+
 #tp-desc-input {
-  grid-area: desc-input;
-  background-color: lightgrey;
+  width: 100%;
+  height: 50px;
+  border: 0;
+  cursor: pointer;
+  margin-bottom: 7px;
 }
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
+#tp-desc-input:hover {
+  background-color: #a9d97d;
+}
+#tp-desc-btn {
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+  color: white;
+  vertical-align: middle;
+}
+
+/* Menu options */
+.opt:hover {
+  cursor: pointer;
+  background-color: #a9d97d;
+}
+
+/* Invite option in nav-bar */
+#inv-btn {
+  width: 47px;
+  height: 33px;
+  text-align: center;
+  padding-top: 6px;
+  border-radius: 3px;
+}
+#inv-btn:hover {
+  cursor: pointer;
+  background-color: #a9d97d;
+}
+
+#inv-container {
+  display: grid;
+  grid-template-columns: 1fr 130px 1fr;
+  grid-template-rows: 30px 200px 20000px; /* last value should be 100%, but it doesn't stretch down like with #tp-container for some reason. */
+  grid-template-areas: 
+    "inv-air-top  inv-air-top inv-air-top"
+    "inv-air-left inv-win     inv-air-right"
+    "inv-air-bot  inv-air-bot inv-air-bot";
+}
+
+#inv-win {
+  grid-area: inv-win;
+  padding: 4px;
+  background-color: #98bb81;
+}
+
+/* Defined in order to capture onclick (to hide invite window) */
+#inv-air-top   {grid-area: inv-air-top;  }
+#inv-air-left  {grid-area: inv-air-left; }
+#inv-air-right {grid-area: inv-air-right;}
+#inv-air-bot   {grid-area: inv-air-bot;  }
