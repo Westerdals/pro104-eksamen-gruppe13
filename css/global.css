@@ -58,12 +58,6 @@
 
 }
 
-.logout-container a {
-  text-decoration: none;
-  color: red;
-  font-weight: bold;
-}
-
 .logout-container img {
   position: relative;
   width:30px;
