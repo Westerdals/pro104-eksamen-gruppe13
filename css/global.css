@@ -48,3 +48,23 @@
   float: none;
   clear: both;
 }
+
+
+/* Logout properties */
+.logout-container {
+  position: absolute;
+  right:10px;
+  top:10px;
+
+}
+
+.logout-container a {
+  text-decoration: none;
+  color: red;
+  font-weight: bold;
+}
+
+.logout-container img {
+  position: relative;
+  width:30px;
+}
