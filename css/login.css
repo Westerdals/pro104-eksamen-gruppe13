@@ -6,7 +6,11 @@ body {
         background-color: #3E463C;
 }
 
-
+@media only screen and (max-width: 600px) {
+    body  {
+       padding-top: 3em;
+  }
+}
 
 #logo{
  width: 15rem;
@@ -40,10 +44,16 @@ body {
 
 .button input{
     
-
     color: #8C9989;
     border: 2px solid #8C9989;
     border-radius: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    .button input  {
+       padding: 9px 20px;
+       margin-bottom: 10px;
+  }
 }
 
 .button{
@@ -64,6 +74,12 @@ body {
     padding-bottom: 2px;
 }
 
+@media only screen and (max-width: 600px) {
+    .sign-in-btn  {
+       padding: 9px;
+       margin: 10px;
+  }
+}
 
 .loginOpacityAnimation {
     animation: fadeoutForm 1s both .5s;
