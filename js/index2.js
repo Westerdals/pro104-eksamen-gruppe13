@@ -379,3 +379,4 @@ function refreshTaskMembers(boardId, taskId) {
     membersDiv.appendChild(memberDiv);
   }
 }
+

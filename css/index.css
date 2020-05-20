@@ -367,6 +367,8 @@ img{
   border: 0;
   cursor: pointer;
   margin-bottom: 7px;
+  outline:none;
+  resize: none;
 }
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: white;
@@ -423,3 +425,15 @@ img{
 #inv-air-left  {grid-area: inv-air-left; }
 #inv-air-right {grid-area: inv-air-right;}
 #inv-air-bot   {grid-area: inv-air-bot;  }
+
+/* Calendar in popup-contanier for tasks */
+#set-date input{
+  background-color: transparent;
+  border:none;
+  padding:5px;
+
+}
+
+#set-date input:hover {
+  background-color: #a9d97d;
+}
