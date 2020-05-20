@@ -88,7 +88,7 @@ function loadBoardData() {
       let taskDiv = document.createElement("div");
       taskDiv.id = "task" + taskId;
       taskDiv.innerHTML = htmlTxtForOneElement;
-      taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
+      taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId, i)};
       anchorTag.parentNode.insertBefore(taskDiv, anchorTag.nextSibling); //insert after anchor tagg
       anchorTag = taskDiv; // Set anchor tag to last inserted div.
 
@@ -123,7 +123,7 @@ function refreshMembersInNav(userId, boardId) {
     const memberId   = userIds[i];
     const memberName = userList[memberId].name; 
     let memberDiv = document.createElement("div");
-    memberDiv.className = "member";
+    memberDiv.className = "member greycircle";
     memberDiv.innerHTML = memberName;
     console.log(i + ", " + memberName);
     anchorTag.appendChild(memberDiv);
@@ -238,7 +238,7 @@ function createTaskHandler(userId, colId, inputTag) {
   let taskDiv = document.createElement("div");
   taskDiv.id = "task" + taskId;
   taskDiv.innerHTML = htmlTxtForOneElement;
-  taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId)};
+  taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId, colId)};
   anchorTag.parentNode.insertBefore(taskDiv, anchorTag); //insert before
   //anchorTag.parentNode.insertBefore(taskDiv, anchorTag.nextSibling);
 
@@ -265,7 +265,7 @@ function drag(ev) {
   ev.dataTransfer.setData("text", ev.target.parentNode.id);
 }
 
-function showTaskPropDiv(boardId, taskId) {
+function showTaskPropDiv(boardId, taskId, colId) {
   //console.log("showTaskPropDiv(taskId="+taskId+")");
   let overlayDiv    = document.getElementById("tp-overlay");
   let frameDiv      = document.getElementById("tp-frame");
@@ -280,7 +280,7 @@ function showTaskPropDiv(boardId, taskId) {
 
   frameDiv.setAttribute("taskId", taskId); //store for later use
   titleDiv.innerHTML    = task.title;
-  titleSubDiv.innerHTML = "in column " + boardList[boardId].title;
+  titleSubDiv.innerHTML = "in column " + boardList[boardId].columns[colId].title;
   descInput.value       = task.description;
 
   refreshTaskMembers(boardId, taskId);
@@ -371,7 +371,7 @@ function refreshTaskMembers(boardId, taskId) {
     const memberName = userList[memberId].name;
 
     let memberDiv = document.createElement("div");
-    memberDiv.className = "member";
+    memberDiv.className = "member greycircle";
     memberDiv.innerHTML = memberName;
 
     membersDiv.appendChild(memberDiv);

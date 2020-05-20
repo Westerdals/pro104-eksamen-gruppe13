@@ -179,10 +179,21 @@ img{
   margin: 0px 3px;
 }
 
-/* Member names in invite window */
-.memberListName {
-  cursor: pointer;
+.greycircle {
+  background-color: lightgray;
+  width: 30px;
+  height: 30px;
+  padding-top: 4px;
+  border-radius: 25px;
+  text-align: center;
 }
+
+/* Member names in invite window */
+.memberListName:hover {
+  cursor: pointer;
+  background-color: #a9d97d;
+}
+
 
 /*
  * === Task properties window ===
@@ -267,7 +278,6 @@ img{
 }
 #tp-mem-list {
   grid-area: mem-list;
-  background-color: lightgrey;
 }
 #tp-menu-wrap {
   grid-area: menu;
@@ -315,8 +325,11 @@ img{
 
 /* Invite option in nav-bar */
 #inv-btn {
-  width: 50px;
-  height: 35px;
+  width: 47px;
+  height: 33px;
+  text-align: center;
+  padding-top: 6px;
+  border-radius: 3px;
 }
 #inv-btn:hover {
   cursor: pointer;
@@ -335,7 +348,8 @@ img{
 
 #inv-win {
   grid-area: inv-win;
-  background-color: lightgrey;
+  padding: 4px;
+  background-color: #98bb81;
 }
 
 /* Defined in order to capture onclick (to hide invite window) */
