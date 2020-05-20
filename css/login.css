@@ -20,9 +20,11 @@
  margin-top: .6rem;
 }
 
-.input{
+.input placeholder{
    color: #8C9989;
    margin-top: .2rem; 
+   border: 2px solid black;
+   border-radius: 2px;
 }
 
 .button input{
@@ -31,6 +33,7 @@
 
 .button{
     margin-top: .6rem;
+  
 }
 
 .feedback{
