@@ -60,6 +60,8 @@ function createTemplateGrid(columns){
                 <textarea id="textAreaId${i}" onfocusout="hideTextBox(this.id)" autofocus type="textbox" placeholder="Add new task.."></textarea>
                 <input id="col${i}-btn" type="button" value="Add task">
             </div>
+
+            <div id="container-to-get-enough-space"></div>
             
         </div>
         `;

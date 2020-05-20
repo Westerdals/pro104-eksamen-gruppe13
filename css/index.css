@@ -190,8 +190,6 @@ header {
     height:5.1em;
     margin:.91em;
     width:90%;
-    background-color: lightgrey;
-
 }
 
 .main-boards-tasks-txt textarea {
@@ -213,6 +211,7 @@ header {
     font-size: 14px;
     font-weight:700;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 /* Member names in nav-bar */
@@ -274,6 +273,10 @@ header {
     position: relative;
     left: 132px;
     outline: none;
+}
+
+#container-to-get-enough-space {
+  height:30px;
 }
 
 /* Animation to add board */
