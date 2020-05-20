@@ -11,16 +11,32 @@
 }
 
 #logotext{
+ 
  width: 17rem;
+<<<<<<< HEAD
  height: 3.3rem;
+=======
+ height: 4rem;
+
+>>>>>>> 06f429cafb23b30370a9cd63939177e562a11697
 }
 
 .name{
+    
+ 
  color: #8C9989;
  margin-top: .6rem;
+    
 }
 
+<<<<<<< HEAD
 .input{
+=======
+
+.input placeholder{
+    
+
+>>>>>>> 06f429cafb23b30370a9cd63939177e562a11697
    color: #8C9989;
    margin-top: .2rem; 
 
@@ -31,17 +47,21 @@
 }
 
 .button input{
+    
+
     color: #8C9989;
     border: 2px solid #8C9989;
     border-radius: 10px;
 }
 
 .button{
+
     margin-top: .6rem;
   
 }
 
 .feedback{
+    
     margin-top: .4rem;
 }
 

@@ -379,3 +379,8 @@ function refreshTaskMembers(boardId, taskId) {
     membersDiv.appendChild(memberDiv);
   }
 }
+
+/* Need help to save the input to localStorage */
+function saveDateAndTime(){
+
+}

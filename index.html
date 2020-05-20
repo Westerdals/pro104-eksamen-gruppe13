@@ -25,7 +25,18 @@
 
   <img src="favicon.ico" id="logo" alt="favicon"> 
   
+<<<<<<< HEAD
 
+=======
+<img src="JADEBOARDTEXT.png" id="logotext" alt="jadetext">
+
+    <!-- Sign out -->
+      <div class="logout-container">
+        <a href="login.html">
+          <img src="img/logout.png" alt="Sign out" title="Sign out">
+        </a>
+      </div>
+>>>>>>> 06f429cafb23b30370a9cd63939177e562a11697
    
   <ul id="main-nav" class="main-nav">
     <li><a id="board-a" href="boards.html">Boards</a></li>
@@ -37,6 +48,7 @@
 
     <li id="inv-li"></li>
     <li><div id="inv-btn" class="color" onclick="showInviteMenu()">Invite</div></li>
+    
   </ul>
 
   <!-- [hidden] List of users that can be invited to the board. -->
@@ -58,7 +70,6 @@
     </div>
   </div>
 
-  <a id="login-a" href="login.html">Log Out</a>
 </header>
 
 
@@ -94,8 +105,15 @@
           <div>Menu</div>
           <div id="m-join" class="opt" onclick="joinTask()">Join</div>
           <div id="m-add" class="opt">Add</div>
+
           <!-- Lag en onclick for dato lik som joinTask()^^ -->
           <div id="m-deadline" class="opt">Deadline</div>
+
+                <div id="set-date">
+                    <input type="datetime-local">
+                </div>
+
+
           <div id="m-move" class="opt">Move</div>
           <div id="m-delete" class="opt">Delete</div>
         </div>
@@ -105,7 +123,7 @@
         <div id="tp-desc-icon">icon</div>            <!-- Description icon -->
         <div id="tp-desc-title">Description</div>    <!-- Description title -->
         <div id="tp-desc-in-wrap">
-          <input id="tp-desc-input" class="color rounded" type="text" placeholder="Add a more detailed text..." onclick="triggerDescInput()"> <!-- Description input -->
+          <textarea id="tp-desc-input" class="color rounded" placeholder="Add a more detailed text..." onclick="triggerDescInput()"></textarea> <!-- Description input -->
           <div id="tp-desc-btn" class="color rounded hidden">Save</div>
         </div>
       </div>
@@ -117,18 +135,9 @@
     </div>
   </div>
   
-</section>
-	
+</section>	
 
-	
 
-	
-
-	
-
-	
-
-	
 
 <script type="text/javascript" src="js/index.js"></script>
 
