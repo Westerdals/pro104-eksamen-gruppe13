@@ -46,7 +46,7 @@ header {
   .main-nav {
      margin:auto;
      left:-15px;;
-     top: 90px;
+     top: 100px;
      width:100%;
      text-align:center;
   }
@@ -97,7 +97,7 @@ header {
 
 @media only screen and (max-width: 600px) {
   .main-boards #main-container {
-    margin-top: 200px;
+    margin-top: 230px;
   }
 }
 

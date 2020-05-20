@@ -43,6 +43,13 @@
   height: 85px;
 }
 
+@media only screen and (max-width: 600px) {
+    .centered  {
+      width: 240px;
+      margin: 10px;
+  }
+}
+
 /* Used to stop floating */
 .clear {
   float: none;
