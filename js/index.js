@@ -44,11 +44,6 @@ function createTemplateGrid(columns){
          * Har også lagt til en id tag på 'Add task' knappen for å legge til
          * en onclick event. */
 
-      columns[i].textBoxId = `textBoxId${i}`;
-      columns[i].textAreaId = `textAreaId${i}`;
-      columns[i].newTaskId = `newTaskId${i}`;
-
-
         htmlTxt += `
         <div id="col${i}" class="box" ondrop="drop(event)" ondragover="allowDrop(event)">
             <p id="p${i}" class="textbox"><strong>${columns[i].title}</strong></p>
