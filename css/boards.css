@@ -4,8 +4,10 @@
 
 body {
   margin: 0;
-  background-color: #D3E8C2;
+  background-color: #3E463C;
+  opacity:0;
 }
+
 
 header {
     padding-top: 1.5rem;
@@ -66,4 +68,30 @@ ul > li:hover {
 
 #login-a:hover {
   border: 1px solid #e03736;
+}
+
+
+.changeBackgroundColor {
+  animation: loadBackground 3s both;
+}
+
+
+/* Creating animations to use when the page is loading */
+@keyframes loadBackground{
+  0% {
+    background-color: #3E463C;
+    opacity: 0;
+    }
+  25% {
+    opacity: 0;
+  }
+
+  50% {
+    background-color: #D3E8C2;
+    }
+   
+   100% {
+     background-color: #D3E8C2;
+     opacity:1;
+   }
 }

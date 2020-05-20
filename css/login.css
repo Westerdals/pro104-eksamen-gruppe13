@@ -1,6 +1,9 @@
 * {
-    background-color: #3E463C;
     text-align: center;
+}
+
+body {
+        background-color: #3E463C;
 }
 
 
@@ -13,12 +16,7 @@
 #logotext{
  
  width: 17rem;
-<<<<<<< HEAD
  height: 3.3rem;
-=======
- height: 4rem;
-
->>>>>>> 06f429cafb23b30370a9cd63939177e562a11697
 }
 
 .name{
@@ -66,3 +64,18 @@
     padding-bottom: 2px;
 }
 
+
+.loginOpacityAnimation {
+    animation: fadeoutForm 1s both .5s;
+}
+
+.loginFadeOutLogo {
+    animation: fadeoutForm 1s both 1.5s;
+}
+
+
+/* Animation for loging in and going to the next page */
+@keyframes fadeoutForm {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}

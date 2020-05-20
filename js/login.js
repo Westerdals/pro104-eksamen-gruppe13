@@ -32,12 +32,20 @@ function loginUser(event) {
         // User found, check password.
         if (userList[i].password == password) {
           console.log("user authentication successful");
+
+          loginAnimation()
           
           // Check if user has a valid lastBoardId value set.
           /*if (userList[i].lastBoardId > -1) {
             window.location.href = "index.html?" + i;
           } else {*/
-            window.location.href = "boards.html?" + i;
+
+          window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href =  "boards.html?" + i;
+
+    }, 3000);
           //}
         } else {
           console.log("User authentication failed: invalid password");
@@ -70,4 +78,15 @@ function loginUser(event) {
     console.log("User " + name + " added to storage with id " + userList.length);
     subFbDiv.innerHTML = "User created successfully";
   }
+}
+
+
+function loginAnimation() {
+  var loginBody = document.getElementsByTagName("body");
+  var loginForm = document.getElementById("login-form");
+  var loginHeader = document.getElementsByTagName("header");
+
+  loginBody[0].className = "loginAnimation";
+  loginForm.className = "loginOpacityAnimation";
+  loginHeader[0].className = "loginFadeOutLogo";
 }

@@ -45,6 +45,8 @@ window.onload = function() {
       }
     }
   }
+
+  loadAnimation();
   console.log(count + " board elements found");
 };
 
@@ -129,4 +131,12 @@ function createNewBoard(inputIdTag) {
   
   // Redirect to the main page.
   window.location.href = "index.html?" + userId;
+}
+
+
+/* Animations when loading the page */
+function loadAnimation(){
+  var body = document.getElementsByTagName("body");
+
+  body[0].className = "changeBackgroundColor";
 }
