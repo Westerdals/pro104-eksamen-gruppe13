@@ -1,5 +1,6 @@
 var mainBoardContainer = document.getElementById("main-container");
 
+
 var columns = [
   {
     title: "To do",
@@ -25,20 +26,6 @@ var columns = [
 ];
 
 /*
- Trenger denne å stå utenfor løkken i createTemplateGrid() ?
-*/
-// Adds ID to the textboxes
-function setIds(){
-    for (let i = 0; i < columns.length; i++){
-      columns[i].textBoxId = `textBoxId${i}`;
-      columns[i].textAreaId = `textAreaId${i}`;
-      columns[i].newTaskId = `newTaskId${i}`;
-    }
-}
-
-setIds();
-
-/*
  Forslag er at denne funksjonen kalles fra loadBoardData() i index2.js
  Da kan den motta 'columns' variabelen som er lest inn fra local storage.
  
@@ -46,7 +33,7 @@ setIds();
  har kjørt før den får lagt til tasks etc. og createTemplateGrid() er avhengig
  av at loadBoardData() har kjørt for å få tegnet kolonnene fra storage.
  */
-function createTemplateGrid(){ 
+function createTemplateGrid(columns){ 
   var htmlTxt = "";
 
   for (let i = 0; i < columns.length; i++) {
@@ -57,20 +44,25 @@ function createTemplateGrid(){
          * Har også lagt til en id dag på 'Add task' knappen for å legge til
          * en onclick event. */
 
+      columns[i].textBoxId = `textBoxId${i}`;
+      columns[i].textAreaId = `textAreaId${i}`;
+      columns[i].newTaskId = `newTaskId${i}`;
+
+
         htmlTxt += `
         <div class="box">
             <p id="p${i}" class="textbox"><strong>${columns[i].title}</strong></p>
 
-            <div id="${columns[i].newTaskId}">
+            <div id="newTaskId${i}">
 
             </div>
 
-            <div class="main-boards-tasks main-boards-add-task-btn" id="${columns[i].textBoxId}" onclick="showTextbox(this.id)">
+            <div class="main-boards-tasks main-boards-add-task-btn" id="textBoxId${i}" onclick="showTextbox(this.id)">
                 <p>+Add new task..</p>
             </div>
 
             <div class="main-boards-tasks-txt">
-                <textarea id="${columns[i].textAreaId}" onfocusout="hideTextBox(this.id)" autofocus type="textbox" placeholder="Add new task.."></textarea>
+                <textarea id="textAreaId${i}" onfocusout="hideTextBox(this.id)" autofocus type="textbox" placeholder="Add new task.."></textarea>
                 <input id="col${i}-btn" type="button" value="Add task">
             </div>
             
@@ -81,7 +73,7 @@ function createTemplateGrid(){
     }
 
     var newBoard = `
-        <div id="add-new-board" onclick="animationForAddBoard()" onfocusout="outAnimationForAddBoard()">
+        <div id="add-new-board" onclick="animationForAddBoard()">
             <p class="textbox"><strong>Add new board</strong></p>
             <div id="new-board-container">
                 <input type="text" id="add-board-field">
@@ -112,6 +104,8 @@ function addNewBoard(){
   columns.push(colElement);
 
   window.localStorage.setItem("boardList", JSON.stringify(boardList));
+
+  window.location.href = "index.html?" + userId;
 
 }
 function animationForAddBoard(){

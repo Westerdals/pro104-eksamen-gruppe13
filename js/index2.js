@@ -61,6 +61,8 @@ function loadBoardData() {
   const columns    = board.columns;
   const tasks      = board.tasks;
 
+  createTemplateGrid(columns);
+
   // Demonstration on how to extract everything.
   for (let i = 0; i < columns.length; i++) {
     const column = columns[i];
