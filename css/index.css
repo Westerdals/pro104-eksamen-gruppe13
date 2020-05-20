@@ -195,6 +195,72 @@ img{
 }
 
 
+/* Adding new boards */
+#add-new-board {
+    background-color: #A9D97D;
+    margin: .9em;
+    height: 4.2em;
+    border-radius: 10px;
+}
+
+#add-new-board:hover {
+  background-color: #97d161;
+}
+
+.add-new-board-animation {
+  animation: addBoard .2s both, changeDisplay .3s both;
+}
+
+/*
+.add-new-board-animation-reversed {
+  animation: addBoard .2s both reversed, changeDisplay .3s both reversed;
+}*/
+
+#new-board-container {
+    margin: auto;
+    width: 80%;
+    display: none;
+}
+
+#add-board-field {
+    width: 100%;
+    height: 25px;
+    font-size: 16px;
+    outline: none;
+}
+
+#add-board-btn {
+    height: 2rem;
+    width: 6rem;
+    margin-top: 5px;
+    position: relative;
+    left: 132px;
+    outline: none;
+}
+
+/* Animation to add board */
+@keyframes addBoard {
+  from {
+    height: 4.2em;
+    background-color: #97d161;
+  }
+  to {
+    height: 8.4em;
+    background-color: #FFF;
+  }
+}
+
+@keyframes changeDisplay {
+  from {
+    display:none;
+    opacity:0;
+  }
+  to {
+    display: block;
+    opacity:1;
+  }
+}
+
 /*
  * === Task properties window ===
  */

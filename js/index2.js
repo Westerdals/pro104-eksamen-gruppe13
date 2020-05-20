@@ -62,6 +62,8 @@ function loadBoardData() {
   const tasks      = board.tasks;
   const userIds    = board.userIds; //invited members
 
+  createTemplateGrid(columns);
+
   // Demonstration on how to extract everything.
   for (let i = 0; i < columns.length; i++) {
     const column = columns[i];
