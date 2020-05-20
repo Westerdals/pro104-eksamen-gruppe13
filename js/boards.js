@@ -25,20 +25,24 @@ window.onload = function() {
     window.location.href = "login.html"; //redirect to login page*/
   }
   
-  // Loops through all boards that belong to the current user.
+  // Loops through all boards the user is a member of.
   let count = 0;
   for (let i = 0; i < boardList.length; i++) {
     let board = boardList[i];
-    if (board.userIds[0] == userId) {
-      count++;
+    let userIds = board.userIds;
+    for (let j = 0; j < userIds.length; j++) {
+      if (userIds[j] == userId) {
+        count++;
 
-      // Creates and appends a new clickable list element.
-      let li = document.createElement("li");
-      li.className = "rounded";
-      li.innerHTML = board.title;
-      li.onclick = function(){ selectBoard(i, userId); }
-      boardsUl.insertBefore(li, createLi);
-      //boardsUl.appendChild(li);
+        // Creates and appends a new clickable list element.
+        let li = document.createElement("li");
+        li.className = "rounded";
+        li.innerHTML = board.title;
+        li.onclick = function(){ selectBoard(i, userId); }
+        boardsUl.insertBefore(li, createLi);
+        //boardsUl.appendChild(li);
+        continue;
+      }
     }
   }
   console.log(count + " board elements found");
