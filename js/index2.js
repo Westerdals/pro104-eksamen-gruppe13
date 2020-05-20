@@ -380,3 +380,7 @@ function refreshTaskMembers(boardId, taskId) {
   }
 }
 
+/* Need help to save the input to localStorage */
+function saveDateAndTime(){
+
+}

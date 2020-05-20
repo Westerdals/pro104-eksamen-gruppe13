@@ -367,7 +367,7 @@ img{
   border: 0;
   cursor: pointer;
   margin-bottom: 7px;
-  outline:none;
+  outline: none;
   resize: none;
 }
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
