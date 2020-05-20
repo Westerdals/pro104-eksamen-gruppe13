@@ -98,6 +98,7 @@ img{
     padding-top: .99em;
     font-weight: 800;
     position: relative;
+    left: 2em;
 }
 
 
@@ -135,8 +136,7 @@ img{
 /* Adding new tasks */
 .main-boards-add-task-btn {
     background-color: #D9D8D8;
-    border-radius: 10px; 
-    text-align: center;
+    border-radius: 10px;
     cursor: pointer;
 }
 
