@@ -10,26 +10,24 @@ body {
 /* Header  */
 header {
     padding-top: 1.5rem;
-    padding-left: 2.85rem;
+    
 }
 
-img{
+#logo{
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
+  margin-left: 2.5rem;
+  height: 100px;
 }
 
+#logotext{
+  width: 100px;
+}
 
 /* Navigation */
 .main-nav {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
-    
+  
 }
-
 
 .main-nav li {
     display: inline-block;

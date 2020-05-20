@@ -1,0 +1,39 @@
+* {
+    background-color: #3E463C;
+    text-align: center;
+}
+
+
+
+#logo{
+ width: 15rem;
+ height: 15rem;
+}
+
+#logotext{
+ width: 17rem;
+ height: 4rem;
+}
+
+.name{
+ color: #8C9989;
+ margin-top: .6rem;
+}
+
+.input{
+   color: #8C9989;
+   margin-top: .2rem; 
+}
+
+.button input{
+    color: #8C9989;
+}
+
+.button{
+    margin-top: .6rem;
+}
+
+.feedback{
+    margin-top: .4rem;
+}
+
