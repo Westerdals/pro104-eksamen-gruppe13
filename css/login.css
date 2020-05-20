@@ -11,16 +11,24 @@
 }
 
 #logotext{
+ 
  width: 17rem;
  height: 4rem;
+
 }
 
 .name{
+    
+ 
  color: #8C9989;
  margin-top: .6rem;
+    
 }
 
+
 .input placeholder{
+    
+
    color: #8C9989;
    margin-top: .2rem; 
    border: 2px solid black;
@@ -28,15 +36,19 @@
 }
 
 .button input{
+    
+
     color: #8C9989;
 }
 
 .button{
+
     margin-top: .6rem;
   
 }
 
 .feedback{
+    
     margin-top: .4rem;
 }
 
