@@ -36,17 +36,25 @@ header {
 /* Navigation */
 .main-nav {
     display: block;
+    position: absolute;
+    top: 45px;
+    width:80%;
+    left: 100px;
 }
 
 @media only screen and (max-width: 600px) {
   .main-nav {
      margin:auto;
+     left:-15px;;
+     top: 90px;
+     width:100%;
+     text-align:center;
   }
 }
 
 .main-nav li {
     display: inline-block;
-    padding: .2em .2em 2rem;
+    padding: .2em .2em 1.1rem;
 }
 
 /* Bigger spacing for bigger fingers */
@@ -78,12 +86,19 @@ header {
 /* Grid for to do boards */
 .main-boards #main-container {
     margin-left: 2em;
+    margin-top: 2em;
     max-width 70em;
     width: 90%;
     display: grid;
     grid-template-columns: repeat( auto-fit, minmax(250px, 315px) );
     height: 80vh;
     float: left;
+}
+
+@media only screen and (max-width: 600px) {
+  .main-boards #main-container {
+    margin-top: 200px;
+  }
 }
 
 .main-grids #main-container div{
