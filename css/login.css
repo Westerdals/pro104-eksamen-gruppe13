@@ -29,14 +29,8 @@
     
 }
 
-<<<<<<< HEAD
-.input{
-=======
-
 .input placeholder{
     
-
->>>>>>> 06f429cafb23b30370a9cd63939177e562a11697
    color: #8C9989;
    margin-top: .2rem; 
 
@@ -63,5 +57,12 @@
 .feedback{
     
     margin-top: .4rem;
+}
+
+.sign-in-btn {
+    outline: 0;
+    border-radius: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
