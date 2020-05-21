@@ -351,9 +351,9 @@ header {
 /* Sub grid container (mobile view) */
 @media screen and (max-width: 550px) {
   #tp-win {
-    padding: 2px;
+    padding: 10px;
     grid-template-columns: 24px 1fr 1fr;
-    grid-template-rows: 20px 18px 18px 40px 20px 70px;
+    grid-template-rows: 20px 18px 18px 40px 30px 90px;
     grid-template-areas:
       "title-icon title      title"
       "title-sub  title-sub  title-sub"
@@ -369,7 +369,10 @@ header {
 
 #tp-title-icon {
   grid-area: title-icon;
-  background-color: lightgrey;
+  /* To move transparent background */
+  mix-blend-mode: multiply;
+  width: 18px;
+
 }
 #tp-title {
   grid-area: title;
@@ -392,8 +395,11 @@ header {
 }
 #tp-desc-icon {
   grid-area: desc-icon;
-  background-color: lightgrey;
+  position: relative;
+  width:18px;
 }
+
+
 #tp-desc-title {
   grid-area: desc-title;
   color: #334622;

@@ -91,8 +91,10 @@
 
       <!-- This is the visible window -->
       <div id="tp-win" class="rounded" onclick="closeDescInput(event)">
-
-        <div id="tp-title-icon">icon</div> <!-- Title icon -->
+        
+        <div>
+          <img src="img/checkbox.png" id="tp-title-icon" alt="Title icon">
+        </div>    <!-- Title icon -->
         <div id="tp-title"></div>         <!-- Title text -->
         <div id="tp-title-sub"></div>     <!-- Text below title -->
 
@@ -118,7 +120,9 @@
 
         <div id="tp-mem-list"></div>
 
-        <div id="tp-desc-icon">icon</div>            <!-- Description icon -->
+        <div>
+            <img src="img/pen.png" id="tp-desc-icon" alt="Description icon">
+        </div>            <!-- Description icon -->
         <div id="tp-desc-title">Description</div>    <!-- Description title -->
         <div id="tp-desc-in-wrap">
           <textarea id="tp-desc-input" class="color rounded" placeholder="Add a more detailed text..." onclick="triggerDescInput()"></textarea> <!-- Description input -->

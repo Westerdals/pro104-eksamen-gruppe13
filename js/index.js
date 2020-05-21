@@ -37,12 +37,6 @@ function createTemplateGrid(columns){
   var htmlTxt = "";
   
   for (let i = 0; i < columns.length; i++) {
-        
-        /* Har startet å flette sammen koden her. La til en id på p tagen
-         * rett under slik at jeg får lagt til task elementer på riktig sted.
-         * Selve task elementene genereres i index2.js linje 75.
-         * Har også lagt til en id tag på 'Add task' knappen for å legge til
-         * en onclick event. */
 
         htmlTxt += `
         <div id="col${i}" class="box" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -144,6 +138,7 @@ function addNewBoard(){
   window.location.href = "index.html?" + userId;
 
 }
+
 function animationForAddBoard(){
   let animateBoard = document.getElementById("add-new-board");
   animateBoard.className = "add-new-board-animation";
@@ -152,11 +147,6 @@ function animationForAddBoard(){
   createNewBoardContainer.style.display = 'block';
 }
 
-/*
-function outAnimationForAddBoard() {
-  let animateBoard = document.getElementById("add-new-board");
-  animateBoard.className = "add-new-board-animation-reversed";
-}*/
 
 // Function to show textfield and hide button
 function showTextbox(clickedId) {
