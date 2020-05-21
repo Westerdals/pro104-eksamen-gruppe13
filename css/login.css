@@ -67,6 +67,10 @@ body {
     margin-top: .4rem;
 }
 
+.feedback-color {
+  color: #FFF;
+}
+
 .sign-in-btn {
     outline: 0;
     border-radius: 10px;
