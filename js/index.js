@@ -72,7 +72,7 @@ function createTemplateGrid(columns){
             <p class="textbox"><strong>Add new board</strong></p>
             <div id="new-board-container">
                 <input type="text" id="add-board-field">
-                <input type="button" value="Add board" id="add-board-btn" onclick="addNewBoard()">
+                <input type="button" value="Add board" id="add-board-btn" onclick="addNewBoard()" alt="Add new board">
             </div>
         </div>
     `;
