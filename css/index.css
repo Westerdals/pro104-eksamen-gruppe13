@@ -395,7 +395,6 @@ header {
 }
 #tp-desc-icon {
   grid-area: desc-icon;
-  position: relative;
   width:18px;
 }
 
