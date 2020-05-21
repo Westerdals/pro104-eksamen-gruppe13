@@ -327,7 +327,6 @@ function triggerDescInput() {
 
 function closeDescInput(ev) {
   if (typeof ev === "undefined" || ev.target.id != "tp-desc-input") {
-    
     // Revert elements.
     const inputDiv = document.getElementById("tp-desc-input");
     const saveDiv = document.getElementById("tp-desc-btn");
