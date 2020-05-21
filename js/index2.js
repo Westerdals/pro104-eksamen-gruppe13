@@ -1,11 +1,14 @@
 function setLinkParams() {
-  let boardA   = document.getElementById("board-a");
-  let ideasA   = document.getElementById("ideas-a");
-  let membersA = document.getElementById("members-a");
-  const userId = getUserId();
+  let boardA     = document.getElementById("board-a");
+  let boardLogo  = document.getElementById("board-logo");
+
+  let ideasA     = document.getElementById("ideas-a");
+  let membersA   = document.getElementById("members-a");
+  const userId   = getUserId();
   
-  boardA.href   = boardA.href   + "?"  + userId;
-  membersA.href = membersA.href + "?"  + userId;
+  boardA.href    = boardA.href   + "?"  + userId;
+  boardLogo.href = boardLogo.href + "?" + userId;
+  membersA.href  = membersA.href + "?"  + userId;
 }
 
 function loadBoardData() {
