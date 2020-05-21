@@ -268,11 +268,15 @@ header {
 
 #add-board-btn {
     height: 2rem;
-    width: 6rem;
     margin-top: 5px;
     position: relative;
-    left: 132px;
+    left: 115px;
     outline: none;
+    width:7rem;
+    font-size: 14px;
+    font-weight:700;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 #container-to-get-enough-space {
