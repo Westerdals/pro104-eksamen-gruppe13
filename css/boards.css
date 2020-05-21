@@ -63,18 +63,36 @@ ul > li:hover {
   left: 50%;
   transform: translate(-50%, 0);
   width: 300px;
+  text-align: center;
 }
 
 #new-board-upper-part {
-  height: 70px;
+  height: 130px;
   padding: 9px 0 0 7px; /* top, right, bottom, left */
   background-color: #777;
+}
+
+#new-board-upper-part * {
+  position: relative;
+  top: -20px;
 }
 
 #new-board-lower-part {
   padding: 6px 0; /* top&bottom, left/right */
 }
 
+#new-board-lower-part input {
+  position:relative;
+  top: -40px;
+  transition: all .5s ease-in;
+}
+
+#new-board-lower-part input:hover {
+  background-color: #A9D97D;
+  color: #FFF;
+}
+
+/* Animation to set to body in onLoad function */
 .changeBackgroundColor {
   animation: loadBackground 3s both;
 }
