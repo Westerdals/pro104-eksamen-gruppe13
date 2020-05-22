@@ -235,6 +235,24 @@ header {
   background-color: #a9d97d;
 }
 
+/* Container for displaying projectname */
+#name-of-project {
+  width:80%;
+  height:3em;
+  margin:2em 2em .5em;
+}
+
+#name-of-project h2 {
+  font-size: 40px;
+  text-align: center;
+}
+
+@media screen and (max-width: 550px){
+  #name-of-project {
+    position: relative;
+    top: 190px;
+  }
+}
 
 /* Adding new boards */
 #add-new-board {

@@ -58,6 +58,11 @@ function loadBoardData() {
   const boardId = userList[userId].lastBoardId;
   const board = boardList[boardId];
 
+  /* Displaying what project youre on */
+  const displayProjectName = document.getElementById("name-of-project");
+  const displayH3Tag = displayProjectName.firstElementChild;
+  displayH3Tag.innerHTML = board.title;
+
   // Board, column and task data.
   const boardTitle = board.title;
   const columns    = board.columns;
@@ -459,6 +464,14 @@ window.addEventListener("load", function() {
     dateInput.value = formattedDate;
     date = formattedDate;
 });
+
+
+/* Function to show which project youre currently inside */
+function showProjectName(){
+
+   
+
+}
 
 /* Alternative method of setting todays date and time */
 /*window.addEventListener("load", function() {
