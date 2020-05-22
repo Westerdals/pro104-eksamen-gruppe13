@@ -98,7 +98,11 @@
         <div id="tp-title"></div>         <!-- Title text -->
         <div id="tp-title-sub"></div>     <!-- Text below title -->
 
-        <div id="tp-mem-title">Members & Deadline</div>
+        <div id="tp-mem-title">Members</div>
+        <div id="tp-mem-view"></div>
+        
+        <div id="tp-date-title">Deadline</div>
+        <div id="tp-date-view"></div>
         
          <!-- Menu on the right side -->
         <div id="tp-menu-wrap">
@@ -107,18 +111,33 @@
           <div id="m-add" class="opt">Add</div>
 
           <!-- Lag en onclick for dato lik som joinTask()^^ -->
-          <div id="m-deadline" class="opt">Deadline</div>
+          <div id="m-deadline" class="opt" onclick="showDateWin()">Deadline</div>
 
-                <div id="set-date">
-                    <input type="datetime-local">
+                  <div id="date-overlay" class="overlay transparent hidden"></div>
+                  <div id="date-frame" class="overlay hidden">
+                    <div id="date-container">
+                      <div id="date-air-top" onclick="hideDateWin()"></div>
+                      <div id="date-air-left" onclick="hideDateWin()"></div>
+
+                      <div id="date-win" class="rounded">
+                        <div id="date-title">Change deadline</div>
+                        <div id="date-close" class="selectable" onclick="hideDateWin()">X</div>  
+                        <input id="date-input" type="datetime-local" oninput="dateChange(event)">
+                        <div id="date-save" class="selectable" onclick="saveDate()">Save</div>
+                        <div id="date-remove" class="selectable" onclick="removeDate()">Remove</div>
+                    </div>
+
+                    <div id="date-air-right" onclick="hideDateWin()"></div>
+                    <div id="date-air-bot" onclick="hideDateWin()"></div>
+                  </div>
                 </div>
-
 
           <div id="m-move" class="opt">Move</div>
           <div id="m-delete" class="opt">Delete</div>
         </div>
 
-        <div id="tp-mem-list"></div>
+        <div id="tp-mem-view"></div>
+        <div id="tp-date-view"></div>
 
         <div id="tp-desc-icon">
             <img src="img/pen.png" id="tp-desc-icon" alt="Description icon">

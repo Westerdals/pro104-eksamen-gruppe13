@@ -275,6 +275,7 @@ function showTaskPropDiv(boardId, taskId, colId) {
   let frameDiv      = document.getElementById("tp-frame");
   const titleDiv    = document.getElementById("tp-title");
   const titleSubDiv = document.getElementById("tp-title-sub");
+  const dateDiv     = document.getElementById("tp-date-view");
   const descInput   = document.getElementById("tp-desc-input");
   let joinDiv       = document.getElementById("m-join");
 
@@ -285,6 +286,7 @@ function showTaskPropDiv(boardId, taskId, colId) {
   frameDiv.setAttribute("taskId", taskId); //store for later use
   titleDiv.innerHTML    = task.title;
   titleSubDiv.innerHTML = "in column " + boardList[boardId].columns[colId].title;
+  dateDiv.innerHTML     = task.deadline;
   descInput.value       = task.description;
 
   refreshTaskMembers(boardId, taskId);
@@ -295,6 +297,15 @@ function showTaskPropDiv(boardId, taskId, colId) {
   } else {
     joinDiv.style.display = "block";
   }
+
+  /* TODO: fix this part. Supposed to set the currently selected date to the one
+  loaded from storage (if it exists). */
+  /*if (typeof task.deadline === 'undefined' || task.deadline === null) {
+    console.log("No previously deadline set.");
+  } else {
+    console.log("A deadline has been set.");
+    date = task.deadline;
+  }*/
 
   overlayDiv.style.display = "block";
   frameDiv.style.display   = "block";
@@ -307,7 +318,6 @@ function handleKeyPressFromProp(ev) {
   if (ev.keyCode == 27) {
       console.log("escape key from Properties window");
       hideTaskPropDiv();
-      document.removeEventListener('keydown', handleKeyPressFromProp);
   }
 }
 
@@ -315,6 +325,7 @@ function hideTaskPropDiv(ev) {
   closeDescInput(); //close description input
   document.getElementById("tp-overlay").style.display = "none";
   document.getElementById("tp-frame").style.display   = "none";
+  document.getElementById("tp-date-view").innerHTML = "";
   document.removeEventListener('keydown', handleKeyPressFromProp);
 }
 
@@ -363,7 +374,7 @@ function joinTask() {
 }
 
 function refreshTaskMembers(boardId, taskId) {
-  let membersDiv = document.getElementById("tp-mem-list");
+  let membersDiv = document.getElementById("tp-mem-view");
 
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
   userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
@@ -381,7 +392,91 @@ function refreshTaskMembers(boardId, taskId) {
   }
 }
 
-/* Need help to save the input to localStorage */
-function saveDateAndTime(){
-
+function showDateWin() {
+  const overlayDiv = document.getElementById("date-overlay");
+  const dateFrame = document.getElementById("date-frame");
+  const dateDiv = document.getElementById("tp-date-view");
+  overlayDiv.style.display = "block";
+  dateFrame.style.display = "block";
+  document.removeEventListener('keydown', handleKeyPressFromProp);
+  document.addEventListener('keydown', handleKeyPressFromDate);
 }
+
+function handleKeyPressFromDate(ev) {
+  ev = ev || window.event;
+  if (ev.keyCode == 27) {
+      console.log("escape key from Deadline window");
+      hideDateDiv();
+  }
+}
+
+function hideDateWin() {
+  const overlayDiv = document.getElementById("date-overlay");
+  const dateFrame = document.getElementById("date-frame");
+  overlayDiv.style.display = "none";
+  dateFrame.style.display = "none";
+  document.removeEventListener('keydown', handleKeyPressFromDate);
+  document.addEventListener('keydown', handleKeyPressFromProp);
+}
+
+var date;
+
+function saveDate(event) {
+  const dateDiv = document.getElementById("tp-date-view");
+  dateDiv.innerHTML = date;
+
+  // Save input data in storage.
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
+  const userId     = getUserId();
+  const boardId    = userList[userId].lastBoardId;
+  const frameDiv   = document.getElementById("tp-frame");
+  const taskId     = frameDiv.getAttribute("taskId");
+  let task         = boardList[boardId].tasks[taskId];
+  task.deadline    = date;
+  window.localStorage.setItem("boardList", JSON.stringify(boardList));
+
+  hideDateWin();
+}
+
+function removeDate() {
+  hideDateWin();
+}
+
+/* Fired whenever the user changes a value in datetime-local.
+   Only fires if all values are set (hence why we fill it in advance). */
+function dateChange(ev) {
+  date = ev.target.value;
+}
+
+/* Sets todays date and time */
+window.addEventListener("load", function() {
+    var now = new Date();
+    var offset = now.getTimezoneOffset() * 60000;
+    var adjustedDate = new Date(now.getTime() - offset);
+    var formattedDate = adjustedDate.toISOString().substring(0,16); // For minute precision
+    var dateInput = document.getElementById("date-input");
+    dateInput.value = formattedDate;
+    date = formattedDate;
+});
+
+/* Alternative method of setting todays date and time */
+/*window.addEventListener("load", function() {
+    var now = new Date();
+    var utcString = now.toISOString().substring(0,19);
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var day = now.getDate();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    var localDatetime = year + "-" +
+                      (month < 10 ? "0" + month.toString() : month) + "-" +
+                      (day < 10 ? "0" + day.toString() : day) + "T" +
+                      (hour < 10 ? "0" + hour.toString() : hour) + ":" +
+                      (minute < 10 ? "0" + minute.toString() : minute) +
+                      utcString.substring(16,19);
+    var dateInput = document.getElementById("date-input");
+    dateInput.value = localDatetime;
+    date = formattedDate;
+});*/
