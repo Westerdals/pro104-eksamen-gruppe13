@@ -337,18 +337,18 @@ header {
   grid-area: win;
   display: grid;
   padding: calc(1vw);
-  grid-template-columns: 24px minmax(200px, auto) 210px;
-  grid-template-rows: 20px 18px 18px 40px 20px minmax(70px, auto) 60px;
+  grid-template-columns: 24px auto minmax(180px, 606px) 130px; /* 686 = 760-24-130*/
+  grid-template-rows: 20px 30px 18px 55px 20px minmax(70px, auto) 60px;
   grid-template-areas:
-    "title-icon title        title"
-    ".          title-sub    ."
-    ".          mem-title    menu"
-    ".          mem-list     menu"
-    "desc-icon  desc-title   menu"
-    "        .  desc-in-wrap menu"
-    "        .  .            menu";
+    "title-icon title        title        title"
+    ".          title-sub    title-sub    title-sub"
+    ".          mem-title    date-title   menu"
+    ".          mem-view     date-view    menu"
+    "desc-icon  desc-title   desc-title   menu"
+    "        .  desc-in-wrap desc-in-wrap menu"
+    "        .  .            .            menu";
   column-gap: calc(1vw * 1.5);
-  row-gap: calc(1vw * 1.5);
+  row-gap: calc(1vw * 1);
   background-color: #98bb81;
 }
 
@@ -359,13 +359,15 @@ header {
     grid-template-columns: 24px 1fr 1fr;
     grid-template-rows: 20px 18px 18px 40px 30px 90px;
     grid-template-areas:
-      "title-icon title      title"
-      "title-sub  title-sub  title-sub"
-      "mem-title  mem-title  mem-title"
-      "mem-list   mem-list   mem-list"
-      "desc-icon  desc-title desc-title"
+      "title-icon   title        title"
+      "title-sub    title-sub    title-sub"
+      "mem-title    mem-title     mem-title"
+      "mem-view    mem-view    mem-view"
+      "date-title    date-title     date-title"
+      "date-view    date-view    date-view"
+      "desc-icon    desc-title   desc-title"
       "desc-in-wrap desc-in-wrap desc-in-wrap"
-      "menu       menu       menu";
+      "menu         menu         menu";
     column-gap: 2px;
     row-gap: 7px;
   }
@@ -386,23 +388,31 @@ header {
   grid-area: title-sub;
   color: #334622
 }
+
 #tp-mem-title {
   grid-area: mem-title;
   color: #334622
 }
-#tp-mem-list {
-  grid-area: mem-list;
+#tp-date-title {
+  grid-area: date-title;
+  color: #334622
 }
+#tp-mem-view {
+  grid-area: mem-view;
+}
+#tp-date-view {
+  grid-area: date-view
+}
+
 #tp-menu-wrap {
   grid-area: menu;
   color: #334622
 }
+
 #tp-desc-icon {
   grid-area: desc-icon;
   width:18px;
 }
-
-
 #tp-desc-title {
   grid-area: desc-title;
   color: #334622;
@@ -486,4 +496,44 @@ header {
 
 #set-date input:hover {
   background-color: #a9d97d;
+}
+
+#date-container {
+  display: grid;
+  grid-template-columns: 1fr 200px 1fr;
+  grid-template-rows: 30px 200px 20000px; /* last value should be 100%, but it doesn't stretch down like with #tp-container for some reason. */
+  grid-template-areas: 
+    "date-air-top  date-air-top date-air-top"
+    "date-air-left date-win     date-air-right"
+    "date-air-bot  date-air-bot date-air-bot";
+}
+
+#date-win {
+  position: relative; /* for placing save and remove buttons at the bottom. */
+  grid-area: date-win;
+  padding: 4px;
+  background-color: #98bb81;
+}
+
+/* Defined in order to capture onclick (to hide date window) */
+#date-air-top   {grid-area: date-air-top;  }
+#date-air-left  {grid-area: date-air-left; }
+#date-air-right {grid-area: date-air-right;}
+#date-air-bot   {grid-area: date-air-bot;  }
+
+#date-title {
+  display: inline-block;
+}
+#date-close {
+  float: right;
+}
+
+#date-save {
+  position: absolute;
+  bottom: 5px;
+}
+#date-remove {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
 }
