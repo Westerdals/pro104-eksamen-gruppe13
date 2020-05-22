@@ -50,7 +50,7 @@ function getDefaultTasks() {
 }
 
 function isAlphaNumeric(str) { 
-  var pattern = /^[0-9a-zA-Z]+$/; // TODO: make space, bindestrek eligible 2nd character
+  var pattern = /^[a-zA-Z][0-9a-zA-Z -]+$/;
   return str.match(pattern);
 }
 
@@ -59,7 +59,7 @@ function invFormAl(str, minLength, isAlphaNum, name) {
     alert(name + " length must be at least " + minLength);
     return true;
   } else if (isAlphaNum && !isAlphaNumeric(str)) {
-    alert(name + " can only contain letters and numbers");
+    alert(name + " can only contain letters, numbers and not start with space or dash");
     return true;
   }
   return false;
@@ -70,11 +70,12 @@ function invFormFb(str, minLength, isAlphaNum, name, fbDiv) {
     fbDiv.innerHTML = name + " length must be at least " + minLength;
     return true;
   } else if (isAlphaNum && !isAlphaNumeric(str)) {
-    fbDiv.innerHTML = name + " can only contain letters and numbers";
+    fbDiv.innerHTML = name + " can only contain letters, numbers and not start with space or dash";
     return true;
-  }
+  } 
   return false;
 }
+
 
 function getUniqueListId(listName) {
 
