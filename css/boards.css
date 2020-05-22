@@ -92,6 +92,10 @@ ul > li:hover {
   color: #FFF;
 }
 
+#new-board-overlay {
+  position: fixed;
+}
+
 /* Animation to set to body in onLoad function */
 .changeBackgroundColor {
   animation: loadBackground 3s both;

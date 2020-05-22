@@ -140,7 +140,7 @@ header {
     padding-top: .99em;
     font-weight: 800;
     position: relative;
-    left: 2em;
+    left: 1.3em;
 }
 
 
@@ -283,6 +283,7 @@ header {
     font-size: 16px;
     outline: none;
     border: .1px solid grey;
+    padding-left: 5px;
 }
 
 #add-board-btn {
