@@ -141,19 +141,19 @@ function refreshMembersInNav(userId, boardId) {
 
 function showInviteMenu() {
   let overlayDiv = document.getElementById("inv-overlay");
-  let frameDiv = document.getElementById("inv-frame");
-  let inviteDiv = document.getElementById("inv-container");
+  let frameDiv   = document.getElementById("inv-frame");
+  let inviteDiv  = document.getElementById("inv-container");
   const inviteLi = document.getElementById("inv-li");
   let membersDiv = document.getElementById("inv-list");
   
   // Make list visible.
   overlayDiv.style.display = "block";
-  frameDiv.style.display = "block";
+  frameDiv.style.display   = "block";
 
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
   userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
-  const userId = getUserId();
-  const boardId = userList[userId].lastBoardId;
+  const userId    = getUserId();
+  const boardId   = userList[userId].lastBoardId;
   const memberIds = boardList[boardId].userIds; //users already invited
   membersDiv.textContent = "";
 
@@ -197,17 +197,17 @@ function addMemberToBoard(userId, memberId, boardId, memberDiv) {
 function handleKeyPressFromInv(ev) {
   ev = ev || window.event;
   if (ev.keyCode == 27) {
-      console.log("escape key from Invite menu");
-      hideInviteMenu();
-      document.removeEventListener('keydown', handleKeyPressFromInv);
+    console.log("escape key from Invite menu");
+    hideInviteMenu();
+    document.removeEventListener('keydown', handleKeyPressFromInv);
   }
 }
 
 function hideInviteMenu() {
   let overlayDiv = document.getElementById("inv-overlay");
-  let frameDiv = document.getElementById("inv-frame");
+  let frameDiv   = document.getElementById("inv-frame");
   overlayDiv.style.display = "none";
-  frameDiv.style.display = "none";
+  frameDiv.style.display   = "none";
   document.removeEventListener('keydown', handleKeyPressFromInv);
 }
 
@@ -285,7 +285,7 @@ function showTaskPropDiv(boardId, taskId, colId) {
   let joinDiv       = document.getElementById("m-join");
 
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
-  const task = boardList[boardId].tasks[taskId];
+  const task   = boardList[boardId].tasks[taskId];
   const userId = getUserId();
 
   frameDiv.setAttribute("taskId", taskId); //store for later use
@@ -321,8 +321,8 @@ function showTaskPropDiv(boardId, taskId, colId) {
 function handleKeyPressFromProp(ev) {
   ev = ev || window.event;
   if (ev.keyCode == 27) {
-      console.log("escape key from Properties window");
-      hideTaskPropDiv();
+    console.log("escape key from Properties window");
+    hideTaskPropDiv();
   }
 }
 
@@ -336,7 +336,7 @@ function hideTaskPropDiv(ev) {
 
 function triggerDescInput() {
   const inputDiv = document.getElementById("tp-desc-input");
-  const saveDiv = document.getElementById("tp-desc-btn");
+  const saveDiv  = document.getElementById("tp-desc-btn");
   inputDiv.style.backgroundColor = "#a9d97d";
   saveDiv.style.display = "table-cell";
 }
@@ -388,6 +388,7 @@ function refreshTaskMembers(boardId, taskId) {
   for (let i = 0; i < memberIds.length; i++) {
     const memberId = memberIds[i];
     const memberName = userList[memberId].name;
+    console.log("readding member " + memberName);
 
     let memberDiv = document.createElement("div");
     memberDiv.className = "member greycircle";
@@ -397,10 +398,113 @@ function refreshTaskMembers(boardId, taskId) {
   }
 }
 
+/* Show add member to task window. Sub-window of task properties. */
+function showAddWin() {
+  const overlayDiv = document.getElementById("add-overlay");
+  const frameDiv   = document.getElementById("add-frame");
+  let membersDiv   = document.getElementById("mem-list");
+  overlayDiv.style.display = "block";
+  frameDiv.style.display   = "block";
+  document.removeEventListener('keydown', handleKeyPressFromProp);
+  document.addEventListener('keydown', handleKeyPressFromAdd);
+
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
+  const userId    = getUserId();
+  const boardId   = userList[userId].lastBoardId;
+  const memberIds = boardList[boardId].userIds; //get board members
+  const taskId    = document.getElementById("tp-frame").getAttribute("taskId");
+  //console.log(taskId);
+  const taskMemberIds = boardList[boardId].tasks[taskId].memberIds;
+  membersDiv.textContent = "";
+
+  for (let i = 0; i < userList.length; i++) {
+    
+    // Check if user is a board member.
+    let isMember = false;
+    for (let j = 0; j < memberIds.length; j++) {
+      const mId = Number(memberIds[j]);
+      if (mId == i) { //is a member
+        isMember = true;
+        break;
+      }
+    }
+    if (!isMember) continue; //skip if not a member
+
+    // Check if a member is already assigned to the task.
+    let isAdded = false;
+    for (let j = 0; j < taskMemberIds.length; j++) {
+      const tmId = Number(taskMemberIds[j]);
+      if (tmId == i) { //is added
+        isAdded = true;
+        break;
+      }
+    }
+
+    let memberDiv = document.createElement("div");
+    memberDiv.className = "memberListName";
+    memberDiv.innerHTML = userList[i].name;
+    if (isAdded) {
+      memberDiv.innerHTML += " (added)";
+      memberDiv.onclick = function() {remMemberFromTask(userId, i, boardId, memberDiv, taskId)};
+    } else {
+      memberDiv.onclick = function() {addMemberToTask(userId, i, boardId, memberDiv, taskId)};
+    }
+
+    membersDiv.appendChild(memberDiv);
+  }
+
+}
+
+function addMemberToTask(userId, memberId, boardId, memberDiv, taskId) {
+  console.log("Adding user " + memberId + " to task " + taskId + " of user " + userId);
+
+  // Mark member as added in the add member window.
+  memberDiv.innerHTML += " (added)";
+
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  boardList[userId].tasks[taskId].memberIds.push(memberId);
+  window.localStorage.setItem("boardList", JSON.stringify(boardList));
+
+  refreshTaskMembers(boardId, taskId);
+}
+
+function remMemberFromTask(userId, memberId, boardId, memberDiv, taskId) {
+  console.log("Removing user " + memberId + " from task " + taskId + " of user " + userId);
+
+  // Mark member as available in the add member window.
+  const str = memberDiv.innerHTML;
+  memberDiv.innerHTML = str.substring(str.length - 8, str-length);
+
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  boardList[userId].tasks[taskId].memberIds.splice(memberId, 1);
+  window.localStorage.setItem("boardList", JSON.stringify(boardList));
+
+  refreshTaskMembers(boardId, taskId);
+}
+
+function handleKeyPressFromAdd(ev) {
+  ev = ev || window.event;
+  if (ev.keyCode == 27) {
+      console.log("escape key from Add members window");
+      hideAddWin();
+  }
+}
+
+function hideAddWin() {
+  const overlayDiv = document.getElementById("add-overlay");
+  const frameDiv = document.getElementById("add-frame");
+  overlayDiv.style.display = "none";
+  frameDiv.style.display = "none";
+  document.removeEventListener('keydown', handleKeyPressFromAdd);
+  document.addEventListener('keydown', handleKeyPressFromProp);
+}
+
+/* Show select date window. Sub-window of task properties. */
 function showDateWin() {
   const overlayDiv = document.getElementById("date-overlay");
   const dateFrame = document.getElementById("date-frame");
-  const dateDiv = document.getElementById("tp-date-view");
+  //const dateDiv = document.getElementById("tp-date-view");
   overlayDiv.style.display = "block";
   dateFrame.style.display = "block";
   document.removeEventListener('keydown', handleKeyPressFromProp);
@@ -424,7 +528,7 @@ function hideDateWin() {
   document.addEventListener('keydown', handleKeyPressFromProp);
 }
 
-var date;
+var date; // Global used by functions related to displaying and changing deadline date.
 
 function saveDate(event) {
   const dateDiv = document.getElementById("tp-date-view");
@@ -445,6 +549,7 @@ function saveDate(event) {
 }
 
 function removeDate() {
+  // TODO: Add logic that removes the deadline....
   hideDateWin();
 }
 
@@ -456,13 +561,13 @@ function dateChange(ev) {
 
 /* Sets todays date and time */
 window.addEventListener("load", function() {
-    var now = new Date();
-    var offset = now.getTimezoneOffset() * 60000;
-    var adjustedDate = new Date(now.getTime() - offset);
-    var formattedDate = adjustedDate.toISOString().substring(0,16); // For minute precision
-    var dateInput = document.getElementById("date-input");
-    dateInput.value = formattedDate;
-    date = formattedDate;
+  var now = new Date();
+  var offset = now.getTimezoneOffset() * 60000;
+  var adjustedDate = new Date(now.getTime() - offset);
+  var formattedDate = adjustedDate.toISOString().substring(0,16); // For minute precision
+  var dateInput = document.getElementById("date-input");
+  dateInput.value = formattedDate;
+  date = formattedDate;
 });
 
 

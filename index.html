@@ -107,7 +107,7 @@
         <div id="tp-menu-wrap">
           <div>Menu</div>
           <div id="m-join" class="opt" onclick="joinTask()">Join</div>
-          <div id="m-add" class="opt" onclick="addToTask()">Add</div>
+          <div id="m-add" class="opt" onclick="showAddWin()">Add members</div>
           <div id="m-deadline" class="opt" onclick="showDateWin()">Deadline</div>
           <div id="m-move" class="opt">Move</div>
           <div id="m-delete" class="opt">Delete</div>
@@ -133,7 +133,32 @@
     </div>
   </div>
 
-  <!-- Select date window. Location independent and hidden by default. -->
+  <!-- Add member(s) to task window. Location independent and hidden by default.
+       Accessed through the task propertie window. -->
+  <div id="add-overlay" class="overlay transparent hidden"></div>
+  <div id="add-frame" class="overlay hidden">
+
+    <div id="add-container"> <!-- grid container -->
+  
+      <div id="add-air-top" onclick="hideAddWin()"></div>
+      <div id="add-air-left" onclick="hideAddWin()"></div>
+
+      <!-- Visible window -->
+      <div id="add-win" class="rounded">
+        <div id="add-title">Add members to task</div>
+        <div id="add-close" class="selectable" onclick="hideAddWin()">X</div>
+        <div id="mem-list"></div>
+      </div>
+
+      <div id="add-air-right" onclick="hideAddWin()"></div>
+      <div id="add-air-bot" onclick="hideAddWin()"></div>
+  
+    </div>
+
+  </div>
+
+  <!-- Select date window. Location independent and hidden by default.
+       Accessed through the task properties window. -->
   <div id="date-overlay" class="overlay transparent hidden"></div>
   <div id="date-frame" class="overlay hidden">
 
@@ -156,7 +181,7 @@
   
     </div>
   </div>
-  
+
 </section>	
 
 <script type="text/javascript" src="js/index.js"></script>
