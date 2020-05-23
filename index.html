@@ -25,7 +25,7 @@
 
   <!-- Linking to boards.html -->
   <a id="board-logo" href="boards.html">
-    <img src="favicon.ico" id="logo" alt="Jadeboard logo">
+    <img src="favicon.ico" id="logo" alt="Jadeboard logo" tabindex="0">
   </a>
 
   <!-- Sign out -->
@@ -37,12 +37,12 @@
 
   <!-- Navigation -->
   <ul id="main-nav" class="main-nav">
-    <li><a id="board-a" href="boards.html" tabindex="2">Boards</a></li>
+    <li><a id="board-a" href="boards.html" tabindex="1">Boards</a></li>
  
-    <li><a href="#">View my tasks</a></li>
+    <li><a href="#" tabindex="2">View my tasks</a></li>
 
     <li id="inv-li"></li>
-    <li><div id="inv-btn" class="color" onclick="showInviteMenu()">Invite</div></li>
+    <li><div id="inv-btn" class="color" onclick="showInviteMenu()" tabindex="3">Invite</div></li>
     
   </ul>
 
