@@ -381,9 +381,9 @@ header {
     grid-template-areas:
       "title-icon   title        title"
       "title-sub    title-sub    title-sub"
-      "mem-title    mem-title     mem-title"
-      "mem-view    mem-view    mem-view"
-      "date-title    date-title     date-title"
+      "mem-title    mem-title    mem-title"
+      "mem-view     mem-view     mem-view"
+      "date-title   date-title   date-title"
       "date-view    date-view    date-view"
       "desc-icon    desc-title   desc-title"
       "desc-in-wrap desc-in-wrap desc-in-wrap"
@@ -506,12 +506,42 @@ header {
 #inv-air-right {grid-area: inv-air-right;}
 #inv-air-bot   {grid-area: inv-air-bot;  }
 
+/* --- Add member to task window --- */
+#add-container {
+  display: grid;
+  grid-template-columns: 10fr 170px 1fr;
+  grid-template-rows: 200px 200px 20000px; /* last value should be 100%, but it doesn't stretch down like with #tp-container for some reason. */
+  grid-template-areas: 
+    "add-air-top  add-air-top add-air-top"
+    "add-air-left add-win     add-air-right"
+    "add-air-bot  add-air-bot add-air-bot";
+}
+
+#add-win {
+  position: relative; /* for placing save and remove buttons at the bottom. */
+  grid-area: add-win;
+  padding: 4px;
+  background-color: #98bb81;
+}
+
+/* Defined in order to capture onclick (to hide add member window) */
+#add-air-top   {grid-area: add-air-top;  }
+#add-air-left  {grid-area: add-air-left; }
+#add-air-right {grid-area: add-air-right;}
+#add-air-bot   {grid-area: add-air-bot;  }
+
+#add-title {
+  display: inline-block;
+}
+#add-close {
+  float: right;
+}
+
 /* Calendar in popup-contanier for tasks */
 #set-date input{
   background-color: transparent;
   border:none;
   padding:5px;
-
 }
 
 #set-date input:hover {
