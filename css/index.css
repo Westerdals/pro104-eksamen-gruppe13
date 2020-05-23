@@ -260,6 +260,7 @@ header {
     margin: .9em;
     height: 4.2em;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 #add-new-board:hover {
