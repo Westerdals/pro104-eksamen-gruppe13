@@ -28,14 +28,13 @@
     <img src="favicon.ico" id="logo" alt="Jadeboard logo">
   </a>
 
-    <!-- Sign out -->
-      <div class="logout-container">
-        <a href="login.html">
-          <img src="img/logout.png" alt="Sign out" title="Sign out">
-        </a>
-      </div>
+  <!-- Sign out -->
+  <div class="logout-container">
+    <a href="login.html">
+      <img src="img/logout.png" alt="Sign out" title="Sign out">
+    </a>
+  </div>
 
-  
   <!-- Navigation -->
   <ul id="main-nav" class="main-nav">
     <li><a id="board-a" href="boards.html">Boards</a></li>
@@ -49,7 +48,7 @@
     
   </ul>
 
-  <!-- [hidden] List of users that can be invited to the board. -->
+  <!-- Invite user window. Location independent and hidden by default. -->
   <div id="inv-overlay" class="overlay transparent hidden"></div>
   <div id="inv-frame" class="overlay hidden">
     <div id="inv-container">
@@ -57,6 +56,7 @@
       <div id="inv-air-top" onclick="hideInviteMenu()"></div>
       <div id="inv-air-left" onclick="hideInviteMenu()"></div>
 
+      <!-- Visible window. -->
       <div id="inv-win" class="rounded">
         <div>Invite to Board</div>
         <div id="inv-list"></div>
@@ -70,7 +70,6 @@
 
 </header>
 
-
 <section class="main-boards">
 
   <div id="name-of-project">
@@ -79,15 +78,11 @@
 
   <div id="main-container"></div>
   
-  <!-- 
-  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  * This is the code for the window that opens when you click a task. *
-  * It's hidden by default.                                           *
-  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+  <!-- Task properties window. Location independent and hidden by default. -->
   <div id="tp-overlay" class="overlay transparent hidden"></div>
   <div id="tp-frame" class="overlay hidden">
 
-    <div id="tp-container">
+    <div id="tp-container"> <!-- grid container -->
 
       <!-- Invisible divs that capture click events for closing the window -->
       <div id="tp-air-top" onclick="hideTaskPropDiv()"></div>
@@ -96,11 +91,11 @@
       <!-- This is the visible window -->
       <div id="tp-win" class="rounded" onclick="closeDescInput(event)">
 
-        <div>
+        <div> <!-- Title icon -->
           <img src="img/checkbox.png" id="tp-title-icon" alt="Title icon">
-        </div>    <!-- Title icon -->
-        <div id="tp-title"></div>         <!-- Title text -->
-        <div id="tp-title-sub"></div>     <!-- Text below title -->
+        </div>
+        <div id="tp-title"></div> <!-- Title text -->
+        <div id="tp-title-sub"></div> <!-- Text below title -->
 
         <div id="tp-mem-title">Members</div>
         <div id="tp-mem-view"></div>
@@ -112,30 +107,8 @@
         <div id="tp-menu-wrap">
           <div>Menu</div>
           <div id="m-join" class="opt" onclick="joinTask()">Join</div>
-          <div id="m-add" class="opt">Add</div>
-
-          <!-- Lag en onclick for dato lik som joinTask()^^ -->
+          <div id="m-add" class="opt" onclick="addToTask()">Add</div>
           <div id="m-deadline" class="opt" onclick="showDateWin()">Deadline</div>
-
-                  <div id="date-overlay" class="overlay transparent hidden"></div>
-                  <div id="date-frame" class="overlay hidden">
-                    <div id="date-container">
-                      <div id="date-air-top" onclick="hideDateWin()"></div>
-                      <div id="date-air-left" onclick="hideDateWin()"></div>
-
-                      <div id="date-win" class="rounded">
-                        <div id="date-title">Change deadline</div>
-                        <div id="date-close" class="selectable" onclick="hideDateWin()">X</div>  
-                        <input id="date-input" type="datetime-local" oninput="dateChange(event)">
-                        <div id="date-save" class="selectable" onclick="saveDate()">Save</div>
-                        <div id="date-remove" class="selectable" onclick="removeDate()">Remove</div>
-                    </div>
-
-                    <div id="date-air-right" onclick="hideDateWin()"></div>
-                    <div id="date-air-bot" onclick="hideDateWin()"></div>
-                  </div>
-                </div>
-
           <div id="m-move" class="opt">Move</div>
           <div id="m-delete" class="opt">Delete</div>
         </div>
@@ -143,10 +116,10 @@
         <div id="tp-mem-view"></div>
         <div id="tp-date-view"></div>
 
-        <div id="tp-desc-icon">
+        <div id="tp-desc-icon"> <!-- Description icon -->
             <img src="img/pen.png" id="tp-desc-icon" alt="Description icon">
-        </div>            <!-- Description icon -->
-        <div id="tp-desc-title">Description</div>    <!-- Description title -->
+        </div>
+        <div id="tp-desc-title">Description</div> <!-- Description title -->
         <div id="tp-desc-in-wrap">
           <textarea id="tp-desc-input" class="color rounded" placeholder="Add a more detailed text..." onclick="triggerDescInput()"></textarea> <!-- Description input -->
           <div id="tp-desc-btn" class="color rounded hidden">Save</div>
@@ -159,10 +132,32 @@
 
     </div>
   </div>
+
+  <!-- Select date window. Location independent and hidden by default. -->
+  <div id="date-overlay" class="overlay transparent hidden"></div>
+  <div id="date-frame" class="overlay hidden">
+
+    <div id="date-container"> <!-- grid container -->
+  
+      <div id="date-air-top" onclick="hideDateWin()"></div>
+      <div id="date-air-left" onclick="hideDateWin()"></div>
+
+      <!-- Visible window -->
+      <div id="date-win" class="rounded">
+        <div id="date-title">Change deadline</div>
+        <div id="date-close" class="selectable" onclick="hideDateWin()">X</div>  
+        <input id="date-input" type="datetime-local" oninput="dateChange(event)">
+        <div id="date-save" class="selectable" onclick="saveDate()">Save</div>
+        <div id="date-remove" class="selectable" onclick="removeDate()">Remove</div>
+      </div>
+
+      <div id="date-air-right" onclick="hideDateWin()"></div>
+      <div id="date-air-bot" onclick="hideDateWin()"></div>
+  
+    </div>
+  </div>
   
 </section>	
-
-
 
 <script type="text/javascript" src="js/index.js"></script>
 
