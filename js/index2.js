@@ -270,10 +270,12 @@ function createElementWithRightCSS(title){
   let outputDiv = `
      <div class="main-boards-tasks color selectable rounded" draggable="true" ondragstart="drag(event)">
             <p>${title}</p>
-                
+
+              <div class="arrow-container">
                 <div class="main-boards-tasks-arrow">
-                    <i class="arrow right"></i>
+                  <i class="arrow right"></i>
                 </div>
+              </div>
      </div>`;
 
   return outputDiv;

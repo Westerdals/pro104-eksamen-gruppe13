@@ -51,7 +51,7 @@ function createTemplateGrid(columns){
             </div>
 
             <div class="main-boards-tasks-txt">
-                <textarea id="textAreaId${i}" onfocusout="hideTextBox(this.id)" autofocus type="textbox" placeholder="Add new task.." maxlength="21"></textarea>
+                <textarea id="textAreaId${i}" onfocusout="hideTextBox(this.id)" autofocus type="textbox" placeholder="Add new task.." maxlength="${INPUT_LENGTH_ADD_TASK}"></textarea>
                 <input id="col${i}-btn" type="button" value="Add task">
             </div>
 
@@ -65,7 +65,7 @@ function createTemplateGrid(columns){
         <div id="add-new-board" onclick="animationForAddBoard()">
             <p class="textbox"><strong>Add new column</strong></p>
             <div id="new-board-container">
-                <input type="text" id="add-board-field" maxlength="18">
+                <input type="text" id="add-board-field" maxlength="${INPUT_LENGTH_ADD_COLUMN}">
                 <input type="button" value="Add column" id="add-board-btn" onclick="addNewBoard()" alt="Add new board">
             </div>
         </div>
