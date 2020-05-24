@@ -1,3 +1,9 @@
+/**
+ * Global variables.
+ */
+const INPUT_LENGTH_ADD_TASK   = 99;
+const INPUT_LENGTH_ADD_COLUMN = 99;
+
 function getUserId() {
   const s = window.location.search;
   return s.substring(1, s.length);
