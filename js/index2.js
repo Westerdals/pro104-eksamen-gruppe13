@@ -24,16 +24,25 @@ function loadBoardData() {
   // Verify that the user is logged in properly.
   if (userList.length == 0 || typeof(userList[userId]) === undefined || userId == '') {
 
-    // Creating a test user if none exists.
+    // Creating two test user if none exists.
     if (userList.length == 0) {
       userId = 0;
-      const name = "test";
-      const password = "test";
-      const lastBoardId = -1;
-      const user = {name, password, lastBoardId};
+      let name = "test";
+      let password = "test";
+      let lastBoardId = -1;
+      let user = {name, password, lastBoardId};
       userList.push(user);
       window.localStorage.setItem("userList", JSON.stringify(userList));
-      console.log("User " + name + " added to storage with id " + userList.length);
+      console.log("User " + name + " added to storage with id " + userId);
+
+      userId = 1;
+      name = "mest";
+      password = "mest";
+      lastBoardId = -1;
+      user = {name, password, lastBoardId};
+      userList.push(user);
+      window.localStorage.setItem("userList", JSON.stringify(userList));
+      console.log("User " + name + " added to storage with id " + userId);
     }
     console.log("Injecting log in session of user " + userList[0].name);
     window.location.href = "index.html?0";
@@ -134,7 +143,7 @@ function refreshMembersInNav(userId, boardId) {
     let memberDiv = document.createElement("div");
     memberDiv.className = "member greycircle";
     memberDiv.innerHTML = memberName;
-    console.log(i + ", " + memberName);
+    //console.log(i + ", " + memberName);
     anchorTag.appendChild(memberDiv);
   }
 }
@@ -388,7 +397,7 @@ function refreshTaskMembers(boardId, taskId) {
   for (let i = 0; i < memberIds.length; i++) {
     const memberId = memberIds[i];
     const memberName = userList[memberId].name;
-    console.log("readding member " + memberName);
+    //console.log("Adding member " + memberName + " to task.");
 
     let memberDiv = document.createElement("div");
     memberDiv.className = "member greycircle";
@@ -445,39 +454,40 @@ function showAddWin() {
     memberDiv.className = "memberListName";
     memberDiv.innerHTML = userList[i].name;
     if (isAdded) {
+      memberDiv.setAttribute("isAdded", "");
       memberDiv.innerHTML += " (added)";
-      memberDiv.onclick = function() {remMemberFromTask(userId, i, boardId, memberDiv, taskId)};
-    } else {
-      memberDiv.onclick = function() {addMemberToTask(userId, i, boardId, memberDiv, taskId)};
     }
+    memberDiv.onclick = function() {addMemberHandler(userId, i, boardId, memberDiv, taskId)};
 
     membersDiv.appendChild(memberDiv);
   }
 
 }
 
-function addMemberToTask(userId, memberId, boardId, memberDiv, taskId) {
-  console.log("Adding user " + memberId + " to task " + taskId + " of user " + userId);
-
-  // Mark member as added in the add member window.
-  memberDiv.innerHTML += " (added)";
-
+/* Adds or removes a member from a task. */
+// BUG: add 2 users, the first, then the second. Second remains in storage.
+function addMemberHandler(userId, memberId, boardId, memberDiv, taskId) {
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
-  boardList[userId].tasks[taskId].memberIds.push(memberId);
-  window.localStorage.setItem("boardList", JSON.stringify(boardList));
 
-  refreshTaskMembers(boardId, taskId);
-}
+  if (memberDiv.hasAttribute("isAdded")) {
+    //console.log("Removing user " + memberId + " from task " + taskId + " of user " + userId);
+    memberDiv.removeAttribute("isAdded");
 
-function remMemberFromTask(userId, memberId, boardId, memberDiv, taskId) {
-  console.log("Removing user " + memberId + " from task " + taskId + " of user " + userId);
+    // Mark member as available in the add member window.
+    const str = memberDiv.innerHTML;
+    memberDiv.innerHTML = str.substring(str.length - 8, str-length);
+    //console.log("boardList["+userId+"]tasks.["+taskId+"].memberIds.splice("+memberId+", 1)");
+    let memberIds = boardList[userId].tasks[taskId].memberIds;
+    boardList[userId].tasks[taskId].memberIds = arrayRemoveByVal(memberId, memberIds);
+  } else {
+    //console.log("Adding user " + memberId + " to task " + taskId + " of user " + userId);
+    memberDiv.setAttribute("isAdded", "");
+    
+    // Mark member as added in the add member window.
+    memberDiv.innerHTML += " (added)";
+    boardList[userId].tasks[taskId].memberIds.push(memberId);
+  }
 
-  // Mark member as available in the add member window.
-  const str = memberDiv.innerHTML;
-  memberDiv.innerHTML = str.substring(str.length - 8, str-length);
-
-  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
-  boardList[userId].tasks[taskId].memberIds.splice(memberId, 1);
   window.localStorage.setItem("boardList", JSON.stringify(boardList));
 
   refreshTaskMembers(boardId, taskId);

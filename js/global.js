@@ -4,6 +4,14 @@ function getUserId() {
 }
 
 /**
+ * Removes array elements by value.
+ * It works by using filter to return elements not matching a value.
+ */
+function arrayRemoveByVal(value, arr) {
+  return arr.filter(function(ele){return ele != value; });
+}
+
+/**
  * Default columns in a new board.
  */
 function getDefaultColumns() {
