@@ -1,4 +1,11 @@
 /* Styles that are used across multiple html files */
+#outer-container {
+  display: grid;
+  grid-template-columns: 20% auto 20%;
+  width: 100vw;
+  height: 100vh;
+}
+
 
 /* Rounded corners */
 .rounded {

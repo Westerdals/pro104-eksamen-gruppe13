@@ -21,15 +21,8 @@ body {
   }
 }
 
-/* Header  */
-header {
-    padding-top: 1.5rem;
-    
-}
-
+/* Navigation */
 #logo{
-  display: block;
-  margin-left: 2.5rem;
   height: 100px;
 }
 
@@ -44,10 +37,10 @@ header {
 /* Navigation */
 .main-nav {
     display: block;
-    position: absolute;
     top: 45px;
     width:80%;
-    left: 100px;
+    text-align:center;
+    margin: auto;
 }
 
 @media only screen and (max-width: 600px) {
@@ -72,12 +65,18 @@ header {
   }
 }
 
-.main-nav li a {
+.main-nav li .aLink {
     text-decoration: none;
     color: #767875;
     border: 1px solid #A9D97D;
     border-radius: 5px;
     padding: .5em 2.25rem;
+}
+
+#logo-li-img {
+  position:relative;
+  top:30px;
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -93,14 +92,12 @@ header {
 
 /* Grid for to do boards */
 .main-boards #main-container {
-    margin-left: 2em;
-    margin-top: 2em;
     max-width 70em;
-    width: 90%;
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(250px, 315px) );
+    grid-template-columns: repeat( auto-fit, minmax(250px, 315px));
     height: 80vh;
-    float: left;
+    justify-content:center;
 }
 
 @media only screen and (max-width: 600px) {
@@ -157,14 +154,10 @@ header {
   position: absolute;
   right: 7px;
   top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
   width: 13px;
   height: 21px;
 }
-.right-arrow:hover { /* Make arrow white on hover*/
-  filter: brightness(0) invert(1);
-}
+
 
 /* Arrow to send to the next block */
 /* Added a container in order to get position right and preserve the existing style. */
@@ -178,8 +171,6 @@ header {
 }
 .main-boards-tasks-arrow {
     position: relative;
-    /*bottom: 2.2em;*/
-    /*left: 14.3rem;*/
     width: 22px;
     height: 20px;
 }
@@ -266,7 +257,6 @@ header {
 
 /* Container for displaying projectname */
 #name-of-project {
-  width:80%;
   height:3em;
   margin:2em 2em .5em;
 }
