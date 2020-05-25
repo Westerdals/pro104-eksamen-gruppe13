@@ -404,6 +404,8 @@ function hideTaskPropDiv(ev) {
   document.getElementById("tp-frame").style.display   = "none";
   document.getElementById("tp-date-view").innerHTML = "";
   document.removeEventListener('keydown', handleKeyPressFromProp);
+
+  setTabindexOnProperties(0);
 }
 
 function triggerDescInput() {
