@@ -9,12 +9,14 @@ window.onload = function() {
   const createLi    = document.getElementById("create-li");
   const loginA      = document.getElementById("login-a");
   const boardsUl    = document.getElementById("board-ul");
+  let count = 0;
   
   // Get board and user list from local storage.
   const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
   const boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
 
   // Verify that the user is logged in properly.
+  console.log(userId);
   if (userList.length == 0 || typeof(userList[userId]) === undefined || userId == '') {
 
     feedbackDiv.innerHTML = "You must be logged in to access and create boards.";
@@ -23,26 +25,26 @@ window.onload = function() {
 
     /*alert("You must be logged in as a user in order to create a board.");
     window.location.href = "login.html"; //redirect to login page*/
-  }
+  } else {
   
-  // Loops through all boards the user is a member of.
-  let count = 0;
-  for (let i = 0; i < boardList.length; i++) {
-    let board = boardList[i];
-    let userIds = board.userIds;
-    for (let j = 0; j < userIds.length; j++) {
-      if (userIds[j] == userId) {
-        count++;
+    // Loops through all boards the user is a member of.
+    for (let i = 0; i < boardList.length; i++) {
+      let board = boardList[i];
+      let userIds = board.userIds;
+      for (let j = 0; j < userIds.length; j++) {
+        if (userIds[j] == userId) {
+          count++;
 
-        // Creates and appends a new clickable list element.
-        let li = document.createElement("li");
-        li.className = "rounded";
-        li.className = "tab-index";
-        li.innerHTML = board.title;
-        li.onclick = function(){ selectBoard(i, userId); }
-        boardsUl.insertBefore(li, createLi);
-        //boardsUl.appendChild(li);
-        continue;
+          // Creates and appends a new clickable list element.
+          let li = document.createElement("li");
+          li.className = "rounded";
+          li.className = "tab-index";
+          li.innerHTML = board.title;
+          li.onclick = function(){ selectBoard(i, userId); }
+          boardsUl.insertBefore(li, createLi);
+          //boardsUl.appendChild(li);
+          continue;
+        }
       }
     }
   }
