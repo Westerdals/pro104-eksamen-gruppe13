@@ -1,5 +1,13 @@
 var mainBoardContainer = document.getElementById("main-container");
 
+/* Counter for tabIndex */
+var counter = 1;
+
+/* Adding tabIndex to elements */
+document.getElementById("logo").tabIndex = counter++;
+document.getElementById("board-a").tabIndex = counter++;
+document.getElementById("inv-btn").tabIndex = counter++;
+
 
 var columns = [
   {

@@ -8,7 +8,7 @@ function setLinkParams() {
   
   boardA.href    = boardA.href   + "?"  + userId;
   boardLogo.href = boardLogo.href + "?" + userId;
-  membersA.href  = membersA.href + "?"  + userId;
+ /* membersA.href  = membersA.href + "?"  + userId; */
 }
 
 function loadBoardData() {
@@ -93,8 +93,13 @@ function loadBoardData() {
       const memberIds    = task.memberIds;
       //console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescr + ", deadline: " + taskDeadline);
 
+
       let htmlTxtForOneElement = createElementWithRightCSS(taskTitle);
       let taskDiv = document.createElement("div");
+      
+      /* Adding tabIndex for every single task */
+      taskDiv.tabIndex = counter++;
+
       taskDiv.id = "task" + taskId;
       taskDiv.innerHTML = htmlTxtForOneElement;
       taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId, i)};
@@ -108,6 +113,9 @@ function loadBoardData() {
         const assignedUserName = userList[assignedUserId].name;
         //console.log("assigned user #" + k + ": " + assignedUserName);
       }
+
+      
+
     }
    
     const addBtn = document.getElementById("col" + i + "-btn");
