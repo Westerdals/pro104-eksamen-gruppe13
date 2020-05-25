@@ -63,8 +63,11 @@ function getDefaultTasks() {
   ];
 }
 
+/**
+ * First character must be a-zA-ZæøåÆØÅ, no character can be ^@"'<>
+ */
 function isAlphaNumeric(str) { 
-  var pattern = /^[a-zA-Z][0-9a-zA-Z -]+$/;
+  var pattern = /[a-zA-ZæøåÆØÅ][^(@"'<>)]*$/;
   return str.match(pattern);
 }
 
