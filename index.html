@@ -48,7 +48,19 @@
     
   </ul>
 
-  <!-- Invite user window. Location independent and hidden by default. -->
+</header>
+
+<section class="main-boards">
+
+  <div id="name-of-project">
+      <h2></h2>
+  </div>
+
+  <div id="main-container"></div>
+
+  <!-- Invite user window. Location independent* and hidden by default.
+       (* must still appear after elements that are supposed to be below
+       or use z-index to counter.) -->
   <div id="inv-overlay" class="overlay transparent hidden"></div>
   <div id="inv-frame" class="overlay hidden">
     <div id="inv-container">
@@ -69,15 +81,6 @@
     </div>
   </div>
 
-</header>
-
-<section class="main-boards">
-
-  <div id="name-of-project">
-      <h2></h2>
-  </div>
-
-  <div id="main-container"></div>
   
   <!-- Task properties window. Location independent and hidden by default. -->
   <div id="tp-overlay" class="overlay transparent hidden"></div>
