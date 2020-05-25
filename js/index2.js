@@ -1,3 +1,5 @@
+var tabIndexBoards = 0;  
+
 function setLinkParams() {
   let boardA     = document.getElementById("board-a");
   let boardLogo  = document.getElementById("board-logo");
@@ -8,7 +10,7 @@ function setLinkParams() {
   
   boardA.href    = boardA.href   + "?"  + userId;
   boardLogo.href = boardLogo.href + "?" + userId;
-  membersA.href  = membersA.href + "?"  + userId;
+ /* membersA.href  = membersA.href + "?"  + userId; */
 }
 
 function loadBoardData() {
@@ -103,13 +105,17 @@ function loadBoardData() {
       //console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescr + ", deadline: " + taskDeadline);
 
       let htmlTxtForOneElement = createElementWithRightCSS(taskTitle, taskId, boardId, i);
+
+ 
       let taskDiv = document.createElement("div");
+
       taskDiv.id = "task" + taskId;
       taskDiv.innerHTML = htmlTxtForOneElement;
       taskDiv.onclick = function(){showTaskPropDiv(event, boardId, taskId, i)};
       anchorTag.parentNode.insertBefore(taskDiv, anchorTag.nextSibling); //insert after anchor tagg
       anchorTag = taskDiv; // Set anchor tag to last inserted div.
-
+      
+      
       for (let k = 0; j < task.userIds; k++) {
 
         // Assigned user id and name.
@@ -117,13 +123,16 @@ function loadBoardData() {
         const assignedUserName = userList[assignedUserId].name;
         //console.log("assigned user #" + k + ": " + assignedUserName);
       }
+
     }
    
     const addBtn = document.getElementById("col" + i + "-btn");
     const inputTag = document.getElementById("textAreaId" + i);
     addBtn.onclick = function(){createTaskHandler(userId, i, inputTag)};
-  }
 
+    setTabindexOnProperties(0);
+  }
+ 
   refreshMembersInNav(userId, boardId);
 }
 
@@ -252,7 +261,9 @@ function createTaskHandler(userId, colId, inputTag) {
   // Get anchor tag.
   let anchorTag = document.getElementById("newTaskId" + colId);
 
+
   let htmlTxtForOneElement = createElementWithRightCSS(title, taskId, boardId, colId);
+
   let taskDiv = document.createElement("div");
   taskDiv.id = "task" + taskId;
   taskDiv.innerHTML = htmlTxtForOneElement;
@@ -264,11 +275,13 @@ function createTaskHandler(userId, colId, inputTag) {
   // and setting focus to write another task
   inputTag.value = "";
   inputTag.focus();
+
 }
 
 function createElementWithRightCSS(title, taskId, boardId, colId){
+
   let outputDiv = `
-     <div class="main-boards-tasks color selectable rounded" draggable="true" ondragstart="drag(event)">
+     <div class="main-boards-tasks color selectable rounded tab-index" draggable="true" ondragstart="drag(event)">
             <p>${title}</p>
 
             <div class="arrow-container" onclick="moveTask(event, ${taskId}, ${boardId}, ${colId}, ${colId+1})">
@@ -277,6 +290,7 @@ function createElementWithRightCSS(title, taskId, boardId, colId){
               </div>
             </div>
      </div>`;
+
 
   return outputDiv;
 }
@@ -349,6 +363,8 @@ function showTaskPropDiv(ev, boardId, taskId, colId) {
   descInput.value       = task.description;
 
   refreshTaskMembers(boardId, taskId);
+  setTabindexOnProperties(-1);
+  
 
   // Hide the "Join" menu option if user is already assigned to the task.
   if (task.memberIds.includes(userId)) {
@@ -368,6 +384,8 @@ function showTaskPropDiv(ev, boardId, taskId, colId) {
 
   overlayDiv.style.display = "block";
   frameDiv.style.display   = "block";
+
+  tabIndexBoards = -1;
 
   document.addEventListener('keydown', handleKeyPressFromProp);
 }
@@ -626,11 +644,15 @@ window.addEventListener("load", function() {
 });
 
 
-/* Function to show which project youre currently inside */
-function showProjectName(){
-
-   
-
+/* Function to set the tabindex of elements to 0 or -1 to call in the loadBoardData-function*/
+function setTabindexOnProperties(para){
+  
+  var mainBoardContainer = document.querySelectorAll(".tab-index");
+    
+  for (let i = 0; i < mainBoardContainer.length; i++){
+      
+      mainBoardContainer[i].tabIndex = para;
+  }
 }
 
 /* Alternative method of setting todays date and time */

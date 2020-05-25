@@ -38,10 +38,8 @@
   <!-- Navigation -->
   <ul id="main-nav" class="main-nav">
     <li><a id="board-a" href="boards.html">Boards</a></li>
-    <li><a id="members-a" href="members.html">Members</a></li>
  
     <li><a href="#">View my tasks</a></li>
-    <li><a href="#">View all tasks</a></li>
 
     <li id="inv-li"></li>
     <li><div id="inv-btn" class="color" onclick="showInviteMenu()">Invite</div></li>
@@ -111,11 +109,11 @@
          <!-- Menu on the right side -->
         <div id="tp-menu-wrap">
           <div>Menu</div>
-          <div id="m-join" class="opt" onclick="joinTask()">Join</div>
-          <div id="m-add" class="opt" onclick="showAddWin()">Add members</div>
-          <div id="m-deadline" class="opt" onclick="showDateWin()">Deadline</div>
-          <div id="m-move" class="opt">Move</div>
-          <div id="m-delete" class="opt">Delete</div>
+          <div id="m-join" class="opt" onclick="joinTask()" tabindex="0">Join</div>
+          <div id="m-add" class="opt" onclick="showAddWin()" tabindex="0">Add members</div>
+          <div id="m-deadline" class="opt" onclick="showDateWin()" tabindex="0">Deadline</div>
+          <div id="m-move" class="opt" tabindex="0">Move</div>
+          <div id="m-delete" class="opt" tabindex="0">Delete</div>
         </div>
 
         <div id="tp-mem-view"></div>
