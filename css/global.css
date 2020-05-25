@@ -1,7 +1,7 @@
 /* Styles that are used across multiple html files */
 #outer-container {
   display: grid;
-  grid-template-columns: 20% auto 20%;
+  grid-template-columns: 17% 3% auto 3% 17%;
   width: 100vw;
   height: 100vh;
 }
@@ -69,23 +69,22 @@
   clear: both;
 }
 
-/* Logout properties */
+/* Sign out properties */
 .logout-container {
   position: absolute;
-  right:10px;
   top:15px;
-
 }
 
-.logout-container img {
-  position: relative;
-  width:30px;
+.logout-container img{
+  width: 30px;
 }
+
 
 /*Setting position to 30px from top in case
 user is using phones that cover top part of app (ex Iphone 8 ->)*/
 @media only screen and (max-width: 600px) {
   .logout-container {
       top:30px;
+      right: 10px;
     }
   }
