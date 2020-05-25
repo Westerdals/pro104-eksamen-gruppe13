@@ -151,7 +151,6 @@ header {
   margin: 0;
 }
 
-/* Replaced old arrow with an image in order to get the positioning right. */
 .right-arrow {
   position: absolute;
   right: 7px;
