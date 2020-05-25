@@ -1,5 +1,4 @@
-var tabIndexBoards = 0;  
-
+ 
 function setLinkParams() {
   let boardA     = document.getElementById("board-a");
   let boardLogo  = document.getElementById("board-logo");
@@ -194,7 +193,10 @@ function showInviteMenu() {
     memberDiv.onclick = function() {addMemberToBoard(userId, i, boardId, memberDiv)};
 
     membersDiv.appendChild(memberDiv);
+    membersDiv.appendChild(memberDiv).tabIndex = "0";
   }
+
+  setTabindexOnProperties(-1);
 
   document.addEventListener('keydown', handleKeyPressFromInv);
 }
@@ -227,6 +229,8 @@ function hideInviteWin() {
   overlayDiv.style.display = "none";
   frameDiv.style.display   = "none";
   document.removeEventListener('keydown', handleKeyPressFromInv);
+
+  setTabindexOnProperties(0);
 }
 
 /**
@@ -385,7 +389,6 @@ function showTaskPropDiv(ev, boardId, taskId, colId) {
   overlayDiv.style.display = "block";
   frameDiv.style.display   = "block";
 
-  tabIndexBoards = -1;
 
   document.addEventListener('keydown', handleKeyPressFromProp);
 }
