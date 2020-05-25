@@ -15,12 +15,6 @@ body {
     background-color: #D3E8C2;
 }
 
-@media only screen and (max-width: 600px) {
-  body {
-    margin: auto;
-  }
-}
-
 /* Navigation */
 #logo{
   height: 100px;
@@ -29,8 +23,10 @@ body {
 
 @media only screen and (max-width: 600px) {
   #logo {
-    width: 60px;
+    width: 80px;
     height: auto;
+    position: ab;
+    top:-30px;
   }
 }
 
@@ -45,11 +41,9 @@ body {
 
 @media only screen and (max-width: 600px) {
   .main-nav {
-     margin:auto;
-     left:-15px;;
-     top: 100px;
-     width:100%;
-     text-align:center;
+    display:inline;
+    top: 0;
+    width:100%;
   }
 }
 
@@ -61,7 +55,7 @@ body {
 /* Bigger spacing for bigger fingers */
 @media only screen and (max-width: 600px) {
   .main-nav li {
-    padding: 1.3em;
+    padding: 1.1em;
   }
 }
 
@@ -76,15 +70,7 @@ body {
 #logo-li-img {
   position:relative;
   top:30px;
-
 }
-
-@media only screen and (max-width: 600px) {
-  .main-nav li a {
-    padding: .4em .9rem;
-  }
-}
-
 
 .main-nav li a:hover, .main-nav li a:target{
     background-color:#A9D97D;
@@ -102,7 +88,7 @@ body {
 
 @media only screen and (max-width: 600px) {
   .main-boards #main-container {
-    margin-top: 230px;
+    margin-top: 75px;
   }
 }
 
@@ -266,12 +252,6 @@ body {
   text-align: center;
 }
 
-@media screen and (max-width: 550px){
-  #name-of-project {
-    position: relative;
-    top: 190px;
-  }
-}
 
 /* Adding new boards */
 #add-new-board {

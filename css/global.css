@@ -6,6 +6,12 @@
   height: 100vh;
 }
 
+/* Removing grids that center website for phones */
+@media only screen and (max-width: 600px) {
+  #outer-container {
+    display: block;   
+  }
+}
 
 /* Rounded corners */
 .rounded {
