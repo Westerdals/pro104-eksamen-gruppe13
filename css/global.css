@@ -51,7 +51,6 @@
 /* Center align text */
 .centered {
   text-align: center; /* horizontal */
-  display: table-cell;
   width: 185px;
   height: 50px;
 }
