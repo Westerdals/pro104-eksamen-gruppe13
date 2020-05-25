@@ -131,7 +131,6 @@ function loadBoardData() {
 
     setTabindexOnProperties(0);
   }
- 
   refreshMembersInNav(userId, boardId);
 }
 
@@ -536,6 +535,9 @@ function showAddWin() {
     memberDiv.onclick = function() {addMemberHandler(userId, i, boardId, memberDiv, taskId)};
 
     membersDiv.appendChild(memberDiv);
+
+    membersDiv.appendChild(memberDiv).tabIndex = "0";
+
   }
 
 }
@@ -707,6 +709,7 @@ function setTabindexOnProperties(para){
       mainBoardContainer[i].tabIndex = para;
   }
 }
+
 
 /* Alternative method of setting todays date and time */
 /*window.addEventListener("load", function() {

@@ -28,12 +28,6 @@
     <img src="favicon.ico" id="logo" alt="Jadeboard logo">
   </a>
 
-  <!-- Sign out -->
-  <div class="logout-container">
-    <a href="login.html" class="tab-index">
-      <img src="img/logout.png" alt="Sign out" title="Sign out">
-    </a>
-  </div>
 
   <!-- Navigation -->
   <ul id="main-nav" class="main-nav">
@@ -174,9 +168,9 @@
       <div id="date-win" class="rounded">
         <div id="date-title" class="inline">Change deadline</div>
         <div class="float-right selectable" onclick="hideDateWin()">X</div>  
-        <input id="date-input" type="datetime-local" oninput="dateChange(event)">
-        <div id="date-save" class="selectable" onclick="saveDate()">Save</div>
-        <div id="date-remove" class="selectable" onclick="removeDate()">Remove</div>
+        <input id="date-input" type="datetime-local" tabindex="0" oninput="dateChange(event)">
+        <div id="date-save" class="selectable" tabindex="0" onclick="saveDate()">Save</div>
+        <div id="date-remove" class="selectable" tabindex="0" onclick="removeDate()">Remove</div>
       </div>
 
       <div id="date-air-right" onclick="hideDateWin()"></div>
@@ -186,6 +180,13 @@
   </div>
 
 </section>	
+
+<!-- Sign out -->
+  <div class="logout-container">
+    <a href="login.html" class="tab-index">
+      <img src="img/logout.png" alt="Sign out" title="Sign out">
+    </a>
+  </div>
 
 <script type="text/javascript" src="js/index.js"></script>
 
