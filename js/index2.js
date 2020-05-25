@@ -331,8 +331,8 @@ function moveTask(ev, taskId, boardId, colId, targetColId) {
   
   // Update the onclick function arguments and insert element in the target column.
   const anchorTag     = document.getElementById("newTaskId" + targetColId);
-  taskDiv.innerHTML = createElementWithRightCSS(task.title, taskId, boardId, targetColId);
-  taskDiv.onclick   = function(){showTaskPropDiv(event, boardId, taskId, targetColId)};
+  taskDiv.innerHTML   = createElementWithRightCSS(task.title, taskId, boardId, targetColId);
+  taskDiv.onclick     = function(){showTaskPropDiv(event, boardId, taskId, targetColId)};
   anchorTag.parentNode.insertBefore(taskDiv, anchorTag);
 }
 
@@ -361,6 +361,7 @@ function showTaskPropDiv(ev, boardId, taskId, colId) {
   const userId = getUserId();
 
   frameDiv.setAttribute("taskId", taskId); //store for later use
+  frameDiv.setAttribute("colId", colId); //used for task deletion
   titleDiv.innerHTML    = task.title;
   titleSubDiv.innerHTML = "in column " + boardList[boardId].columns[colId].title;
   dateDiv.innerHTML     = task.deadline;
@@ -403,6 +404,13 @@ function handleKeyPressFromProp(ev) {
 
 function hideTaskPropDiv(ev) {
   closeDescInput(); //close description input
+  const deleteDiv = document.getElementById("m-delete");
+  if (deleteDiv.hasAttribute("doDelete")) {
+    deleteDiv.removeAttribute("doDelete");
+    deleteDiv.innerHTML = "Delete";
+    deleteDiv.className = "opt"
+  }  
+
   document.getElementById("tp-overlay").style.display = "none";
   document.getElementById("tp-frame").style.display   = "none";
   document.getElementById("tp-date-view").innerHTML = "";
@@ -571,9 +579,9 @@ function handleKeyPressFromAdd(ev) {
 
 function hideAddWin() {
   const overlayDiv = document.getElementById("add-overlay");
-  const frameDiv = document.getElementById("add-frame");
+  const frameDiv   = document.getElementById("add-frame");
   overlayDiv.style.display = "none";
-  frameDiv.style.display = "none";
+  frameDiv.style.display   = "none";
   document.removeEventListener('keydown', handleKeyPressFromAdd);
   document.addEventListener('keydown', handleKeyPressFromProp);
 }
@@ -648,6 +656,46 @@ window.addEventListener("load", function() {
   date = formattedDate;
 });
 
+function deleteTaskHandler() {
+  let deleteDiv = document.getElementById("m-delete");
+  if (deleteDiv.hasAttribute("doDelete")) {
+    deleteDiv.removeAttribute("doDelete");
+    deleteDiv.innerHTML = "Delete";
+    deleteDiv.className = "opt"
+    hideTaskPropDiv();
+    deleteTask();
+  } else {
+    deleteDiv.setAttribute("doDelete", "");
+    deleteDiv.className = "optWarning";
+    deleteDiv.innerHTML = "Are you sure?"
+  }
+}
+
+function deleteTask() {
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
+  const boardId    = userList[getUserId()].lastBoardId;
+  const frameDiv   = document.getElementById("tp-frame");
+  const taskId     = frameDiv.getAttribute("taskId");
+  const colId      = frameDiv.getAttribute("colId");
+  const board      = boardList[boardId];
+  let task         = board.tasks[taskId];
+
+
+  let taskDiv = document.getElementById("task" + taskId);
+
+  // Remove task id from the columns array.
+  let taskIds = board.columns[colId].taskIds;
+  taskIds = arrayRemoveByVal(taskId, taskIds);
+  boardList[boardId].columns[colId].taskIds = taskIds;
+  
+  // Remove task from tasks array and save.
+  boardList[boardId].tasks.splice(taskId, 1);
+  window.localStorage.setItem("boardList", JSON.stringify(boardList));
+  
+  // Remove element from DOM.
+  taskDiv.parentNode.removeChild(taskDiv);
+}
 
 /* Function to set the tabindex of elements to 0 or -1 to call in the loadBoardData-function*/
 function setTabindexOnProperties(para){

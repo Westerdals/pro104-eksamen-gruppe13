@@ -504,6 +504,14 @@ header {
   cursor: pointer;
   background-color: #a9d97d;
 }
+.optWarning {
+  background-color: #f00;
+  color: #ff0;
+}
+.optWarning:hover {
+  cursor: pointer;
+  font-weight: 800;  
+}
 
 /* Invite option in nav-bar */
 #inv-btn {
