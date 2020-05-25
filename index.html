@@ -91,7 +91,6 @@
           <img src="img/checkbox.png" id="tp-title-icon" alt="Title icon">
         </div>
         <div id="tp-title"></div> <!-- Title text -->
-        <div id="tp-close" class="selectable" onclick="hideTaskPropDiv()">X</div>
         <div id="tp-title-sub"></div> <!-- Text below title -->
 
         <div id="tp-mem-title">Members</div>
@@ -121,7 +120,12 @@
           <textarea id="tp-desc-input" class="color rounded" placeholder="Add a more detailed text..." onclick="triggerDescInput()"></textarea> <!-- Description input -->
           <div id="tp-desc-btn" class="color rounded hidden" tabindex="0">Save</div>
         </div>
+
+      <!-- Button to close up window -->
+      <div id="tp-close" class="selectable" onclick="hideTaskPropDiv()" tabindex="0">X</div>
+
       </div>
+      
 
       <!-- Invisible divs that capture click events for closing the window -->
       <div id="tp-air-right" onclick="hideTaskPropDiv()"></div>
@@ -143,8 +147,8 @@
       <!-- Visible window -->
       <div id="add-win" class="rounded">
         <div id="add-title">Add members to task</div>
-        <div id="add-close" class="selectable" onclick="hideAddWin()">X</div>
         <div id="mem-list"></div>
+        <div id="add-close" class="selectable" onclick="hideAddWin()" tabindex="0">X</div>
       </div>
 
       <div id="add-air-right" onclick="hideAddWin()"></div>
@@ -167,10 +171,10 @@
       <!-- Visible window -->
       <div id="date-win" class="rounded">
         <div id="date-title" class="inline">Change deadline</div>
-        <div class="float-right selectable" onclick="hideDateWin()">X</div>  
         <input id="date-input" type="datetime-local" tabindex="0" oninput="dateChange(event)">
         <div id="date-save" class="selectable" tabindex="0" onclick="saveDate()">Save</div>
         <div id="date-remove" class="selectable" tabindex="0" onclick="removeDate()">Remove</div>
+        <div class="float-right selectable" id="date-close" onclick="hideDateWin()">X</div>  
       </div>
 
       <div id="date-air-right" onclick="hideDateWin()"></div>
