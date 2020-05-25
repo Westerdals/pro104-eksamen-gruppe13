@@ -37,6 +37,7 @@ ul > li {
   background-color: #88b360;
   text-align: center;
   padding-top: 33px;
+  border-radius: 5px;
 }
 
 @media only screen and (max-width: 600px) {

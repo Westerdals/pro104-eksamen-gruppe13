@@ -37,6 +37,7 @@ window.onload = function() {
         // Creates and appends a new clickable list element.
         let li = document.createElement("li");
         li.className = "rounded";
+        li.className = "tab-index";
         li.innerHTML = board.title;
         li.onclick = function(){ selectBoard(i, userId); }
         boardsUl.insertBefore(li, createLi);
@@ -46,6 +47,7 @@ window.onload = function() {
     }
   }
 
+  setTabindexOnProperties(0); 
   loadAnimation();
   console.log(count + " board elements found");
 };
@@ -67,6 +69,8 @@ function showNewBoardDiv() {
   var containerDiv = document.getElementById("new-board-container");
   overlayDiv.style.display = "block";
   containerDiv.style.display = "block";
+
+  setTabindexOnProperties(-1);
 }
 
 function hideNewBoardDiv() {
@@ -74,6 +78,8 @@ function hideNewBoardDiv() {
   var containerDiv = document.getElementById("new-board-container");
   overlayDiv.style.display = "none";
   containerDiv.style.display = "none";
+
+  setTabindexOnProperties(0);
 }
 
 /**
@@ -139,4 +145,16 @@ function loadAnimation(){
   var body = document.getElementsByTagName("body");
 
   body[0].className = "changeBackgroundColor";
+}
+
+/* Function to set tabindex-value to 0 or -1 */
+function setTabindexOnProperties(para){
+  
+  var mainBoardContainer = document.querySelectorAll(".tab-index");
+    
+  for (let i = 0; i < mainBoardContainer.length; i++){
+      
+      mainBoardContainer[i].tabIndex = para
+  }
+  
 }
