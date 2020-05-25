@@ -102,11 +102,11 @@ function loadBoardData() {
       const memberIds    = task.memberIds;
       //console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescr + ", deadline: " + taskDeadline);
 
-      let htmlTxtForOneElement = createElementWithRightCSS(taskTitle);
+      let htmlTxtForOneElement = createElementWithRightCSS(taskTitle, taskId, boardId, i);
       let taskDiv = document.createElement("div");
       taskDiv.id = "task" + taskId;
       taskDiv.innerHTML = htmlTxtForOneElement;
-      taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId, i)};
+      taskDiv.onclick = function(){showTaskPropDiv(event, boardId, taskId, i)};
       anchorTag.parentNode.insertBefore(taskDiv, anchorTag.nextSibling); //insert after anchor tagg
       anchorTag = taskDiv; // Set anchor tag to last inserted div.
 
@@ -252,11 +252,11 @@ function createTaskHandler(userId, colId, inputTag) {
   // Get anchor tag.
   let anchorTag = document.getElementById("newTaskId" + colId);
 
-  let htmlTxtForOneElement = createElementWithRightCSS(title);
+  let htmlTxtForOneElement = createElementWithRightCSS(title, taskId, boardId, colId);
   let taskDiv = document.createElement("div");
   taskDiv.id = "task" + taskId;
   taskDiv.innerHTML = htmlTxtForOneElement;
-  taskDiv.onclick = function(){showTaskPropDiv(boardId, taskId, colId)};
+  taskDiv.onclick = function(){showTaskPropDiv(event, boardId, taskId, colId)};
   anchorTag.parentNode.insertBefore(taskDiv, anchorTag); //insert before
   //anchorTag.parentNode.insertBefore(taskDiv, anchorTag.nextSibling);
 
@@ -266,26 +266,69 @@ function createTaskHandler(userId, colId, inputTag) {
   inputTag.focus();
 }
 
-function createElementWithRightCSS(title){
+function createElementWithRightCSS(title, taskId, boardId, colId){
   let outputDiv = `
      <div class="main-boards-tasks color selectable rounded" draggable="true" ondragstart="drag(event)">
             <p>${title}</p>
 
-              <div class="arrow-container">
-                <div class="main-boards-tasks-arrow">
-                  <i class="arrow right"></i>
-                </div>
+            <div class="arrow-container" onclick="moveTask(event, ${taskId}, ${boardId}, ${colId}, ${colId+1})">
+              <div class="main-boards-tasks-arrow">
+                <i class="arrow right"></i>
               </div>
+            </div>
      </div>`;
 
   return outputDiv;
+}
+
+function moveTask(ev, taskId, boardId, colId, targetColId) {
+  // Prevent outer onclick events from firing.
+  if (!ev) var ev = window.event;
+  ev.cancelBubble = true;
+  if (ev.stopPropagation) ev.stopPropagation();
+
+  let taskDiv = document.getElementById(ev.currentTarget.parentNode.parentNode.id);
+  //console.log("Move task "+taskId+" in board "+boardId+" to column "+targetColId);
+
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  const board = boardList[boardId];
+  const cols = board.columns;
+  const task = board.tasks[taskId];
+  if (targetColId >= cols.length) {
+    console.log("An attempt was made to move a task to a column outside range.");
+    return;
+  }
+
+  // Remove task id from the columns array.
+  let taskIds = cols[colId].taskIds;
+  taskIds = arrayRemoveByVal(taskId, taskIds);
+  boardList[boardId].columns[colId].taskIds = taskIds;
+
+  // Add task id to the target columns array and save to storage.
+  cols[targetColId].taskIds.push(taskId);
+  window.localStorage.setItem("boardList", JSON.stringify(boardList));
+  
+  // Remove element from DOM.
+  taskDiv.parentNode.removeChild(taskDiv);
+  
+  // Update the onclick function arguments and insert element in the target column.
+  const anchorTag     = document.getElementById("newTaskId" + targetColId);
+  taskDiv.innerHTML = createElementWithRightCSS(task.title, taskId, boardId, targetColId);
+  taskDiv.onclick   = function(){showTaskPropDiv(event, boardId, taskId, targetColId)};
+  anchorTag.parentNode.insertBefore(taskDiv, anchorTag);
 }
 
 function drag(ev) {
   ev.dataTransfer.setData("text", ev.target.parentNode.id);
 }
 
-function showTaskPropDiv(boardId, taskId, colId) {
+function showTaskPropDiv(ev, boardId, taskId, colId) {
+  /*console.log(ev.currentTarget.id.substring(0, 4));
+  if (ev.currentTarget.id.substring(0, 4) === "task") {
+    console.log("showTaskPropDiv() clicked");
+    return;
+  }
+  let taskDiv = document.getElementById(ev.currentTarget.parentNode.parentNode.id);*/
   //console.log("showTaskPropDiv(taskId="+taskId+")");
   let overlayDiv    = document.getElementById("tp-overlay");
   let frameDiv      = document.getElementById("tp-frame");
