@@ -1,14 +1,5 @@
 var mainBoardContainer = document.getElementById("main-container");
 
-/* Counter for tabIndex */
-var counter = 1;
-
-/* Adding tabIndex to elements */
-document.getElementById("logo").tabIndex = counter++;
-document.getElementById("board-a").tabIndex = counter++;
-document.getElementById("inv-btn").tabIndex = counter++;
-
-
 var columns = [
   {
     title: "To do",
@@ -54,7 +45,7 @@ function createTemplateGrid(columns){
 
             </div>
 
-            <div class="main-boards-tasks main-boards-add-task-btn" id="textBoxId${i}" onclick="showTextbox(this.id)">
+            <div class="main-boards-tasks main-boards-add-task-btn tab-index" id="textBoxId${i}" onclick="showTextbox(this.id)">
                 <p>+Add new task..</p>
             </div>
 
@@ -70,7 +61,7 @@ function createTemplateGrid(columns){
     }
 
     var newBoard = `
-        <div id="add-new-board" onclick="animationForAddBoard()">
+        <div id="add-new-board" class="tab-index" onclick="animationForAddBoard()">
             <p class="textbox"><strong>Add new column</strong></p>
             <div id="new-board-container">
                 <input type="text" id="add-board-field" maxlength="18">
@@ -78,6 +69,8 @@ function createTemplateGrid(columns){
             </div>
         </div>
     `;
+
+ 
  
   mainBoardContainer.innerHTML = htmlTxt;
   mainBoardContainer.innerHTML += newBoard;
