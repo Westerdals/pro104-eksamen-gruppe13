@@ -207,12 +207,12 @@ function handleKeyPressFromInv(ev) {
   ev = ev || window.event;
   if (ev.keyCode == 27) {
     console.log("escape key from Invite menu");
-    hideInviteMenu();
+    hideInviteWin();
     document.removeEventListener('keydown', handleKeyPressFromInv);
   }
 }
 
-function hideInviteMenu() {
+function hideInviteWin() {
   let overlayDiv = document.getElementById("inv-overlay");
   let frameDiv   = document.getElementById("inv-frame");
   overlayDiv.style.display = "none";
@@ -570,7 +570,7 @@ function handleKeyPressFromDate(ev) {
   ev = ev || window.event;
   if (ev.keyCode == 27) {
       console.log("escape key from Deadline window");
-      hideDateDiv();
+      hideDateWin();
   }
 }
 

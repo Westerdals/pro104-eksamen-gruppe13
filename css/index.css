@@ -2,6 +2,14 @@
   box-sizing: border-box;
 }
 
+.inline {
+  display: inline-block;
+}
+
+.float-right {
+  float: right;
+}
+
 body {
     margin: 0;
     background-color: #D3E8C2;
@@ -381,7 +389,7 @@ header {
   grid-template-columns: 24px auto minmax(180px, 606px) 130px; /* 686 = 760-24-130*/
   grid-template-rows: 20px 30px 18px 55px 20px minmax(70px, auto) 60px;
   grid-template-areas:
-    "title-icon title        title        title"
+    "title-icon title        title        close"
     ".          title-sub    title-sub    title-sub"
     ".          mem-title    date-title   menu"
     ".          mem-view     date-view    menu"
@@ -400,7 +408,7 @@ header {
     grid-template-columns: 24px 1fr 1fr;
     grid-template-rows: 20px 18px 18px 40px 30px 90px;
     grid-template-areas:
-      "title-icon   title        title"
+      "title-icon   title        close"
       "title-sub    title-sub    title-sub"
       "mem-title    mem-title    mem-title"
       "mem-view     mem-view     mem-view"
@@ -419,11 +427,15 @@ header {
   /* To move transparent background */
   mix-blend-mode: multiply;
   width: 18px;
-
 }
 #tp-title {
   grid-area: title;
   color: #334622;
+}
+#tp-close {
+  grid-area: close;
+  width: 14px;
+  justify-self: end;
 }
 #tp-title-sub {
   grid-area: title-sub;
@@ -591,13 +603,6 @@ header {
 #date-air-left  {grid-area: date-air-left; }
 #date-air-right {grid-area: date-air-right;}
 #date-air-bot   {grid-area: date-air-bot;  }
-
-#date-title {
-  display: inline-block;
-}
-#date-close {
-  float: right;
-}
 
 #date-save {
   position: absolute;

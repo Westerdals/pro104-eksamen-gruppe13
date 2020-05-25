@@ -53,17 +53,18 @@
   <div id="inv-frame" class="overlay hidden">
     <div id="inv-container">
       
-      <div id="inv-air-top" onclick="hideInviteMenu()"></div>
-      <div id="inv-air-left" onclick="hideInviteMenu()"></div>
+      <div id="inv-air-top" onclick="hideInviteWin()"></div>
+      <div id="inv-air-left" onclick="hideInviteWin()"></div>
 
       <!-- Visible window. -->
       <div id="inv-win" class="rounded">
-        <div>Invite to Board</div>
+        <div class="inline">Invite to Board</div>
+        <div class="float-right selectable" onclick="hideInviteWin()">X</div>
         <div id="inv-list"></div>
       </div>
 
-      <div id="inv-air-right" onclick="hideInviteMenu()"></div>
-      <div id="inv-air-bot" onclick="hideInviteMenu()"></div>
+      <div id="inv-air-right" onclick="hideInviteWin()"></div>
+      <div id="inv-air-bot" onclick="hideInviteWin()"></div>
 
     </div>
   </div>
@@ -95,6 +96,7 @@
           <img src="img/checkbox.png" id="tp-title-icon" alt="Title icon">
         </div>
         <div id="tp-title"></div> <!-- Title text -->
+        <div id="tp-close" class="selectable" onclick="hideTaskPropDiv()">X</div>
         <div id="tp-title-sub"></div> <!-- Text below title -->
 
         <div id="tp-mem-title">Members</div>
@@ -169,8 +171,8 @@
 
       <!-- Visible window -->
       <div id="date-win" class="rounded">
-        <div id="date-title">Change deadline</div>
-        <div id="date-close" class="selectable" onclick="hideDateWin()">X</div>  
+        <div id="date-title" class="inline">Change deadline</div>
+        <div class="float-right selectable" onclick="hideDateWin()">X</div>  
         <input id="date-input" type="datetime-local" oninput="dateChange(event)">
         <div id="date-save" class="selectable" onclick="saveDate()">Save</div>
         <div id="date-remove" class="selectable" onclick="removeDate()">Remove</div>
