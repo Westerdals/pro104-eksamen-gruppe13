@@ -38,7 +38,7 @@ function loginUser(event) {
           window.setTimeout(function(){
 
         // Move to a new location or you can do something else
-        window.location.href =  "boards.html?" + i;
+        window.location.href =  "boards.html?userid=" + i;
 
     }, 3000);
           //}

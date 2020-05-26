@@ -1,29 +1,5 @@
 var mainBoardContainer = document.getElementById("main-container");
 
-var columns = [
-  {
-    title: "To do",
-    taskIds: [0], // refers to its index value
-    textBoxId: "",
-    textAreaId: "",
-    newTaskId: "",
-  },
-  {
-    title: "Doing",
-    taskIds: [],
-    textBoxId: "",
-    textAreaId: "",
-    newTaskId: "",
-  },
-  {
-    title: "Done",
-    taskIds: [1, 2],
-    textBoxId: "",
-    textAreaId: "",
-    newTaskId: "",
-  }
-];
-
 /* Creating the template for the columns that will hold the tasks */
 function createTemplateGrid(columns){ 
   var htmlTxt = "";
@@ -51,8 +27,6 @@ function createTemplateGrid(columns){
             
         </div>
         `;
-
-
     }
 
 /* Creating the new column-field that will make it possible to add new columns */
@@ -65,19 +39,21 @@ function createTemplateGrid(columns){
             </div>
         </div>
     `;
-
- 
  
   mainBoardContainer.innerHTML = htmlTxt;
   mainBoardContainer.innerHTML += newBoard;
 }
 
-// Prevent interaction when dragging an element.
+/**
+ * Prevent interaction when dragging an element.
+ */
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
-// Handles dropping a dragged task over a column.
+/**
+ * Handles dropping a dragged task over a column.
+ */
 function drop(ev) {
   ev.preventDefault();
   
@@ -132,16 +108,25 @@ function addNewBoard(){
 
   window.localStorage.setItem("boardList", JSON.stringify(boardList));
 
-  window.location.href = "index.html?" + userId;
+  const i = boardList[boardId].columns.length - 1;
+  window.location.href = "index.html?userid=" + userId + "&focus=textBoxId"+i;
 
+  /* In order to gain focus on the Add new task button in the newly created column,
+     the button element id is passed as a url parameter. When the site loads,
+     it will be read and focused. */
 }
 
+/**
+ * Displays input field and button for adding a new column.
+ */
 function animationForAddBoard(){
   let animateBoard = document.getElementById("add-new-board");
   animateBoard.className = "add-new-board-animation";
 
   let createNewBoardContainer = document.getElementById("new-board-container");
   createNewBoardContainer.style.display = 'block';
+  
+  document.getElementById("add-board-field").focus();
 }
 
 
@@ -156,26 +141,21 @@ function showTextbox(clickedId) {
   // Focusing on the textarea shown
   let focus = showText.getElementsByTagName("textarea");
   focus[0].focus();
-
-  const overlayDiv = document.getElementById("add-overlay");
-  const frameDiv   = document.getElementById("add-frame");
-  overlayDiv.style.display = "none";
-  frameDiv.style.display   = "none";
   
+  // Enable use of escape key to interact with the open text box.
   document.addEventListener('keydown', handleKeyPressFromTextbox);
 
   setSecondTabIndexElements(0);
 }
 
+/**
+ * Hides the input text box and button for Add new task.
+ * Triggered by key press and checks for the "escape" key.
+ */
 function handleKeyPressFromTextbox(ev) {
   ev = ev || window.event;
   if (ev.keyCode == 27) {
     console.log("escape key from New task textbox");
-
-    // Prevent outer onclick events from firing.
-    if (!ev) var ev = window.event;
-    ev.cancelBubble = true;
-    if (ev.stopPropagation) ev.stopPropagation();
 
     document.removeEventListener('keydown', handleKeyPressFromTextbox);
     document.getElementById(ev.target.id).blur(); //remove focus to trigger hideTextBox()

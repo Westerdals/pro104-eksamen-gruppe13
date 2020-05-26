@@ -5,8 +5,7 @@ const INPUT_LENGTH_ADD_TASK   = 99;
 const INPUT_LENGTH_ADD_COLUMN = 99;
 
 function getUserId() {
-  const s = window.location.search;
-  return s.substring(1, s.length);
+  return getUrlParameter("userid");
 }
 
 /**
@@ -71,6 +70,9 @@ function isAlphaNumeric(str) {
   return str.match(pattern);
 }
 
+/**
+ * Input validation handler with alert as feedback.
+ */
 function invFormAl(str, minLength, isAlphaNum, name) {
   if (minLength > 0 && str.length < minLength) {
     alert(name + " length must be at least " + minLength);
@@ -82,6 +84,9 @@ function invFormAl(str, minLength, isAlphaNum, name) {
   return false;
 }
 
+/**
+ * Input validation handler that writes feedback in a HTML element.
+ */
 function invFormFb(str, minLength, isAlphaNum, name, fbDiv) {
   if (minLength > 0 && str.length < minLength) {
     fbDiv.innerHTML = name + " length must be at least " + minLength;
@@ -125,4 +130,11 @@ function createBoard(userId, title, columns, tasks) {
   userList[userId].lastBoardId = boardId;
   window.localStorage.setItem("userList", JSON.stringify(userList));
   window.localStorage.setItem("boardList", JSON.stringify(boardList));
+}
+
+function getUrlParameter(name) {
+  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+  var results = regex.exec(location.search);
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
