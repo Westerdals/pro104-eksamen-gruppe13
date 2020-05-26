@@ -56,7 +56,6 @@ function setLinkParams() {
   
   boardA.href    = boardA.href   + "?"  + userId;
   boardLogo.href = boardLogo.href + "?" + userId;
- /* membersA.href  = membersA.href + "?"  + userId; */
 }
 
 function loadBoardData() {
