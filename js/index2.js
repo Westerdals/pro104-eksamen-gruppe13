@@ -1,4 +1,39 @@
- 
+
+/**
+ * Called from end of loadBoardData()
+ * Sets up listeners from triggering interactible elements with enter key press.
+ */
+function addEventListeners(columns, tasks) {
+  document.getElementById("inv-btn").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {showInviteMenu();}
+  });
+
+  for (let i = 0; i < columns.length; i++) {
+    document.getElementById("textBoxId"+i).addEventListener('keypress', function(e) {
+      if (e.keyCode == 13) {
+        e.preventDefault();
+        showTextbox("textBoxId"+i);
+      }
+    });
+  }
+
+  document.getElementById("m-join").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {joinTask();}
+  });
+  document.getElementById("m-add").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {showAddWin();}
+  });
+  document.getElementById("m-deadline").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {showDateWin();}
+  });
+  document.getElementById("m-move").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {showMoveWin();}
+  });
+  document.getElementById("m-delete").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {showDeleteWin();}
+  });
+}
+
 function setLinkParams() {
   let boardA     = document.getElementById("board-a");
   let boardLogo  = document.getElementById("board-logo");
@@ -25,7 +60,7 @@ function loadBoardData() {
   // Verify that the user is logged in properly.
   if (userList.length == 0 || typeof(userList[userId]) === undefined || userId == '') {
 
-    // Creating two test user if none exists.
+    // Creating two test users if none exists.
     if (userList.length == 0) {
       userId = 0;
       let name = "test";
@@ -79,9 +114,10 @@ function loadBoardData() {
   const tasks      = board.tasks;
   const userIds    = board.userIds; //invited members
 
+  // Draw columns
   createTemplateGrid(columns);
 
-  // Demonstration on how to extract everything.
+  // Loop through columns
   for (let i = 0; i < columns.length; i++) {
     const column = columns[i];
 
@@ -111,18 +147,11 @@ function loadBoardData() {
       taskDiv.id = "task" + taskId;
       taskDiv.innerHTML = htmlTxtForOneElement;
       taskDiv.onclick = function(){showTaskPropDiv(event, boardId, taskId, i)};
+      taskDiv.addEventListener('keypress', function(e) {
+        if (e.keyCode == 13) {showTaskPropDiv(event, boardId, taskId, i);}
+      });
       anchorTag.parentNode.insertBefore(taskDiv, anchorTag.nextSibling); //insert after anchor tagg
       anchorTag = taskDiv; // Set anchor tag to last inserted div.
-      
-      
-      for (let k = 0; j < task.userIds; k++) {
-
-        // Assigned user id and name.
-        const assignedUserId = task.userIds[k];
-        const assignedUserName = userList[assignedUserId].name;
-        //console.log("assigned user #" + k + ": " + assignedUserName);
-      }
-
     }
    
     const addBtn = document.getElementById("col" + i + "-btn");
@@ -132,6 +161,8 @@ function loadBoardData() {
     setTabindexOnProperties(0);
   }
   refreshMembersInNav(userId, boardId);
+
+  addEventListeners(columns, tasks);
 }
 
 // Add members to nav-bar
@@ -207,7 +238,7 @@ function addMemberToBoard(userId, memberId, boardId, memberDiv) {
   memberDiv.parentNode.removeChild(memberDiv);
 
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
-  boardList[userId].userIds.push(memberId);
+  boardList[boardId].userIds.push(memberId);
   window.localStorage.setItem("boardList", JSON.stringify(boardList));
 
   refreshMembersInNav(userId, boardId);
@@ -657,6 +688,11 @@ window.addEventListener("load", function() {
   dateInput.value = formattedDate;
   date = formattedDate;
 });
+
+function showMoveWin() {
+  alert("Work in progress!");
+}
+
 
 function deleteTaskHandler() {
   let deleteDiv = document.getElementById("m-delete");
