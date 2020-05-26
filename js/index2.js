@@ -249,8 +249,8 @@ function showInviteMenu() {
     memberDiv.innerHTML = userList[i].name;
     memberDiv.onclick = function() {addMemberToBoard(userId, i, boardId, memberDiv)};
     memberDiv.addEventListener('keypress', function(e) {
-    if (e.keyCode == 13) {addMemberToBoard(userId, i, boardId, memberDiv)}
-     });
+      if (e.keyCode == 13) {addMemberToBoard(userId, i, boardId, memberDiv)}
+    });
    
     membersDiv.appendChild(memberDiv);
     memberDiv.tabIndex = "0";
@@ -290,7 +290,8 @@ function hideInviteWin() {
   overlayDiv.style.display = "none";
   frameDiv.style.display   = "none";
   document.removeEventListener('keydown', handleKeyPressFromInv);
-
+  
+  document.getElementById("inv-btn").focus();
   setTabindexOnProperties(0);
 }
 
