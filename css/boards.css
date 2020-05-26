@@ -87,7 +87,7 @@ ul > li:hover {
 
 #new-board-upper-part * {
   position: relative;
-  top: -20px;
+  margin-top: 5px;
 }
 
 @media only screen and (max-width: 600px){
