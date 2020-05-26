@@ -239,16 +239,9 @@ function showInviteMenu() {
     memberDiv.className = "memberListName";
     memberDiv.innerHTML = userList[i].name;
     memberDiv.onclick = function() {addMemberToBoard(userId, i, boardId, memberDiv)};
-<<<<<<< HEAD
-    
-
-=======
-    memberDiv.addEventListener('keypress', function(e) {
-      if (e.keyCode == 13) {addMemberToBoard(userId, i, boardId, memberDiv);}
-    });
-    memberDiv.tabIndex = 0;
->>>>>>> 5d894a27f5e875a5267b2f1a11b494d7cb969de4
+   
     membersDiv.appendChild(memberDiv);
+    memberDiv.tabIndex = "0";
   }
 
   setTabindexOnProperties(-1);
