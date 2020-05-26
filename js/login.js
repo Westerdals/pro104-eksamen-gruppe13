@@ -33,12 +33,7 @@ function loginUser(event) {
         if (userList[i].password == password) {
           console.log("user authentication successful");
 
-          loginAnimation()
-          
-          // Check if user has a valid lastBoardId value set.
-          /*if (userList[i].lastBoardId > -1) {
-            window.location.href = "index.html?" + i;
-          } else {*/
+          loginAnimation();
 
           window.setTimeout(function(){
 

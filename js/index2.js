@@ -94,14 +94,7 @@ function loadBoardData() {
     }
     console.log("Injecting log in session of user " + userList[0].name);
     window.location.href = "index.html?0";
-
-    /*feedbackDiv.innerHTML = "You must be logged in to access and create boards.";
-    createLi.style.display = "none";
-    loginA.innerHTML = "Log In";*/
-
-    /*alert("You must be logged in to access this page.");
-    window.location.href = "login.html"; //redirect to login page
-    console.log("invalid login state");*/
+    
     return;
   }
 
@@ -135,7 +128,6 @@ function loadBoardData() {
 
     // Column title.
     const columnTitle = column.title;
-    //console.log("column #" + i + " title: " + columnTitle);
 
     // Used for inserting tasks.
     let anchorTag = document.getElementById("p" + i);
@@ -149,7 +141,6 @@ function loadBoardData() {
       const taskDescr    = task.description;
       const taskDeadline = task.deadline;
       const memberIds    = task.memberIds;
-      //console.log("task #" + j + " title: " + taskTitle + ", description: " + taskDescr + ", deadline: " + taskDeadline);
 
       let htmlTxtForOneElement = createElementWithRightCSS(taskTitle, taskId, boardId, i);
 
@@ -196,7 +187,6 @@ function refreshMembersInNav(userId, boardId) {
     let memberDiv = document.createElement("div");
     memberDiv.className = "member greycircle";
     memberDiv.innerHTML = memberName;
-    //console.log(i + ", " + memberName);
     anchorTag.appendChild(memberDiv);
   }
 }
@@ -284,7 +274,6 @@ function hideInviteWin() {
  * from where the button was pressed and saves task data in local storage.
  */
 function createTaskHandler(userId, colId, inputTag) {
-  //console.log("createTaskHandler(userId="+userId+", colId="+colId+", value="+inputTag.value+") running");
   
   // Create the task data variable.
   const title = inputTag.value;
@@ -319,7 +308,6 @@ function createTaskHandler(userId, colId, inputTag) {
   taskDiv.innerHTML = htmlTxtForOneElement;
   taskDiv.onclick = function(){showTaskPropDiv(event, boardId, taskId, colId)};
   anchorTag.parentNode.insertBefore(taskDiv, anchorTag); //insert before
-  //anchorTag.parentNode.insertBefore(taskDiv, anchorTag.nextSibling);
 
   // Setting textArea to empty when added task
   // and setting focus to write another task
@@ -352,7 +340,6 @@ function moveTask(ev, taskId, boardId, colId, targetColId) {
   if (ev.stopPropagation) ev.stopPropagation();
 
   let taskDiv = document.getElementById(ev.currentTarget.parentNode.parentNode.id);
-  //console.log("Move task "+taskId+" in board "+boardId+" to column "+targetColId);
 
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
   const board = boardList[boardId];
@@ -387,13 +374,6 @@ function drag(ev) {
 }
 
 function showTaskPropDiv(ev, boardId, taskId, colId) {
-  /*console.log(ev.currentTarget.id.substring(0, 4));
-  if (ev.currentTarget.id.substring(0, 4) === "task") {
-    console.log("showTaskPropDiv() clicked");
-    return;
-  }
-  let taskDiv = document.getElementById(ev.currentTarget.parentNode.parentNode.id);*/
-  //console.log("showTaskPropDiv(taskId="+taskId+")");
   let overlayDiv    = document.getElementById("tp-overlay");
   let frameDiv      = document.getElementById("tp-frame");
   const titleDiv    = document.getElementById("tp-title");
@@ -530,7 +510,6 @@ function refreshTaskMembers(boardId, taskId) {
   for (let i = 0; i < memberIds.length; i++) {
     const memberId = memberIds[i];
     const memberName = userList[memberId].name;
-    //console.log("Adding member " + memberName + " to task.");
 
     let memberDiv = document.createElement("div");
     memberDiv.className = "member greycircle";
@@ -556,7 +535,6 @@ function showAddWin() {
   const boardId   = userList[userId].lastBoardId;
   const memberIds = boardList[boardId].userIds; //get board members
   const taskId    = document.getElementById("tp-frame").getAttribute("taskId");
-  //console.log(taskId);
   const taskMemberIds = boardList[boardId].tasks[taskId].memberIds;
   membersDiv.textContent = "";
 
@@ -608,17 +586,14 @@ function addMemberHandler(userId, memberId, boardId, memberDiv, taskId) {
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
 
   if (memberDiv.hasAttribute("isAdded")) {
-    //console.log("Removing user " + memberId + " from task " + taskId + " of user " + userId);
     memberDiv.removeAttribute("isAdded");
 
     // Mark member as available in the add member window.
     const str = memberDiv.innerHTML;
     memberDiv.innerHTML = str.substring(str.length - 8, str-length);
-    //console.log("boardList["+userId+"]tasks.["+taskId+"].memberIds.splice("+memberId+", 1)");
     let memberIds = boardList[userId].tasks[taskId].memberIds;
     boardList[userId].tasks[taskId].memberIds = arrayRemoveByVal(memberId, memberIds);
   } else {
-    //console.log("Adding user " + memberId + " to task " + taskId + " of user " + userId);
     memberDiv.setAttribute("isAdded", "");
     
     // Mark member as added in the add member window.
@@ -654,7 +629,6 @@ function hideAddWin() {
 function showDateWin() {
   const overlayDiv = document.getElementById("date-overlay");
   const dateFrame = document.getElementById("date-frame");
-  //const dateDiv = document.getElementById("tp-date-view");
   overlayDiv.style.display = "block";
   dateFrame.style.display = "block";
   document.removeEventListener('keydown', handleKeyPressFromProp);
@@ -804,8 +778,6 @@ function setTabindexOnProperties(para){
 function setSecondTabIndexElements(para) {
   
   var propCont = document.querySelectorAll(".second-tab-index");
-  
-
 
   for (let i = 0; i < propCont.length; i++){
       
@@ -813,25 +785,3 @@ function setSecondTabIndexElements(para) {
   }
 
 }
-
-
-/* Alternative method of setting todays date and time */
-/*window.addEventListener("load", function() {
-    var now = new Date();
-    var utcString = now.toISOString().substring(0,19);
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var day = now.getDate();
-    var hour = now.getHours();
-    var minute = now.getMinutes();
-    var second = now.getSeconds();
-    var localDatetime = year + "-" +
-                      (month < 10 ? "0" + month.toString() : month) + "-" +
-                      (day < 10 ? "0" + day.toString() : day) + "T" +
-                      (hour < 10 ? "0" + hour.toString() : hour) + ":" +
-                      (minute < 10 ? "0" + minute.toString() : minute) +
-                      utcString.substring(16,19);
-    var dateInput = document.getElementById("date-input");
-    dateInput.value = localDatetime;
-    date = formattedDate;
-});*/

@@ -24,14 +24,7 @@ var columns = [
   }
 ];
 
-/*
- Forslag er at denne funksjonen kalles fra loadBoardData() i index2.js
- Da kan den motta 'columns' variabelen som er lest inn fra local storage.
- 
- Situasjonen vi er i nå er at loadBoardData() er avhengig av at createTemplateGrid()
- har kjørt før den får lagt til tasks etc. og createTemplateGrid() er avhengig
- av at loadBoardData() har kjørt for å få tegnet kolonnene fra storage.
- */
+/* Creating the template for the columns that will hold the tasks */
 function createTemplateGrid(columns){ 
   var htmlTxt = "";
   
@@ -62,6 +55,7 @@ function createTemplateGrid(columns){
 
     }
 
+/* Creating the new column-field that will make it possible to add new columns */
     var newBoard = `
         <div id="add-new-board" class="tab-index" onclick="animationForAddBoard()">
             <p class="textbox"><strong>Add new column</strong></p>
