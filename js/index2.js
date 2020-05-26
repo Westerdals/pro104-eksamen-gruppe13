@@ -158,10 +158,12 @@ function loadBoardData() {
     const inputTag = document.getElementById("textAreaId" + i);
     addBtn.onclick = function(){createTaskHandler(userId, i, inputTag)};
 
-    setTabindexOnProperties(0);
-    setSecondTabIndexElements(0);
+    
   }
   refreshMembersInNav(userId, boardId);
+
+  setTabindexOnProperties(0);
+  setSecondTabIndexElements(0);
 
   addEventListeners(columns, tasks);
 }
@@ -298,7 +300,7 @@ function createTaskHandler(userId, colId, inputTag) {
   let anchorTag = document.getElementById("newTaskId" + colId);
 
 
-  let htmlTxtForOneElement = createElementWithRightCSS(title, taskId, boardId, colId);
+  let htmlTxtForOneElement = createElementWithRightCSS(title, taskId, boardId, colId);   
 
   let taskDiv = document.createElement("div");
   taskDiv.id = "task" + taskId;
@@ -327,7 +329,7 @@ function createElementWithRightCSS(title, taskId, boardId, colId){
             </div>
      </div>`;
 
-
+    
   return outputDiv;
 }
 
