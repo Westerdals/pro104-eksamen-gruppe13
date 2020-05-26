@@ -258,15 +258,19 @@ body {
 
 /* Adding new boards */
 #add-new-board {
-    background-color: #A9D97D;
+    background-color: #98BB81;
     margin: .9em;
     height: 4.2em;
     border-radius: 10px;
     cursor: pointer;
 }
+#add-new-board #add-board-field{
+  border-radius: 5px;
+  background-color: #bdccad;
+}
 
 #add-new-board:hover {
-  background-color: #97d161;
+  background-color: #99c76e;
 }
 
 .add-new-board-animation {
@@ -314,7 +318,6 @@ body {
   }
   to {
     height: 8.4em;
-    background-color: #FFF;
   }
 }
 

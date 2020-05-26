@@ -60,7 +60,7 @@ function createTemplateGrid(columns){
         <div id="add-new-board" class="tab-index" onclick="animationForAddBoard()">
             <p class="textbox"><strong>Add new column</strong></p>
             <div id="new-board-container">
-                <input type="text" id="add-board-field" maxlength="${INPUT_LENGTH_ADD_COLUMN}">
+                <input type="text" id="add-board-field" placeholder="Add new column.." maxlength="${INPUT_LENGTH_ADD_COLUMN}">
                 <input type="button" value="Add column" id="add-board-btn" onclick="addNewBoard()" alt="Add new board">
             </div>
         </div>
