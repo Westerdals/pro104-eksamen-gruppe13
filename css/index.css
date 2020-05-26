@@ -506,6 +506,12 @@ body {
   background-color: #a9d97d;
 }
 
+#inv-close {
+  position:relative;
+  top:-59px;
+  right: 2px;
+}
+
 #inv-container {
   display: grid;
   grid-template-columns: 1fr 130px 1fr;

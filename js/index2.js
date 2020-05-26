@@ -44,6 +44,20 @@ function addEventListeners(columns, tasks) {
   document.getElementById("date-close").addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {hideDateWin();}
   });
+  document.getElementById("date-save").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {saveDate();}
+  });
+  document.getElementById("date-remove").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {removeDate();}
+  });
+  
+  document.getElementById("add-new-board").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {animationForAddBoard();}
+  });
+  
+
+
+
 }
 
 function setLinkParams() {
@@ -225,6 +239,7 @@ function showInviteMenu() {
     memberDiv.className = "memberListName";
     memberDiv.innerHTML = userList[i].name;
     memberDiv.onclick = function() {addMemberToBoard(userId, i, boardId, memberDiv)};
+    
 
     membersDiv.appendChild(memberDiv);
     membersDiv.appendChild(memberDiv).tabIndex = "0";
