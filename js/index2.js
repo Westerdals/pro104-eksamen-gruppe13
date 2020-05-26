@@ -56,6 +56,11 @@ function addEventListeners(columns, tasks) {
   document.getElementById("add-new-board").addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {animationForAddBoard();}
   });
+
+
+  document.getElementById("tp-desc-btn").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {closeDescInput();}
+  });
 }
 
 function setLinkParams() {
