@@ -196,7 +196,7 @@ function refreshMembersInNav(userId, boardId) {
   anchorTag.textContent = "";
   for (let i = 0; i < userIds.length; i++) {
     const memberId   = userIds[i];
-    const memberName = userList[memberId].name; 
+    const memberName = userList[memberId].name;
     let memberDiv = document.createElement("div");
     memberDiv.className = "member greycircle";
     memberDiv.innerHTML = memberName;
@@ -582,6 +582,9 @@ function showAddWin() {
       memberDiv.innerHTML += " (added)";
     }
     memberDiv.onclick = function() {addMemberHandler(userId, i, boardId, memberDiv, taskId)};
+    memberDiv.addEventListener('keypress', function(e){
+      if (e.keyCode == 13) {addMemberHandler(userId, i, boardId, memberDiv, taskId)}
+    });
 
     membersDiv.appendChild(memberDiv);
 
