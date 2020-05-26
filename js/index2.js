@@ -56,32 +56,28 @@ function addEventListeners(columns, tasks) {
   document.getElementById("add-new-board").addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {animationForAddBoard();}
   });
-  
-
-
-
 }
 
 function setLinkParams() {
   let boardA     = document.getElementById("board-a");
   let boardLogo  = document.getElementById("board-logo");
 
-  let ideasA     = document.getElementById("ideas-a");
-  let membersA   = document.getElementById("members-a");
   const userId   = getUserId();
-  
-  boardA.href    = boardA.href   + "?"  + userId;
-  boardLogo.href = boardLogo.href + "?" + userId;
+
+  boardA.href    = boardA.href    + "?userid=" + userId;
+  boardLogo.href = boardLogo.href + "?userid=" + userId;
 }
 
 function loadBoardData() {
+
+  setLinkParams();
 
   let userId = getUserId();
 
   const loginA = document.getElementById("login-a");
 
   // Get board and user list from local storage.
-  let userList = JSON.parse(window.localStorage.getItem("userList")) || [];
+  let userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
   let boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
 
   // Verify that the user is logged in properly.
@@ -108,7 +104,7 @@ function loadBoardData() {
       console.log("User " + name + " added to storage with id " + userId);
     }
     console.log("Injecting log in session of user " + userList[0].name);
-    window.location.href = "index.html?0";
+    window.location.href = "index.html?userid=0";
     
     return;
   }
@@ -184,6 +180,25 @@ function loadBoardData() {
   setSecondTabIndexElements(0);
 
   addEventListeners(columns, tasks);
+
+  // If the site was refreshed due to a new column being created, regain focus.
+  regainFocusState();
+}
+
+/**
+ * Checks the url for the "focus" parameter id.
+ * If set, it means the site was refreshed from addNewBoard() in index.js
+ * In order to keep tabindex focus integrity, this function was created
+ * to set focus on the appropriate element after page reload.
+ */
+function regainFocusState() {
+  const id = getUrlParameter("focus");
+  if (id !== "") {
+    //document.activeElement.blur();
+    document.getElementById(id).focus(); // cause of the Autofocus processing blocked message.
+    
+    // TODO: add code for removing the url parameter.
+  }
 }
 
 // Add members to nav-bar
@@ -249,8 +264,8 @@ function showInviteMenu() {
     memberDiv.innerHTML = userList[i].name;
     memberDiv.onclick = function() {addMemberToBoard(userId, i, boardId, memberDiv)};
     memberDiv.addEventListener('keypress', function(e) {
-    if (e.keyCode == 13) {addMemberToBoard(userId, i, boardId, memberDiv)}
-     });
+      if (e.keyCode == 13) {addMemberToBoard(userId, i, boardId, memberDiv)}
+    });
    
     membersDiv.appendChild(memberDiv);
     memberDiv.tabIndex = "0";
@@ -290,7 +305,8 @@ function hideInviteWin() {
   overlayDiv.style.display = "none";
   frameDiv.style.display   = "none";
   document.removeEventListener('keydown', handleKeyPressFromInv);
-
+  
+  document.getElementById("inv-btn").focus();
   setTabindexOnProperties(0);
 }
 
@@ -338,7 +354,6 @@ function createTaskHandler(userId, colId, inputTag) {
   // and setting focus to write another task
   inputTag.value = "";
   inputTag.focus();
-
 }
 
 function createElementWithRightCSS(title, taskId, boardId, colId){
