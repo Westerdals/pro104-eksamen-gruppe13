@@ -211,6 +211,31 @@
     </div>
   </div>
 
+  <!-- Move task window. Location independent and hidden by default.
+       Accessed through the task propertie window. -->
+  <div id="move-overlay" class="overlay transparent hidden"></div>
+  <div id="move-frame" class="overlay hidden">
+
+    <div id="move-container"> <!-- grid container -->
+  
+      <div id="move-air-top" onclick="hideMoveWin()"></div>
+      <div id="move-air-left" onclick="hideMoveWin()"></div>
+
+      <!-- Visible window -->
+      <div id="move-win" class="rounded">
+        <div id="move-title">Move task to column</div>
+        <div id="col-list"></div>
+        <div id="move-close" class="selectable" onclick="hideMoveWin()" tabindex="0">X</div>
+      </div>
+
+      <div id="move-air-right" onclick="hideMoveWin()"></div>
+      <div id="move-air-bot" onclick="hideMoveWin()"></div>
+  
+    </div>
+
+  </div>
+
+
 
 <div></div>
 

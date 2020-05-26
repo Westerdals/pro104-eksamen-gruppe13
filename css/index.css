@@ -611,3 +611,37 @@ body {
   top: 4px;
   right:8px;
 }
+
+/* --- Move task to column window --- */
+#move-container {
+  display: grid;
+  grid-template-columns: 10fr 170px 1fr;
+  grid-template-rows: 200px 200px 20000px; /* last value should be 100%, but it doesn't stretch down like with #tp-container for some reason. */
+  grid-template-areas: 
+    "move-air-top  move-air-top move-air-top"
+    "move-air-left move-win     move-air-right"
+    "move-air-bot  move-air-bot move-air-bot";
+}
+
+#move-win {
+  position: relative; /* for placing save and remove buttons at the bottom. */
+  grid-area: add-win;
+  padding: 4px;
+  background-color: #98bb81;
+}
+
+/* Defined in order to capture onclick (to hide move task window) */
+#move-air-top   {grid-area: move-air-top;  }
+#move-air-left  {grid-area: move-air-left; }
+#move-air-right {grid-area: move-air-right;}
+#move-air-bot   {grid-area: move-air-bot;  }
+
+#move-title {
+  display: inline-block;
+  margin-top: 10px;
+}
+#move-close {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+}
