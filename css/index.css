@@ -32,6 +32,7 @@ body {
 /* Navigation */
 .main-nav {
     display: block;
+    position: relative;
     top: 45px;
     width: 100%;
     text-align: center;
@@ -41,7 +42,7 @@ body {
 @media only screen and (max-width: 600px) {
   .main-nav {
     display: inline;
-    top: 0;
+    top: -40px;
     width:50%;
     margin: auto;
   }
@@ -89,12 +90,6 @@ body {
     grid-template-columns: repeat( auto-fit, minmax(250px, 315px));
     height: 80vh;
     justify-content:center;
-}
-
-@media only screen and (max-width: 600px) {
-  .main-boards #main-container {
-    margin-top: 75px;
-  }
 }
 
 .main-grids #main-container div{
@@ -254,6 +249,13 @@ body {
 #name-of-project h2 {
   font-size: 40px;
   text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  #name-of-project {
+    position: relative;
+    top: -50px;
+  }
 }
 
 
