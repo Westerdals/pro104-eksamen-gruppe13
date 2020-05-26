@@ -159,6 +159,7 @@ function loadBoardData() {
     addBtn.onclick = function(){createTaskHandler(userId, i, inputTag)};
 
     setTabindexOnProperties(0);
+    setSecondTabIndexElements(0);
   }
   refreshMembersInNav(userId, boardId);
 
@@ -227,6 +228,7 @@ function showInviteMenu() {
   }
 
   setTabindexOnProperties(-1);
+  setSecondTabIndexElements(0);
 
   document.addEventListener('keydown', handleKeyPressFromInv);
 }
@@ -399,6 +401,7 @@ function showTaskPropDiv(ev, boardId, taskId, colId) {
 
   refreshTaskMembers(boardId, taskId);
   setTabindexOnProperties(-1);
+  setSecondTabIndexElements(0); 
   
 
   // Hide the "Join" menu option if user is already assigned to the task.
@@ -447,6 +450,7 @@ function hideTaskPropDiv(ev) {
   document.removeEventListener('keydown', handleKeyPressFromProp);
 
   setTabindexOnProperties(0);
+  setSecondTabIndexElements(0);
 }
 
 function triggerDescInput() {
@@ -569,6 +573,8 @@ function showAddWin() {
 
     membersDiv.appendChild(memberDiv).tabIndex = "0";
 
+    setSecondTabIndexElements(-1);
+
   }
 
 }
@@ -617,6 +623,8 @@ function hideAddWin() {
   frameDiv.style.display   = "none";
   document.removeEventListener('keydown', handleKeyPressFromAdd);
   document.addEventListener('keydown', handleKeyPressFromProp);
+
+  setSecondTabIndexElements(0);
 }
 
 /* Show select date window. Sub-window of task properties. */
@@ -628,6 +636,8 @@ function showDateWin() {
   dateFrame.style.display = "block";
   document.removeEventListener('keydown', handleKeyPressFromProp);
   document.addEventListener('keydown', handleKeyPressFromDate);
+
+  setSecondTabIndexElements(-1);
 }
 
 function handleKeyPressFromDate(ev) {
@@ -645,6 +655,8 @@ function hideDateWin() {
   dateFrame.style.display = "none";
   document.removeEventListener('keydown', handleKeyPressFromDate);
   document.addEventListener('keydown', handleKeyPressFromProp);
+
+  setSecondTabIndexElements(0);
 }
 
 var date; // Global used by functions related to displaying and changing deadline date.
@@ -744,6 +756,20 @@ function setTabindexOnProperties(para){
       
       mainBoardContainer[i].tabIndex = para;
   }
+}
+
+
+function setSecondTabIndexElements(para) {
+  
+  var propCont = document.querySelectorAll(".second-tab-index");
+  
+
+
+  for (let i = 0; i < propCont.length; i++){
+      
+      propCont[i].tabIndex = para;
+  }
+
 }
 
 
