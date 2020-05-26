@@ -32,6 +32,18 @@ function addEventListeners(columns, tasks) {
   document.getElementById("m-delete").addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {deleteTaskHandler();}
   });
+  document.getElementById("inv-close").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {hideInviteWin();}
+  });
+  document.getElementById("tp-close").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {hideTaskPropDiv();}
+  });
+  document.getElementById("add-close").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {hideAddWin();}
+  });
+  document.getElementById("date-close").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {hideDateWin();}
+  });
 }
 
 function setLinkParams() {
@@ -694,19 +706,37 @@ function showMoveWin() {
 }
 
 
-function deleteTaskHandler() {
+function deleteTaskHandler() {    
   let deleteDiv = document.getElementById("m-delete");
   if (deleteDiv.hasAttribute("doDelete")) {
     deleteDiv.removeAttribute("doDelete");
-    deleteDiv.innerHTML = "Delete";
-    deleteDiv.className = "opt"
+    resetDeleteElement();
     hideTaskPropDiv();
     deleteTask();
   } else {
     deleteDiv.setAttribute("doDelete", "");
     deleteDiv.className = "optWarning";
     deleteDiv.innerHTML = "Are you sure?"
+    document.removeEventListener('keydown', handleKeyPressFromProp); //deactivate esc
+    document.addEventListener('keydown', handleKeyPressFromDeleteWarning);
   }
+}
+
+function handleKeyPressFromDeleteWarning(ev) {
+  ev = ev || window.event;
+  if (ev.keyCode == 27) {
+      console.log("escape key from delete");
+      resetDeleteElement(); //reset element
+      document.removeEventListener('keydown', handleKeyPressFromDeleteWarning);
+      document.addEventListener('keydown', handleKeyPressFromProp); //reactivate esc
+  }
+}
+
+function resetDeleteElement() {
+  let deleteDiv = document.getElementById("m-delete");
+  deleteDiv.innerHTML = "Delete";
+  deleteDiv.className = "opt"
+  deleteDiv.className = "opt";
 }
 
 function deleteTask() {
@@ -728,7 +758,7 @@ function deleteTask() {
   boardList[boardId].columns[colId].taskIds = taskIds;
   
   // Remove task from tasks array and save.
-  boardList[boardId].tasks.splice(taskId, 1);
+  boardList[boardId].tasks = "";
   window.localStorage.setItem("boardList", JSON.stringify(boardList));
   
   // Remove element from DOM.
