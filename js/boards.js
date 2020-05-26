@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 window.onload = function() {
 
   const userId = getUserId();
@@ -23,8 +21,6 @@ window.onload = function() {
     createLi.style.display = "none";
     loginA.innerHTML = "Log In";
 
-    /*alert("You must be logged in as a user in order to create a board.");
-    window.location.href = "login.html"; //redirect to login page*/
   } else {
   
     // Loops through all boards the user is a member of.
@@ -48,7 +44,6 @@ window.onload = function() {
       }
     });
           boardsUl.insertBefore(li, createLi);
-          //boardsUl.appendChild(li);
           continue;
         }
       }
@@ -117,34 +112,10 @@ function createNewBoard(inputIdTag) {
   }
 
   const userName = userList[userId].name;
-
-  // Checking that the user doesn't already have a board with the same title.
-  /*for (let i = 0; i < boardList.length; i++) {
-    const boardOwnerId = boardList[i].userIds[0];
-    if (boardOwnerId == userId && boardList[i] == title) {
-      alert("Board title " + title + " already exist for user " + userName + ".");
-      return;
-    }
-  }*/
   
   // Creating the new board and adds it to the list.
   createBoard(userId, title, getDefaultColumns(), getDefaultTasks());
 
-  /*const boardId = boardList.length;
-  const userIds = [userId]; // current members (user ids) of the board
-  const columns = getDefaultColumns(); // column list
-  const tasks   = getDefaultTasks(); // task list
-  const board = {userIds, title, columns, tasks};
-  boardList.push(board);
-  
-  // Setting the board as the users last active board.
-  userList[userId].lastBoardId = boardId;
-
-  // Storing board and user data in local storage.
-  window.localStorage.setItem("boardList", JSON.stringify(boardList));
-  window.localStorage.setItem("userList", JSON.stringify(userList));
-  console.log("Storing board with title " + title + " (id=" + boardId + ") for user " + userName + " (id=" + userId + ").");*/
-  
   // Redirect to the main page.
   window.location.href = "index.html?" + userId;
 }
