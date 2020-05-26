@@ -79,9 +79,15 @@ body {
   top:30px;
 }
 
+.tab-index-aLink:hover{
+    content: attr(data-text)
+}
+
+
 .main-nav li .aLink:hover, .main-nav li .aLink:target{
     background-color:#A9D97D;
 }
+
 
 /* Grid for to do boards */
 .main-boards #main-container {
