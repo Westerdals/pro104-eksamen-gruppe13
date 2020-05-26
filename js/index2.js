@@ -30,7 +30,7 @@ function addEventListeners(columns, tasks) {
     if (e.keyCode == 13) {showMoveWin();}
   });
   document.getElementById("m-delete").addEventListener('keypress', function(e) {
-    if (e.keyCode == 13) {showDeleteWin();}
+    if (e.keyCode == 13) {deleteTaskHandler();}
   });
 }
 
