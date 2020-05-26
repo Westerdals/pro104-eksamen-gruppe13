@@ -235,12 +235,6 @@ body {
   text-align: center;
 }
 
-/* Member names in invite window */
-.memberListName:hover {
-  cursor: pointer;
-  background-color: #a9d97d;
-}
-
 /* Container for displaying projectname */
 #name-of-project {
   height:2.5em;
@@ -632,7 +626,7 @@ body {
 
 #move-win {
   position: relative; /* for placing save and remove buttons at the bottom. */
-  grid-area: add-win;
+  grid-area: move-win;
   padding: 4px;
   background-color: #98bb81;
 }
@@ -645,7 +639,7 @@ body {
 
 #move-title {
   display: inline-block;
-  margin-top: 10px;
+  margin: 3px 0; /* top & bottom margin */
 }
 #move-close {
   position: absolute;
