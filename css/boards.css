@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  padding: 0;
 }
 
 body {
@@ -80,7 +81,7 @@ ul > li:hover {
 
 #new-board-upper-part {
   height: 145px;
-  padding: 9px 0 0 7px; /* top, right, bottom, left */
+  padding: 9px 0 0 3px; /* top, right, bottom, left */
   background-color: #777;
 }
 
