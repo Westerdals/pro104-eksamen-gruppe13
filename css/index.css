@@ -507,9 +507,9 @@ body {
 }
 
 #inv-close {
-  position:relative;
-  top:-59px;
-  right: 2px;
+  position:absolute;
+  top: 3px;
+  right: 5px;
 }
 
 #inv-container {
@@ -526,6 +526,7 @@ body {
   grid-area: inv-win;
   padding: 4px;
   background-color: #98bb81;
+  position: relative;
 }
 
 /* Defined in order to capture onclick (to hide invite window) */
