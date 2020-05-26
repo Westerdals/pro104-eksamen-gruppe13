@@ -50,7 +50,7 @@ function createTemplateGrid(columns){
             </div>
 
             <div class="main-boards-tasks-txt">
-                <textarea id="textAreaId${i}" onfocusout="hideTextBox(this.id)" autofocus type="textbox" placeholder="Add new task.." maxlength="${INPUT_LENGTH_ADD_TASK}"></textarea>
+                <textarea id="textAreaId${i}" onfocusout="hideTextBox(this.id)" autofocus type="textbox" placeholder="Add new task.." maxlength="${INPUT_LENGTH_ADD_TASK}" disabled></textarea>
                 <input id="col${i}-btn" type="button" value="Add task">
             </div>
 
@@ -58,6 +58,8 @@ function createTemplateGrid(columns){
             
         </div>
         `;
+
+
     }
 
     var newBoard = `
@@ -151,7 +153,6 @@ function animationForAddBoard(){
 
 // Function to show textfield and hide button
 function showTextbox(clickedId) {
-
   let hideButton = document.getElementById(clickedId);
   hideButton.style.display = "none";
 
@@ -160,8 +161,8 @@ function showTextbox(clickedId) {
 
   // Focusing on the textarea shown
   let focus = showText.getElementsByTagName("textarea");
+  focus[0].disabled = false;
   focus[0].focus();
-  
 }
 
 // Function to show button and hide textfields
