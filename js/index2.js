@@ -535,10 +535,15 @@ function refreshTaskMembers(boardId, taskId) {
     const memberName = userList[memberId].name;
 
     let memberDiv = document.createElement("div");
-    memberDiv.className = "member greycircle";
+    memberDiv.className = "member greycircle tooltip";
     memberDiv.innerHTML = memberName.charAt(0).toUpperCase();
 
     membersDiv.appendChild(memberDiv);
+    
+    let tooltipMember = document.createElement("span");
+    tooltipMember.className = "tooltiptext";
+    tooltipMember.innerHTML = memberName;
+    memberDiv.appendChild(tooltipMember);
   }
 }
 

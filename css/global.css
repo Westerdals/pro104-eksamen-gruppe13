@@ -78,7 +78,7 @@
   left:15px;
   margin-left: -60px;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity .3s;
 }
 
 .tooltip .tooltiptext::after {
