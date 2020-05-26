@@ -43,7 +43,7 @@ function createTemplateGrid(columns){
             </div>
 
             <div class="main-boards-tasks-txt">
-                <textarea id="textAreaId${i}" onfocusout="hideTextBox(this.id)" autofocus type="textbox" placeholder="Add new task.." maxlength="${INPUT_LENGTH_ADD_TASK}" disabled></textarea>
+                <textarea id="textAreaId${i}" onfocusout="hideTextBox(this.id)" autofocus type="textbox" placeholder="Add new task.." maxlength="${INPUT_LENGTH_ADD_TASK}"></textarea>
                 <input id="col${i}-btn" type="button" value="Add task">
             </div>
 
@@ -155,8 +155,31 @@ function showTextbox(clickedId) {
 
   // Focusing on the textarea shown
   let focus = showText.getElementsByTagName("textarea");
-  focus[0].disabled = false;
   focus[0].focus();
+
+  const overlayDiv = document.getElementById("add-overlay");
+  const frameDiv   = document.getElementById("add-frame");
+  overlayDiv.style.display = "none";
+  frameDiv.style.display   = "none";
+  
+  document.addEventListener('keydown', handleKeyPressFromTextbox);
+
+  setSecondTabIndexElements(0);
+}
+
+function handleKeyPressFromTextbox(ev) {
+  ev = ev || window.event;
+  if (ev.keyCode == 27) {
+    console.log("escape key from New task textbox");
+
+    // Prevent outer onclick events from firing.
+    if (!ev) var ev = window.event;
+    ev.cancelBubble = true;
+    if (ev.stopPropagation) ev.stopPropagation();
+
+    document.removeEventListener('keydown', handleKeyPressFromTextbox);
+    document.getElementById(ev.target.id).blur(); //remove focus to trigger hideTextBox()
+  }
 }
 
 // Function to show button and hide textfields
@@ -167,9 +190,10 @@ function hideTextBox(object){
 
   if (hideText.value.length == 0){
 
-  parentOfTextarea.style.display = "none";
+    parentOfTextarea.style.display = "none";
 
-  showButton.style.display = "block";
+    showButton.style.display = "block";
+    showButton.focus();
 
   }
 }

@@ -339,7 +339,6 @@ function createTaskHandler(userId, colId, inputTag) {
   // and setting focus to write another task
   inputTag.value = "";
   inputTag.focus();
-
 }
 
 function createElementWithRightCSS(title, taskId, boardId, colId){
