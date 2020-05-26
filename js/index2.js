@@ -56,8 +56,6 @@ function addEventListeners(columns, tasks) {
   document.getElementById("add-new-board").addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {animationForAddBoard();}
   });
-
-
   document.getElementById("tp-desc-btn").addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {closeDescInput();}
   });
@@ -521,7 +519,7 @@ function propWinClickHandler(ev) {
 function closeDescInput() {
   // Revert elements.
   const inputDiv = document.getElementById("tp-desc-input");
-  const saveDiv = document.getElementById("tp-desc-btn");
+  const saveDiv  = document.getElementById("tp-desc-btn");
   inputDiv.style.backgroundColor = "#63824f"; //same as .color
   saveDiv.style.display = "none";
 
