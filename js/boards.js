@@ -66,7 +66,7 @@ function selectBoard(boardId, userId) {
   window.localStorage.setItem("userList", JSON.stringify(userList));
   
   // Redirect to the main page.
-  window.location.href = "index.html?" + userId;
+  window.location.href = "index.html?userid=" + userId;
 }
 
 function showNewBoardDiv() {
