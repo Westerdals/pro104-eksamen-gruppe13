@@ -15,48 +15,35 @@ body {
     background-color: #D3E8C2;
 }
 
-@media only screen and (max-width: 600px) {
-  body {
-    margin: auto;
-  }
-}
-
-/* Header  */
-header {
-    padding-top: 1.5rem;
-    
-}
-
+/* Navigation */
 #logo{
-  display: block;
-  margin-left: 2.5rem;
   height: 100px;
 }
 
 
 @media only screen and (max-width: 600px) {
   #logo {
-    width: 60px;
+    width: 80px;
     height: auto;
+    position: ab;
+    top:-30px;
   }
 }
 
 /* Navigation */
 .main-nav {
     display: block;
-    position: absolute;
     top: 45px;
     width:80%;
-    left: 100px;
+    text-align:center;
+    margin: auto;
 }
 
 @media only screen and (max-width: 600px) {
   .main-nav {
-     margin:auto;
-     left:-15px;;
-     top: 100px;
-     width:100%;
-     text-align:center;
+    display:inline;
+    top: 0;
+    width:100%;
   }
 }
 
@@ -68,11 +55,11 @@ header {
 /* Bigger spacing for bigger fingers */
 @media only screen and (max-width: 600px) {
   .main-nav li {
-    padding: 1.3em;
+    padding: 1.1em;
   }
 }
 
-.main-nav li a {
+.main-nav li .aLink {
     text-decoration: none;
     color: #767875;
     border: 1px solid #A9D97D;
@@ -80,12 +67,10 @@ header {
     padding: .5em 2.25rem;
 }
 
-@media only screen and (max-width: 600px) {
-  .main-nav li a {
-    padding: .4em .9rem;
-  }
+#logo-li-img {
+  position:relative;
+  top:30px;
 }
-
 
 .main-nav li a:hover, .main-nav li a:target{
     background-color:#A9D97D;
@@ -93,19 +78,17 @@ header {
 
 /* Grid for to do boards */
 .main-boards #main-container {
-    margin-left: 2em;
-    margin-top: 2em;
     max-width 70em;
-    width: 90%;
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat( auto-fit, minmax(250px, 315px) );
+    grid-template-columns: repeat( auto-fit, minmax(250px, 315px));
     height: 80vh;
-    float: left;
+    justify-content:center;
 }
 
 @media only screen and (max-width: 600px) {
   .main-boards #main-container {
-    margin-top: 230px;
+    margin-top: 75px;
   }
 }
 
@@ -156,14 +139,10 @@ header {
   position: absolute;
   right: 7px;
   top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
   width: 13px;
   height: 21px;
 }
-.right-arrow:hover { /* Make arrow white on hover*/
-  filter: brightness(0) invert(1);
-}
+
 
 /* Arrow to send to the next block */
 /* Added a container in order to get position right and preserve the existing style. */
@@ -177,8 +156,6 @@ header {
 }
 .main-boards-tasks-arrow {
     position: relative;
-    /*bottom: 2.2em;*/
-    /*left: 14.3rem;*/
     width: 22px;
     height: 20px;
 }
@@ -265,7 +242,6 @@ header {
 
 /* Container for displaying projectname */
 #name-of-project {
-  width:80%;
   height:3em;
   margin:2em 2em .5em;
 }
@@ -275,12 +251,6 @@ header {
   text-align: center;
 }
 
-@media screen and (max-width: 550px){
-  #name-of-project {
-    position: relative;
-    top: 190px;
-  }
-}
 
 /* Adding new boards */
 #add-new-board {

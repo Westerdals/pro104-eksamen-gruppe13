@@ -20,20 +20,29 @@
 </head>
 
 <body onload="loadBoardData(); setLinkParams()">
-  
+
+  <div id="outer-container">
+  <div></div>
+  <div></div>
+  <div id="outer-center-grid">
+
 <header>
 
   <!-- Linking to boards.html -->
-  <a id="board-logo" class="tab-index" href="boards.html">
-    <img src="favicon.ico" id="logo" alt="Jadeboard logo">
-  </a>
+ 
 
 
   <!-- Navigation -->
   <ul id="main-nav" class="main-nav">
-    <li><a class="tab-index" id="board-a" href="boards.html">Boards</a></li>
+    <li class="tab-index" id="logo-li-img">
+       <a id="board-logo" class="tab-index" href="boards.html">
+    <img src="favicon.ico" id="logo" alt="Jadeboard logo">
+  </a>
+    </li>
+
+    <li><a class="tab-index aLink" id="board-a" href="boards.html">Boards</a></li>
  
-    <li><a class="tab-index" href="#">View my tasks</a></li>
+    <li><a class="tab-index aLink" href="#">View my tasks</a></li>
 
     <li id="inv-li"></li>
     <li><div id="inv-btn" class="color tab-index" onclick="showInviteMenu()">Invite</div></li>
@@ -185,14 +194,22 @@
 
 </section>	
 
-<!-- Sign out -->
+
+<script type="text/javascript" src="js/index.js"></script>
+
+</div>
+
+<div>
+    <!-- Sign out -->
   <div class="logout-container">
     <a href="login.html" class="tab-index">
       <img src="img/logout.png" alt="Sign out" title="Sign out">
     </a>
   </div>
+</div>
+<div></div>
 
-<script type="text/javascript" src="js/index.js"></script>
+</div>
 
 </body>
 
