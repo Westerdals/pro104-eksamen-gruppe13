@@ -44,13 +44,15 @@ function addEventListeners(columns, tasks) {
   document.getElementById("date-close").addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {hideDateWin();}
   });
+  document.getElementById("move-close").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {hideMoveWin();}
+  });
   document.getElementById("date-save").addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {saveDate();}
   });
   document.getElementById("date-remove").addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {removeDate();}
   });
-  
   document.getElementById("add-new-board").addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {animationForAddBoard();}
   });
@@ -243,7 +245,7 @@ function showInviteMenu() {
     if (isMember) continue;
 
     let memberDiv = document.createElement("div");
-    memberDiv.className = "memberListName";
+    memberDiv.className = "opt";
     memberDiv.innerHTML = userList[i].name;
     memberDiv.onclick = function() {addMemberToBoard(userId, i, boardId, memberDiv)};
     memberDiv.addEventListener('keypress', function(e) {
@@ -345,7 +347,7 @@ function createElementWithRightCSS(title, taskId, boardId, colId){
      <div class="main-boards-tasks color selectable rounded tab-index" draggable="true" ondragstart="drag(event)">
             <p>${title}</p>
 
-            <div class="arrow-container" onclick="moveTask(event, ${taskId}, ${boardId}, ${colId}, ${colId+1})">
+            <div class="arrow-container" onclick="moveTaskHandler(event, ${taskId}, ${boardId}, ${colId}, ${colId+1})">
               <div class="main-boards-tasks-arrow">
                 <i class="arrow right"></i>
               </div>
@@ -356,14 +358,21 @@ function createElementWithRightCSS(title, taskId, boardId, colId){
   return outputDiv;
 }
 
-function moveTask(ev, taskId, boardId, colId, targetColId) {
+function moveTaskHandler(ev, taskId, boardId, colId, targetColId) {
   // Prevent outer onclick events from firing.
   if (!ev) var ev = window.event;
   ev.cancelBubble = true;
   if (ev.stopPropagation) ev.stopPropagation();
 
-  let taskDiv = document.getElementById(ev.currentTarget.parentNode.parentNode.id);
+  //let taskDiv = document.getElementById(ev.currentTarget.parentNode.parentNode.id);
+  moveTask(taskId, boardId, colId, targetColId);
+}
 
+/**
+ * Moves a task to a specified column.
+ * Called by: moveTaskHandler(), onclick event set in showMoveWin()
+ */
+function moveTask(taskId, boardId, colId, targetColId) {
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
   const board = boardList[boardId];
   const cols = board.columns;
@@ -372,6 +381,7 @@ function moveTask(ev, taskId, boardId, colId, targetColId) {
     console.log("An attempt was made to move a task to a column outside range.");
     return;
   }
+  let taskDiv = document.getElementById("task" + taskId);
 
   // Remove task id from the columns array.
   let taskIds = cols[colId].taskIds;
@@ -379,7 +389,7 @@ function moveTask(ev, taskId, boardId, colId, targetColId) {
   boardList[boardId].columns[colId].taskIds = taskIds;
 
   // Add task id to the target columns array and save to storage.
-  cols[targetColId].taskIds.push(taskId);
+  cols[targetColId].taskIds.push(Number(taskId));
   window.localStorage.setItem("boardList", JSON.stringify(boardList));
   
   // Remove element from DOM.
@@ -590,7 +600,7 @@ function showAddWin() {
     }
 
     let memberDiv = document.createElement("div");
-    memberDiv.className = "memberListName";
+    memberDiv.className = "opt";
     memberDiv.innerHTML = userList[i].name;
     if (isAdded) {
       memberDiv.setAttribute("isAdded", "");
@@ -602,13 +612,11 @@ function showAddWin() {
     });
 
     membersDiv.appendChild(memberDiv);
-
-    membersDiv.appendChild(memberDiv).tabIndex = "0";
-
+    
+    memberDiv.tabIndex = "0";
     setSecondTabIndexElements(-1);
 
   }
-
 }
 
 /* Adds or removes a member from a task. */
@@ -731,46 +739,82 @@ window.addEventListener("load", function() {
 });
 
 
+/**
+ * Displays the move task window.
+ */
 function showMoveWin() {
   const overlayDiv = document.getElementById("move-overlay");
   const frameDiv   = document.getElementById("move-frame");
-  let columnsDiv   = document.getElementById("col-list");
   overlayDiv.style.display = "block";
   frameDiv.style.display   = "block";
   document.removeEventListener('keydown', handleKeyPressFromProp);
   document.addEventListener('keydown', handleKeyPressFromMove);
 
-  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
-  userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
-  const userId    = getUserId();
-  const boardId   = userList[userId].lastBoardId;
-  const board     = boardList[boardId];
-  const colums    = board.columns;
-  const memberIds = boardList[boardId].userIds; //get board members
-  const taskId    = document.getElementById("tp-frame").getAttribute("taskId");
-  const taskMemberIds = boardList[boardId].tasks[taskId].memberIds;
-  columnsDiv.textContent = "";
-
-  for (let i = 0; i < columns.length; i++) {
-
-  }
+  refreshMoveColList();
 
   setSecondTabIndexElements(-1);
+}
+
+/**
+ * Creates and appends clickable column elements in the move task window.
+ * Called when the window is opened and whenever an element is clicked and
+ * it needs to refresh the list.
+ */
+function refreshMoveColList(colId) {
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
+  const boardId   = userList[getUserId()].lastBoardId;
+  const board     = boardList[boardId];
+  const columns   = board.columns;
+  let columnsDiv  = document.getElementById("col-list");
+  const taskId    = document.getElementById("tp-frame").getAttribute("taskId");
+  if (typeof colId === "undefined") {
+    colId = document.getElementById("tp-frame").getAttribute("colId");
+  }
+
+  columnsDiv.textContent = "";
+  for (let i = 0; i < columns.length; i++) {
+    let name = columns[i].title;
+    let tabVal = 0;
+
+    if (colId == i) {
+      name += " (current)";
+      tabVal = -1;
+    }
+
+    let colDiv = document.createElement("div");
+    colDiv.innerHTML = name;
+    colDiv.className = "opt";
+    colDiv.onclick =  function(){
+      moveTask(taskId, boardId, colId, i)
+      refreshMoveColList(i);
+    };
+    colDiv.addEventListener('keypress', function(e) {
+      if (e.keyCode == 13) {
+        moveTask(taskId, boardId, colId, i);
+        refreshMoveColList(i);
+      }
+    });
+    colDiv.tabIndex = tabVal;
+
+    columnsDiv.appendChild(colDiv);
+  }
 }
 
 function handleKeyPressFromMove(ev) {
   ev = ev || window.event;
   if (ev.keyCode == 27) {
       console.log("escape key from Move window");
-      hideDateWin();
+      hideMoveWin();
   }
 }
 
 function hideMoveWin() {
+  console.log("hideMoveWin()");
   const overlayDiv = document.getElementById("move-overlay");
-  const dateFrame = document.getElementById("move-frame");
+  const frameDiv = document.getElementById("move-frame");
   overlayDiv.style.display = "none";
-  dateFrame.style.display = "none";
+  frameDiv.style.display = "none";
   document.removeEventListener('keydown', handleKeyPressFromMove);
   document.addEventListener('keydown', handleKeyPressFromProp);
 
