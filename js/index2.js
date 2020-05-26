@@ -198,9 +198,16 @@ function refreshMembersInNav(userId, boardId) {
     const memberId   = userIds[i];
     const memberName = userList[memberId].name;
     let memberDiv = document.createElement("div");
-    memberDiv.className = "member greycircle";
-    memberDiv.innerHTML = memberName;
+    memberDiv.className = "member greycircle tooltip";
+    memberDiv.innerHTML = memberName.charAt(0).toUpperCase();
     anchorTag.appendChild(memberDiv);
+
+
+    
+    let tooltipMember = document.createElement("span");
+    tooltipMember.className = "tooltiptext";
+    tooltipMember.innerHTML = memberName;
+    memberDiv.appendChild(tooltipMember);
   }
 }
 
@@ -239,6 +246,9 @@ function showInviteMenu() {
     memberDiv.className = "memberListName";
     memberDiv.innerHTML = userList[i].name;
     memberDiv.onclick = function() {addMemberToBoard(userId, i, boardId, memberDiv)};
+    memberDiv.addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {addMemberToBoard(userId, i, boardId, memberDiv)}
+     });
    
     membersDiv.appendChild(memberDiv);
     memberDiv.tabIndex = "0";
@@ -526,7 +536,7 @@ function refreshTaskMembers(boardId, taskId) {
 
     let memberDiv = document.createElement("div");
     memberDiv.className = "member greycircle";
-    memberDiv.innerHTML = memberName;
+    memberDiv.innerHTML = memberName.charAt(0).toUpperCase();
 
     membersDiv.appendChild(memberDiv);
   }

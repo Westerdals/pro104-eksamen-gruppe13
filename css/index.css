@@ -68,7 +68,7 @@ body {
 
 .main-nav li .aLink {
     text-decoration: none;
-    color: #767875;
+    color: #4e524d;
     border: 1px solid #A9D97D;
     border-radius: 5px;
     padding: .5em 2.25rem;
@@ -224,13 +224,14 @@ body {
 .member {
   display: inline-block;
   margin: 0px 3px;
+  position:relative;
 }
 
 .greycircle {
   background-color: lightgray;
   width: 30px;
   height: 30px;
-  padding-top: 4px;
+  padding-top: 5.5px;
   border-radius: 25px;
   text-align: center;
 }
