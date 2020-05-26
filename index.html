@@ -91,7 +91,7 @@
       <!-- Visible window. -->
       <div id="inv-win" class="rounded">
         <div class="inline">Invite to Board</div>
-        <div class="float-right selectable" onclick="hideInviteWin()">X</div>
+        <div class="float-right selectable" tabindex="0" onclick="hideInviteWin()">X</div>
         <div id="inv-list"></div>
       </div>
 
@@ -202,7 +202,7 @@
         <input id="date-input" type="datetime-local" tabindex="0" oninput="dateChange(event)">
         <div id="date-save" class="selectable" tabindex="0" onclick="saveDate()">Save</div>
         <div id="date-remove" class="selectable" tabindex="0" onclick="removeDate()">Remove</div>
-        <div class="float-right selectable" id="date-close" onclick="hideDateWin()">X</div>  
+        <div class="float-right selectable" id="date-close" tabindex="0" onclick="hideDateWin()">X</div>  
       </div>
 
       <div id="date-air-right" onclick="hideDateWin()"></div>
