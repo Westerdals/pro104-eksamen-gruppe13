@@ -41,6 +41,12 @@ window.onload = function() {
           li.className = "tab-index";
           li.innerHTML = board.title;
           li.onclick = function(){ selectBoard(i, userId); }
+          li.addEventListener('keypress', function(e) {
+      if (e.keyCode == 13) {
+        e.preventDefault();
+        selectBoard(i, userId);
+      }
+    });
           boardsUl.insertBefore(li, createLi);
           //boardsUl.appendChild(li);
           continue;
@@ -52,6 +58,8 @@ window.onload = function() {
   setTabindexOnProperties(0); 
   loadAnimation();
   console.log(count + " board elements found");
+
+  addEventListeners();
 };
 
 function selectBoard(boardId, userId) {
@@ -159,4 +167,10 @@ function setTabindexOnProperties(para){
       mainBoardContainer[i].tabIndex = para
   }
   
+}
+
+function addEventListeners() {
+  document.getElementById("create-li").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {showNewBoardDiv();}
+  });
 }
