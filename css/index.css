@@ -72,7 +72,7 @@ body {
   top:30px;
 }
 
-.main-nav li a:hover, .main-nav li a:target{
+.main-nav li .aLink:hover, .main-nav li .aLink:target{
     background-color:#A9D97D;
 }
 

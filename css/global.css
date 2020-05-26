@@ -1,7 +1,7 @@
 /* Styles that are used across multiple html files */
 #outer-container {
   display: grid;
-  grid-template-columns: 12% 3% auto 3% 12%;
+  grid-template-columns: 20px 20px auto 30px 20px;
   width: 100vw;
   height: 100vh;
 }
