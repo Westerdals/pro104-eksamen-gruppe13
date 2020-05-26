@@ -32,6 +32,18 @@ function addEventListeners(columns, tasks) {
   document.getElementById("m-delete").addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {deleteTaskHandler();}
   });
+  document.getElementById("inv-close").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {hideInviteWin();}
+  });
+  document.getElementById("tp-close").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {hideTaskPropDiv();}
+  });
+  document.getElementById("add-close").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {hideAddWin();}
+  });
+  document.getElementById("date-close").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {hideDateWin();}
+  });
 }
 
 function setLinkParams() {
@@ -441,9 +453,7 @@ function hideTaskPropDiv(ev) {
   closeDescInput(); //close description input
   const deleteDiv = document.getElementById("m-delete");
   if (deleteDiv.hasAttribute("doDelete")) {
-    deleteDiv.removeAttribute("doDelete");
-    deleteDiv.innerHTML = "Delete";
-    deleteDiv.className = "opt"
+    resetDeleteElement();
   }  
 
   document.getElementById("tp-overlay").style.display = "none";
@@ -462,25 +472,36 @@ function triggerDescInput() {
   saveDiv.style.display = "table-cell";
 }
 
-function closeDescInput(ev) {
+/**
+ * Handles various click events in the task properties window.
+ */
+function propWinClickHandler(ev) {
+  console.log("propWinClickHandler() " + ev.target.id);
   if (typeof ev === "undefined" || ev.target.id != "tp-desc-input") {
-    // Revert elements.
-    const inputDiv = document.getElementById("tp-desc-input");
-    const saveDiv = document.getElementById("tp-desc-btn");
-    inputDiv.style.backgroundColor = "#63824f"; //same as .color
-    saveDiv.style.display = "none";
-
-    // Save input data in storage.
-    boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
-    userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
-    const userId     = getUserId();
-    const boardId    = userList[userId].lastBoardId;
-    const frameDiv   = document.getElementById("tp-frame");
-    const taskId     = frameDiv.getAttribute("taskId");
-    let task         = boardList[boardId].tasks[taskId];
-    task.description = inputDiv.value;
-    window.localStorage.setItem("boardList", JSON.stringify(boardList));
+    closeDescInput();
   }
+  if (ev.target.id != "m-delete" && document.getElementById("m-delete").hasAttribute("doDelete")) {
+    resetDeleteElement();
+  }
+}
+
+function closeDescInput() {
+  // Revert elements.
+  const inputDiv = document.getElementById("tp-desc-input");
+  const saveDiv = document.getElementById("tp-desc-btn");
+  inputDiv.style.backgroundColor = "#63824f"; //same as .color
+  saveDiv.style.display = "none";
+
+  // Save input data in storage.
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
+  const userId     = getUserId();
+  const boardId    = userList[userId].lastBoardId;
+  const frameDiv   = document.getElementById("tp-frame");
+  const taskId     = frameDiv.getAttribute("taskId");
+  let task         = boardList[boardId].tasks[taskId];
+  task.description = inputDiv.value;
+  window.localStorage.setItem("boardList", JSON.stringify(boardList));
 }
 
 function joinTask() {
@@ -708,19 +729,39 @@ function showMoveWin() {
 }
 
 
-function deleteTaskHandler() {
+function deleteTaskHandler() {    
   let deleteDiv = document.getElementById("m-delete");
   if (deleteDiv.hasAttribute("doDelete")) {
-    deleteDiv.removeAttribute("doDelete");
-    deleteDiv.innerHTML = "Delete";
-    deleteDiv.className = "opt"
+    console.log("perform delete action");
+    resetDeleteElement();
     hideTaskPropDiv();
     deleteTask();
   } else {
+    console.log("perform delete warning");
     deleteDiv.setAttribute("doDelete", "");
     deleteDiv.className = "optWarning";
     deleteDiv.innerHTML = "Are you sure?"
+    document.removeEventListener('keydown', handleKeyPressFromProp); //deactivate esc
+    document.addEventListener('keydown', handleKeyPressFromDeleteWarning);
   }
+}
+
+function handleKeyPressFromDeleteWarning(ev) {
+  ev = ev || window.event;
+  if (ev.keyCode == 27) {
+      console.log("escape key from delete");
+      resetDeleteElement(); //reset element
+  }
+}
+
+function resetDeleteElement() {
+  console.log("resetDeleteElement() triggered");
+  let deleteDiv = document.getElementById("m-delete");
+  deleteDiv.innerHTML = "Delete";
+  deleteDiv.className = "opt";
+  deleteDiv.removeAttribute("doDelete");
+  document.removeEventListener('keydown', handleKeyPressFromDeleteWarning);
+  document.addEventListener('keydown', handleKeyPressFromProp); //reactivate esc
 }
 
 function deleteTask() {
@@ -733,7 +774,6 @@ function deleteTask() {
   const board      = boardList[boardId];
   let task         = board.tasks[taskId];
 
-
   let taskDiv = document.getElementById("task" + taskId);
 
   // Remove task id from the columns array.
@@ -742,7 +782,7 @@ function deleteTask() {
   boardList[boardId].columns[colId].taskIds = taskIds;
   
   // Remove task from tasks array and save.
-  boardList[boardId].tasks.splice(taskId, 1);
+  boardList[boardId].tasks[taskId] = "";
   window.localStorage.setItem("boardList", JSON.stringify(boardList));
   
   // Remove element from DOM.
