@@ -597,6 +597,7 @@ function showAddWin() {
 // BUG: add 2 users, the first, then the second. Second remains in storage.
 function addMemberHandler(userId, memberId, boardId, memberDiv, taskId) {
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  console.log("userID="+userId+", memberId="+memberId+", boardId="+boardId+", memberDiv="+memberDiv+", taskId="+taskId);
 
   if (memberDiv.hasAttribute("isAdded")) {
     memberDiv.removeAttribute("isAdded");
@@ -604,14 +605,14 @@ function addMemberHandler(userId, memberId, boardId, memberDiv, taskId) {
     // Mark member as available in the add member window.
     const str = memberDiv.innerHTML;
     memberDiv.innerHTML = str.substring(str.length - 8, str-length);
-    let memberIds = boardList[userId].tasks[taskId].memberIds;
-    boardList[userId].tasks[taskId].memberIds = arrayRemoveByVal(memberId, memberIds);
+    let memberIds = boardList[boardId].tasks[taskId].memberIds;
+    boardList[boardId].tasks[taskId].memberIds = arrayRemoveByVal(memberId, memberIds);
   } else {
     memberDiv.setAttribute("isAdded", "");
     
     // Mark member as added in the add member window.
     memberDiv.innerHTML += " (added)";
-    boardList[userId].tasks[taskId].memberIds.push(memberId);
+    boardList[boardId].tasks[taskId].memberIds.push(memberId);
   }
 
   window.localStorage.setItem("boardList", JSON.stringify(boardList));
@@ -711,10 +712,52 @@ window.addEventListener("load", function() {
   date = formattedDate;
 });
 
+
 function showMoveWin() {
-  alert("Work in progress!");
+  const overlayDiv = document.getElementById("move-overlay");
+  const frameDiv   = document.getElementById("move-frame");
+  let columnsDiv   = document.getElementById("col-list");
+  overlayDiv.style.display = "block";
+  frameDiv.style.display   = "block";
+  document.removeEventListener('keydown', handleKeyPressFromProp);
+  document.addEventListener('keydown', handleKeyPressFromMove);
+
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
+  const userId    = getUserId();
+  const boardId   = userList[userId].lastBoardId;
+  const board     = boardList[boardId];
+  const colums    = board.columns;
+  const memberIds = boardList[boardId].userIds; //get board members
+  const taskId    = document.getElementById("tp-frame").getAttribute("taskId");
+  const taskMemberIds = boardList[boardId].tasks[taskId].memberIds;
+  columnsDiv.textContent = "";
+
+  for (let i = 0; i < columns.length; i++) {
+
+  }
+
+  setSecondTabIndexElements(-1);
 }
 
+function handleKeyPressFromMove(ev) {
+  ev = ev || window.event;
+  if (ev.keyCode == 27) {
+      console.log("escape key from Move window");
+      hideDateWin();
+  }
+}
+
+function hideMoveWin() {
+  const overlayDiv = document.getElementById("move-overlay");
+  const dateFrame = document.getElementById("move-frame");
+  overlayDiv.style.display = "none";
+  dateFrame.style.display = "none";
+  document.removeEventListener('keydown', handleKeyPressFromMove);
+  document.addEventListener('keydown', handleKeyPressFromProp);
+
+  setSecondTabIndexElements(0);
+}
 
 function deleteTaskHandler() {    
   let deleteDiv = document.getElementById("m-delete");
