@@ -98,7 +98,6 @@ function loadBoardData() {
       let user = {name, password, lastBoardId};
       userList.push(user);
       window.localStorage.setItem("userList", JSON.stringify(userList));
-      console.log("User " + name + " added to storage with id " + userId);
 
       userId = 1;
       name = "mest";
@@ -107,7 +106,6 @@ function loadBoardData() {
       user = {name, password, lastBoardId};
       userList.push(user);
       window.localStorage.setItem("userList", JSON.stringify(userList));
-      console.log("User " + name + " added to storage with id " + userId);
     }
     console.log("Injecting log in session of user " + userList[0].name);
     window.location.href = "index.html?userid=0";
@@ -298,7 +296,6 @@ function addMemberToBoard(userId, memberId, boardId, memberDiv) {
 function handleKeyPressFromInv(ev) {
   ev = ev || window.event;
   if (ev.keyCode == 27) {
-    console.log("escape key from Invite menu");
     hideInviteWin();
     document.removeEventListener('keydown', handleKeyPressFromInv);
   }
@@ -476,7 +473,6 @@ function showTaskPropDiv(ev, boardId, taskId, colId) {
 function handleKeyPressFromProp(ev) {
   ev = ev || window.event;
   if (ev.keyCode == 27) {
-    console.log("escape key from Properties window");
     hideTaskPropDiv();
   }
 }
@@ -666,7 +662,6 @@ function addMemberHandler(userId, memberId, boardId, memberDiv, taskId) {
 function handleKeyPressFromAdd(ev) {
   ev = ev || window.event;
   if (ev.keyCode == 27) {
-      console.log("escape key from Add members window");
       hideAddWin();
   }
 }
@@ -697,7 +692,6 @@ function showDateWin() {
 function handleKeyPressFromDate(ev) {
   ev = ev || window.event;
   if (ev.keyCode == 27) {
-      console.log("escape key from Deadline window");
       hideDateWin();
   }
 }
@@ -830,7 +824,6 @@ function refreshMoveColList(colId) {
 function handleKeyPressFromMove(ev) {
   ev = ev || window.event;
   if (ev.keyCode == 27) {
-      console.log("escape key from Move window");
       hideMoveWin();
   }
 }
@@ -999,13 +992,11 @@ function showMytasksWin() {
 function handleKeyPressFromMytasks(ev) {
   ev = ev || window.event;
   if (ev.keyCode == 27) {
-      console.log("escape key from My tasks window");
       hideMytasksWin();
   }
 }
 
 function hideMytasksWin() {
-  console.log("hideMytasksWin()");
   const overlayDiv = document.getElementById("mytasks-overlay");
   const frameDiv = document.getElementById("mytasks-frame");
   overlayDiv.style.display = "none";

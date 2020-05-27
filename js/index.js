@@ -155,7 +155,6 @@ function showTextbox(clickedId) {
 function handleKeyPressFromTextbox(ev) {
   ev = ev || window.event;
   if (ev.keyCode == 27) {
-    console.log("escape key from New task textbox");
 
     document.removeEventListener('keydown', handleKeyPressFromTextbox);
     document.getElementById(ev.target.id).blur(); //remove focus to trigger hideTextBox()
