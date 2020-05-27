@@ -367,11 +367,11 @@ function createElementWithRightCSS(title, taskId, boardId, colId){
      <div class="main-boards-tasks color selectable rounded tab-index" draggable="true" ondragstart="drag(event)">
             <p>${title}</p>
 
-            <div class="arrow-container" onclick="moveTaskHandler(event, ${taskId}, ${boardId}, ${colId}, ${colId+1})">
+            <abbr title="Move task to next column"><div class="arrow-container" onclick="moveTaskHandler(event, ${taskId}, ${boardId}, ${colId}, ${colId+1})">
               <div class="main-boards-tasks-arrow">
                 <i class="arrow right"></i>
               </div>
-            </div>
+            </div></abbr>
      </div>`;
 
     
