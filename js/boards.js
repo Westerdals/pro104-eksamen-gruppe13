@@ -14,7 +14,6 @@ window.onload = function() {
   const boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
 
   // Verify that the user is logged in properly.
-  console.log(userId);
   if (userList.length == 0 || typeof(userList[userId]) === undefined || userId == '') {
 
     feedbackDiv.innerHTML = "You must be logged in to access and create boards.";
@@ -52,13 +51,11 @@ window.onload = function() {
 
   setTabindexOnProperties(0); 
   loadAnimation();
-  console.log(count + " board elements found");
 
   addEventListeners();
 };
 
 function selectBoard(boardId, userId) {
-  console.log("boardId " + boardId + " selected");
 
   // Fetch and store the selected board's id in userList.
   const userList = JSON.parse(window.localStorage.getItem("userList")) || [];

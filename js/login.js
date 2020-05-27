@@ -49,7 +49,6 @@ function loginUser(event) {
         return;
       }
     }
-    console.log("Couldn't find user " + name + " in storage");
     subFbDiv.innerHTML = "User not found";
 
   } else {

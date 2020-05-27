@@ -284,7 +284,6 @@ function showInviteMenu() {
 }
 
 function addMemberToBoard(userId, memberId, boardId, memberDiv) {
-  console.log("Adding user " + memberId + " to the board of user " + userId);
 
   // Remove member from the invite list. 
   memberDiv.parentNode.removeChild(memberDiv);
@@ -439,7 +438,6 @@ function showTaskPropDiv(ev, boardId, taskId, colId) {
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
   const task   = boardList[boardId].tasks[taskId];
   const userId = getUserId();
-  console.log("boardId="+boardId+", colId="+colId+", taskId="+taskId);
   frameDiv.setAttribute("taskId", taskId); //store for later use
   frameDiv.setAttribute("colId", colId); //used for task deletion
   titleDiv.innerHTML    = task.title;
@@ -510,7 +508,6 @@ function triggerDescInput() {
  * Handles various click events in the task properties window.
  */
 function propWinClickHandler(ev) {
-  console.log("propWinClickHandler() " + ev.target.id);
   if (typeof ev === "undefined" || ev.target.id != "tp-desc-input") {
     closeDescInput();
   }
@@ -644,7 +641,6 @@ function showAddWin() {
 // BUG: add 2 users, the first, then the second. Second remains in storage.
 function addMemberHandler(userId, memberId, boardId, memberDiv, taskId) {
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
-  console.log("userID="+userId+", memberId="+memberId+", boardId="+boardId+", memberDiv="+memberDiv+", taskId="+taskId);
 
   if (memberDiv.hasAttribute("isAdded")) {
     memberDiv.removeAttribute("isAdded");
@@ -854,12 +850,10 @@ function hideMoveWin() {
 function deleteTaskHandler() {    
   let deleteDiv = document.getElementById("m-delete");
   if (deleteDiv.hasAttribute("doDelete")) {
-    console.log("perform delete action");
     resetDeleteElement();
     hideTaskPropDiv();
     deleteTask();
   } else {
-    console.log("perform delete warning");
     deleteDiv.setAttribute("doDelete", "");
     deleteDiv.className = "optWarning";
     deleteDiv.innerHTML = "Are you sure?"
@@ -871,13 +865,11 @@ function deleteTaskHandler() {
 function handleKeyPressFromDeleteWarning(ev) {
   ev = ev || window.event;
   if (ev.keyCode == 27) {
-      console.log("escape key from delete");
       resetDeleteElement(); //reset element
   }
 }
 
 function resetDeleteElement() {
-  console.log("resetDeleteElement() triggered");
   let deleteDiv = document.getElementById("m-delete");
   deleteDiv.innerHTML = "Delete";
   deleteDiv.className = "opt";
