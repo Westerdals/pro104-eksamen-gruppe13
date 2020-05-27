@@ -660,7 +660,7 @@ body {
 /* --- My tasks window --- */
 #mytasks-container {
   display: grid;
-  grid-template-columns: 10fr 170px 1fr;
+  grid-template-columns: 1fr 170px 1fr;
   grid-template-rows: 200px 200px 20000px; /* last value should be 100%, but it doesn't stretch down like with #tp-container for some reason. */
   grid-template-areas: 
     "mytasks-air-top  mytasks-air-top mytasks-air-top"
