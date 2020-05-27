@@ -836,7 +836,6 @@ function handleKeyPressFromMove(ev) {
 }
 
 function hideMoveWin() {
-  console.log("hideMoveWin()");
   const overlayDiv = document.getElementById("move-overlay");
   const frameDiv = document.getElementById("move-frame");
   overlayDiv.style.display = "none";
@@ -953,6 +952,7 @@ function showMytasksWin() {
   for (let i = 0; i < tasks.length; i++) { //loop through all tasks
     const memberIds = tasks[i].memberIds;
     const task = tasks[i];
+    if (memberIds === undefined) break;
     for (let j = 0; j < memberIds.length; j++) { //loop through members of each task
       const memId = memberIds[j];
       if (memId == userId) { //check if member is equal to current user

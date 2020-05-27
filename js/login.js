@@ -69,7 +69,6 @@ function loginUser(event) {
     userList.push(user);
     window.localStorage.setItem("userList", JSON.stringify(userList));
 
-    console.log("User " + name + " added to storage with id " + userList.length);
     subFbDiv.innerHTML = "User created successfully";
   }
 }
