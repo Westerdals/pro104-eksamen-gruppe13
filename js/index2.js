@@ -738,7 +738,17 @@ function saveDate(event) {
 }
 
 function removeDate() {
-  // TODO: Add logic that removes the deadline....
+  const dateDiv = document.getElementById("tp-date-view");
+  dateDiv.innerHTML = "";
+
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
+  const boardId    = userList[getUserId()].lastBoardId;
+  const frameDiv   = document.getElementById("tp-frame");
+  const taskId     = frameDiv.getAttribute("taskId");
+  boardList[boardId].tasks[taskId].deadline = "";
+  window.localStorage.setItem("boardList", JSON.stringify(boardList));
+
   hideDateWin();
 }
 
