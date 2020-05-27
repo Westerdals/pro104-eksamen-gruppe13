@@ -656,3 +656,37 @@ body {
   top: 5px;
   right: 7px;
 }
+
+/* --- My tasks window --- */
+#mytasks-container {
+  display: grid;
+  grid-template-columns: 10fr 170px 1fr;
+  grid-template-rows: 200px 200px 20000px; /* last value should be 100%, but it doesn't stretch down like with #tp-container for some reason. */
+  grid-template-areas: 
+    "mytasks-air-top  mytasks-air-top mytasks-air-top"
+    "mytasks-air-left mytasks-win     mytasks-air-right"
+    "mytasks-air-bot  mytasks-air-bot mytasks-air-bot";
+}
+
+#mytasks-win {
+  position: relative; /* for placing save and remove buttons at the bottom. */
+  grid-area: mytasks-win;
+  padding: 4px;
+  background-color: #98bb81;
+}
+
+/* Defined in order to capture onclick (to hide my tasks window) */
+#mytasks-air-top   {grid-area: mytasks-air-top;  }
+#mytasks-air-left  {grid-area: mytasks-air-left; }
+#mytasks-air-right {grid-area: mytasks-air-right;}
+#mytasks-air-bot   {grid-area: mytasks-air-bot;  }
+
+#mytasks-title {
+  display: inline-block;
+  margin: 3px 0; /* top & bottom margin */
+}
+#mytasks-close {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+}

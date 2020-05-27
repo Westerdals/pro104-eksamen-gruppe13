@@ -42,7 +42,7 @@
 
     <li><a class="tab-index aLink" id="board-a" href="boards.html">Boards</a></li>
  
-    <li><a class="tab-index aLink" href="#">View my tasks</a></li>
+    <li><a class="tab-index aLink" onclick="showMytasksWin()">View my tasks</a></li>
 
     <li id="inv-li"></li>
     <li><div id="inv-btn" class="color tab-index" onclick="showInviteMenu()">Invite</div></li>
@@ -237,10 +237,29 @@
       <div id="move-air-bot" onclick="hideMoveWin()"></div>
   
     </div>
-
   </div>
+  
+  <!-- My tasks window. Location independent and hidden by default. -->
+  <div id="mytasks-overlay" class="overlay transparent hidden"></div>
+  <div id="mytasks-frame" class="overlay hidden">
 
+    <div id="mytasks-container"> <!-- grid container -->
+  
+      <div id="mytasks-air-top" onclick="hideMytasksWin()"></div>
+      <div id="mytasks-air-left" onclick="hideMytasksWin()"></div>
 
+      <!-- Visible window -->
+      <div id="mytasks-win" class="rounded">
+        <div id="mytasks-title">My tasks</div>
+        <div id="task-list"></div>
+        <div id="mytasks-close" class="selectable" onclick="hideMytasksWin()" tabindex="0">X</div>
+      </div>
+
+      <div id="mytasks-air-right" onclick="hideMytasksWin()"></div>
+      <div id="mytasks-air-bot" onclick="hideMytasksWin()"></div>
+  
+    </div>
+  </div>
 
 <div></div>
 

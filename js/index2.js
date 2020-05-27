@@ -59,6 +59,9 @@ function addEventListeners(columns, tasks) {
   document.getElementById("tp-desc-btn").addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {closeDescInput();}
   });
+  document.getElementById("mytasks-close").addEventListener('keypress', function(e) {
+    if (e.keyCode == 13) {hideMytasksWin();}
+  });
 }
 
 function setLinkParams() {
@@ -436,7 +439,7 @@ function showTaskPropDiv(ev, boardId, taskId, colId) {
   boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
   const task   = boardList[boardId].tasks[taskId];
   const userId = getUserId();
-
+  console.log("boardId="+boardId+", colId="+colId+", taskId="+taskId);
   frameDiv.setAttribute("taskId", taskId); //store for later use
   frameDiv.setAttribute("colId", colId); //used for task deletion
   titleDiv.innerHTML    = task.title;
@@ -756,7 +759,6 @@ window.addEventListener("load", function() {
   date = formattedDate;
 });
 
-
 /**
  * Displays the move task window.
  */
@@ -920,4 +922,94 @@ function setSecondTabIndexElements(para) {
       propCont[i].tabIndex = para;
   }
 
+}
+
+
+/**
+ * Displays the my tasks window with a list of the current user's tasks.
+ * The task elements are clickable and will direct the user to the properties
+ * window of that task. Called when the window is opened.
+ */
+function showMytasksWin() {
+  const overlayDiv = document.getElementById("mytasks-overlay");
+  const frameDiv   = document.getElementById("mytasks-frame");
+  overlayDiv.style.display = "block";
+  frameDiv.style.display   = "block";
+  document.removeEventListener('keydown', handleKeyPressFromProp);
+  document.addEventListener('keydown', handleKeyPressFromMove);
+
+  boardList = JSON.parse(window.localStorage.getItem("boardList")) || [];
+  userList  = JSON.parse(window.localStorage.getItem("userList")) || [];
+  const userId    = getUserId();
+  const boardId   = userList[userId].lastBoardId;
+  const board     = boardList[boardId];
+  const columns   = board.columns;
+  const tasks     = board.tasks;
+  let tasksDiv    = document.getElementById("task-list");
+
+  tasksDiv.textContent = ""; //reset task container
+  for (let i = 0; i < tasks.length; i++) { //loop through all tasks
+    const memberIds = tasks[i].memberIds;
+    const task = tasks[i];
+    for (let j = 0; j < memberIds.length; j++) { //loop through members of each task
+      const memId = memberIds[j];
+      if (memId == userId) { //check if member is equal to current user
+        
+        // In order to trigger the task properties window, we need the column id.
+        let colId = null; // column id of the current taskId
+        for (let k = 0; k < columns.length; k++) { //loop through all columns
+          const taskIds = columns[k].taskIds;
+          for (let l = 0; l < taskIds.length; l++) { //loop through task ids in the column
+            const colTaskId = taskIds[l];
+            if (colTaskId == i) { //check that the task id matches the current task from the outermost loop
+              colId = k;
+              break;
+            }
+          }
+          if (colId !== null) break;
+        }
+        
+        const taskDiv = document.createElement("div");
+        
+        taskDiv.innerHTML = task.title;
+        taskDiv.className = "opt";
+        taskDiv.tabIndex  = 0;
+
+        taskDiv.onclick = function(){
+          hideMytasksWin();
+          showTaskPropDiv(null, boardId, i, colId);
+        };
+        taskDiv.addEventListener('keypress', function(e) {
+          if (e.keyCode == 13) {
+            hideMytasksWin();
+            showTaskPropDiv(null, boardId, i, colId);
+          }
+        });
+
+        tasksDiv.appendChild(taskDiv);
+      } //end of -if-
+    } //end of -j loop-
+  } //end of -i loop-
+
+  setSecondTabIndexElements(-1);
+}
+
+function handleKeyPressFromMytasks(ev) {
+  ev = ev || window.event;
+  if (ev.keyCode == 27) {
+      console.log("escape key from My tasks window");
+      hideMytasksWin();
+  }
+}
+
+function hideMytasksWin() {
+  console.log("hideMytasksWin()");
+  const overlayDiv = document.getElementById("mytasks-overlay");
+  const frameDiv = document.getElementById("mytasks-frame");
+  overlayDiv.style.display = "none";
+  frameDiv.style.display = "none";
+  document.removeEventListener('keydown', handleKeyPressFromMytasks);
+  document.addEventListener('keydown', handleKeyPressFromProp);
+
+  setSecondTabIndexElements(0);
 }
