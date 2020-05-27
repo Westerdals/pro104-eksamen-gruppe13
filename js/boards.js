@@ -38,11 +38,11 @@ window.onload = function() {
           li.innerHTML = board.title;
           li.onclick = function(){ selectBoard(i, userId); }
           li.addEventListener('keypress', function(e) {
-      if (e.keyCode == 13) {
-        e.preventDefault();
-        selectBoard(i, userId);
-      }
-    });
+          if (e.keyCode == 13) {
+            e.preventDefault();
+            selectBoard(i, userId);
+          }});
+          
           boardsUl.insertBefore(li, createLi);
           continue;
         }
@@ -117,7 +117,7 @@ function createNewBoard(inputIdTag) {
   createBoard(userId, title, getDefaultColumns(), getDefaultTasks());
 
   // Redirect to the main page.
-  window.location.href = "index.html?" + userId;
+  window.location.href = "index.html?userid=" + userId;
 }
 
 
