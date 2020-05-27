@@ -23,6 +23,7 @@ function loginUser(event) {
 
   const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
 
+  alert(document.activeElement.name);
   if (loginType == "login") {
        
      // Check if user is found in storage.
