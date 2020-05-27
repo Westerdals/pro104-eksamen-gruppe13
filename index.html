@@ -35,17 +35,17 @@
   <!-- Navigation -->
   <ul id="main-nav" class="main-nav">
     <li id="logo-li-img">
-       <a id="board-logo" class="tab-index" href="boards.html">
-          <img src="favicon.ico" id="logo" alt="Jadeboard logo">
+      <abbr title="Jadeboard logo"> <a id="board-logo" class="tab-index" href="boards.html">
+          <img src="favicon.ico" id="logo" alt="Jadeboard logo"> </abbr>
        </a>
     </li>
 
-    <li><a class="tab-index aLink opt" id="board-a" href="boards.html">Boards</a></li>
+    <abbr title="Go to boardselection"><li><a class="tab-index aLink opt" id="board-a" href="boards.html">Boards</a></li></abbr>
  
     <li><a class="tab-index aLink opt" onclick="showMytasksWin()">View my tasks</a></li>
 
     <li id="inv-li"></li>
-    <li><div id="inv-btn" class="color tab-index" onclick="showInviteMenu()">Invite</div></li>
+    <abbr title="Add members to board"><li><div id="inv-btn" class="color tab-index" onclick="showInviteMenu()">Invite</div></li></abbr>
     
   </ul>
 
@@ -127,9 +127,9 @@
          <!-- Menu on the right side -->
         <div id="tp-menu-wrap">
           <div>Menu</div>
-          <div id="m-join" class="opt second-tab-index" onclick="joinTask()">Join</div>
-          <div id="m-add" class="opt second-tab-index" onclick="showAddWin()">Add members</div>
-          <div id="m-deadline" class="opt second-tab-index" onclick="showDateWin()">Deadline</div>
+          <abbr title="Join this task"><div id="m-join" class="opt second-tab-index" onclick="joinTask()">Join</div></abbr>
+          <abbr title="Add/remove members for task"><div id="m-add" class="opt second-tab-index" onclick="showAddWin()">Add members</div></abbr>
+          <abbr title="Add deadline to task"><div id="m-deadline" class="opt second-tab-index" onclick="showDateWin()">Deadline</div></abbr>
           <div id="m-move" class="opt second-tab-index" onclick="showMoveWin()">Move</div>
           <div id="m-delete" class="opt second-tab-index" onclick="deleteTaskHandler()">Delete</div>
         </div>
