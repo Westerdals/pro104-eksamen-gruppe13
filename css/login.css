@@ -58,7 +58,7 @@ body {
 @media only screen and (max-width: 600px) {
     .button input  {
        padding: 9px 20px;
-       margin-bottom: 10px;
+       margin-top: 40px;
   }
 }
 
